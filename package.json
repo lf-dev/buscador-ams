@@ -1,0 +1,19 @@
+{
+  "name": "ams-scrapper",
+  "version": "1.0.0",
+  "description": "web scrapper for busca ams",
+  "main": "./src/scrapper.js",
+  "dependencies": {
+    "cheerio": "^0.22.0",
+    "request": "^2.79.0",
+    "string": "^3.3.3"
+  },
+  "devDependencies": {
+    "mocha": "^3.1.2"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC"
+}

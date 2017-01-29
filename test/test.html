@@ -1,0 +1,1101 @@
+
+<!-- saved from url=(0050)https://seguro2.petrobras.com.br/buscaams/busca.do -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="CACHE-CONTROL" content="NO-CACHE">
+		<title>
+			Busca AMS
+		</title>
+
+<script language="javascript" src="./test_files/script.js"></script>
+
+<link rel="stylesheet" type="text/css" href="./test_files/style.css">
+
+
+
+
+
+</head>
+<body>
+	<table align="left" cellpadding="0" cellspacing="0" border="0" width="100%" height="100%">
+		<tbody><tr>
+            <td align="center" valign="middle" height="1%" width="100%">
+               
+               <!-- Page: layout/header.jsp -->
+
+
+
+
+
+<script language="javascript" src="./test_files/jquery-1.7.2.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready( function(){
+
+        // ** Para controlar exibir HEADER dependendo da URL ** Alterado por controle de parametro "exibirHeader" **
+        //alert(document.title);
+        //alert(window.parent.document.title);
+        //alert(document.URL);
+        //alert(window.parent.document.referrer.split('/')[2]);
+        //if (document.parent){
+        //    $("#divHeader").hide();
+        //}
+//        var url = window.location.href.split('/')[2];
+        //var url2 = window.location.href;
+//        var url1 = document.referrer.split('/')[2];
+        //var url3 = document.referrer;
+        //alert(url);
+        //alert(url2);
+        //alert(url1);
+//        if(typeof(url1) != 'undefined'){
+//           url = url1;
+//        }
+        var exibir = "";
+        if(('null' != 'N')
+//           && (url == 'busca-amsd.petrobras.com.br' || //url1 == 'busca-amsd.petrobras.com.br' ||
+//               url == 'busca-amsh.petrobras.com.br' || //url1 == 'busca-amsh.petrobras.com.br' ||
+//               url == 'busca-ams.petrobras.com.br'  //|| url1 == 'busca-ams.petrobras.com.br' ||
+//               url == 'mi00194268:8081' //maquina desenvolvedor )
+        ){
+            //divHeader.style.display = "block";
+            $("#divHeader").show();
+            exibir = 'S';
+        }else{
+            //divHeader.style.display = "none";
+            $("#divHeader").hide();
+            exibir = 'N';
+        }
+
+        //variÃ¡vel setada no "BuscaAMSRequestProcessor.processPopulate"
+        
+        
+            
+                    
+                    
+                    
+            
+        
+
+    });
+
+</script>
+
+<div id="divHeader">
+<table cellpadding="0" cellspacing="3" border="0" width="100%">
+    <!--tr>
+      <td align="center" valign="middle">&nbsp;</td>
+	</tr-->
+	<tbody><tr>
+      <td valign="middle" align="center" width="48%">
+         <!--a href="http://www.petrobras.com.br"-->
+  				<!--img src="/images/br.gif" alt="Petrobras" border="0"/-->
+             <img src="./test_files/topo_ams.jpg" width="1000" height="120">
+         <!-- /a -->
+      </td>
+	</tr>
+    <tr>
+      <td align="center" valign="middle">&nbsp;</td>
+	</tr>
+	<tr>
+      <td align="center" valign="middle" class="applicationtitlebar">
+			Busca AMS
+      </td>
+	</tr>
+    <tr>
+      <td align="center" valign="middle"> &nbsp; </td>
+	</tr>
+</tbody></table>
+</div>
+            </td>
+		</tr>
+		<tr>
+            <td align="center" valign="top" height="98%" width="100%">
+               
+               <!-- Page: layout/result.jsp -->
+
+
+
+
+
+
+
+<style type="text/css">
+	body {font-family:Verdana, Geneva, sans-serif; color:#000000; font-size: 10px;}
+	td {font-size: 10px;}
+</style>
+
+  
+
+<link rel="stylesheet" type="text/css" href="./test_files/style-print.css" media="print">
+
+
+
+<!-- html:form action="busca" method="post" name="buscaForm" scope="request" type="br.com.petrobras.buscaams.form.BuscaFormAction" -->
+<form name="buscaForm" method="post" action="https://seguro2.petrobras.com.br/buscaams/busca.do">
+<script type="text/javascript">
+
+
+//** JQuery / Iframe**
+//$(document).ready(function() {
+//	$("#div_mapa").dialog({
+//		width : 800,
+//		height : 600,
+//		modal : true,
+//		autoOpen : false
+//	});
+//});
+
+/** IFrame-GoogleMaps
+function bams_openMaps (idDiv, nomeCredenc, endereco, bairro, cidade, estado, cep){
+	//** Destroi/Limpa o DIV
+	$('#map_canvas').remove();
+	//** Recria o DIV
+	$('#div_mapa').append('<div id="map_canvas"></div>');
+	
+	document.getElementById("enderecoOrigem").value='';
+	document.getElementById("bairroOrigem").value='';
+	document.getElementById("cidadeOrigem").value='';
+	document.getElementById("estadoOrigem").value='';
+	document.getElementById("cepOrigem").value='';
+		
+	document.getElementById("credenciadoDestino").value=nomeCredenc;
+	document.getElementById("enderecoDestino").value=endereco;
+	document.getElementById("bairroDestino").value=bairro;
+	document.getElementById("cidadeDestino").value=cidade;
+	document.getElementById("estadoDestino").value=estado;
+	document.getElementById("cepDestino").value=cep;
+		
+	enderecoOrigem =document.getElementById("enderecoOrigem").value + ','+ document.getElementById("cidadeOrigem").value+','+document.getElementById("estadoOrigem").value+','+document.getElementById("cepOrigem").value+', BR';
+	enderecoDestino=endereco+', '+bairro+', '+cidade+', '+estado+', '+cep+', BR';
+	
+	//initialize(idDiv, enderecoDestino);
+	tracaRota(idDiv, enderecoOrigem, enderecoDestino);
+	$("#div_mapa").dialog("open");
+}
+
+function tracaRotaGrafico(idDiv){
+	var enderDe = document.getElementById("enderecoOrigem").value + ','+ document.getElementById("cidadeOrigem").value+','+document.getElementById("estadoOrigem").value+','+document.getElementById("cepOrigem").value+', BR';
+	var enderAte = document.getElementById("enderecoDestino").value + ','+ document.getElementById("cidadeDestino").value+','+document.getElementById("estadoDestino").value+','+document.getElementById("cepDestino").value+', BR';
+	
+	tracaRota(idDiv, enderDe, enderAte);
+}
+*/
+
+String.prototype.replaceAll = function(de, para){
+    var str = this;
+    var pos = str.indexOf(de);
+    while (pos > -1){
+        str = str.replace(de, para);
+        pos = str.indexOf(de);
+    }
+    return (str);
+}
+//** POPUP-GoogleMaps
+function bams_openMaps2 (nomeCredenc, endereco, complemento, bairro, cidade, estado, cep, ddd, tel, tipoLogradouro, logradouro2, numero, gpsLatitude, gpsLongitude){
+
+    //** bacalhau para tirar (') do nome credenciado para mapa
+    nomeCredenc = nomeCredenc.replaceAll('ttrrooccaa_aspa', '\'');
+
+    //var estourouGeoLocalizacao = "N"
+
+    //window.open('./pages/googleMaps.jsp?credenciadoDestino='+nomeCredenc+'&enderecoDestino='+endereco+'&complementoDestino='+complemento+'&bairroDestino='+bairro+'&cidadeDestino='+cidade+'&estadoDestino='+estado+'&cepDestino='+cep+'&telDestino='+tel, 'mywindow', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=1,resizable=0,width=950,height=725');
+    //window.open('./pages/googleMaps.jsp?credenciadoDestino='+nomeCredenc+'&enderecoDestino='+endereco+'&complementoDestino='+complemento+'&bairroDestino='+bairro+'&cidadeDestino='+cidade+'&estadoDestino='+estado+'&cepDestino='+cep+'&dddDestino='+ddd+'&telDestino='+tel+'&tipoLogradouro='+tipoLogradouro+'&logradouro2='+logradouro2+'&numero='+numero+'&gpsLatitude='+gpsLatitude+'&gpsLongitude='+gpsLongitude+'&estourouGeoLocalizacao='+estourouGeoLocalizacao, 'mywindow', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=1,resizable=0,width=1010,height=800');
+    window.open('./pages/googleMaps.jsp?credenciadoDestino='+nomeCredenc+'&enderecoDestino='+endereco+'&complementoDestino='+complemento+'&bairroDestino='+bairro+'&cidadeDestino='+cidade+'&estadoDestino='+estado+'&cepDestino='+cep+'&dddDestino='+ddd+'&telDestino='+tel+'&tipoLogradouro='+tipoLogradouro+'&logradouro2='+logradouro2+'&numero='+numero+'&gpsLatitude='+gpsLatitude+'&gpsLongitude='+gpsLongitude, 'mywindow', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=1,resizable=0,width=1010,height=800');
+}
+
+//**Bing-Maps
+function bams_openMaps3 (nomeCredenc, endereco, complemento, bairro, cidade, estado, cep, tel, tipoLogradouro, logradouro2, numero, gpsLatitude, gpsLongitude){
+    window.open('./pages/bingMaps.jsp?credenciadoDestino='+nomeCredenc+'&enderecoDestino='+endereco+'&complementoDestino='+complemento+'&bairroDestino='+bairro+'&cidadeDestino='+cidade+'&estadoDestino='+estado+'&cepDestino='+cep+'&telDestino='+tel+'&tipoLogradouro='+tipoLogradouro+'&logradouro2='+logradouro2+'&numero='+numero+'&gpsLatitude='+gpsLatitude+'&gpsLongitude='+gpsLongitude, 'mywindow', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=1,resizable=0,width=1010,height=800');
+}
+
+//** Redirect-SiteGoogleMaps
+function bams_openMaps4 (nomeCredenc, endereco, bairro, cidade, estado, cep){
+	//window.open('https://maps.google.com.br/?gbqfq=%2724240290,%20niteroi%27&q=%2724240290,%20niteroi%27');
+	window.open('https://maps.google.com.br/?q='+endereco+', '+bairro+', '+cidade+', '+estado+', '+cep);
+}
+
+//**********************************************************************
+//** Somente para carga do GPS.
+//**********************************************************************
+var ix =0;
+function bams_CoordenadaCarga() {
+    document.buscaForm.method.value='buscaCoordenadaCarga';
+    //document.buscaForm.action='busca.do';
+    document.buscaForm.target= 'mywindow';
+    window.open('', 'mywindow', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=1,resizable=0,width=900,height=780');
+    document.buscaForm.submit();
+
+    //document.buscaForm.target= '_top';
+    document.buscaForm.target= '_self';
+
+    if (confirm(++ix+") Executar de novo?")){
+        bams_CoordenadaCarga();
+    }
+
+//    for(var i = 0 ; i < 200; i++){
+//        sleep(15000);
+//        bams_CoordenadaCarga();
+//    }
+
+}
+
+function sleep(milliSeconds){
+    var startTime = new Date().getTime(); // get the current time
+    while (new Date().getTime() < startTime + milliSeconds); // hog cpu
+}
+//********************************************************************* */
+
+</script>
+
+
+
+   <input type="hidden" name="sort" value="">
+   <input type="hidden" name="nome" value="">
+   <input type="hidden" name="estado" value="RJ">
+   <input type="hidden" name="cidade" value="ARMACAO DOS BUZIOS">
+   <input type="hidden" name="categoria" value="">
+   <input type="hidden" name="subcategoria1" value="">
+   <input type="hidden" name="subcategoria2" value="">
+   <input type="hidden" name="atendimento" value="true">
+   <input type="hidden" name="logradouro" value="">
+   <input type="hidden" name="certificado" value="0">
+
+   <input type="hidden" name="method" value="">
+
+	
+      <input type="hidden" name="bairro" value="">
+	
+   <table align="left" cellpadding="0" cellspacing="0" border="0" width="100%">
+      <tbody><tr>
+         <td align="center" valign="middle" style="font-size:18px;">
+            <big><b>Resultado da Busca</b></big>
+         </td>
+      </tr>
+      <tr>
+         <td align="left" valign="top">
+            <!--
+            ====================================================================
+            Filtros usados na pesquisa
+            ====================================================================
+            -->
+				<!-- Page: pages/resultfiltro.jsp -->
+
+
+
+
+
+<script type="text/javascript">
+
+
+</script>
+
+<style type="text/css">
+
+p {font-size:12px;}
+
+#botoes input {border:none; width:auto}
+.bt-verde {background-image:url(/bams/images/bt-verde.gif); background-repeat:no-repeat; width:72px !important; height:27px; color:white; font-weight:bold; }
+
+</style>
+
+<p><strong><br>Parâmetro(s) utilizado(s) na pesquisa</strong></p>
+<br>
+
+
+	<p><strong>Pesquisar em</strong>:Atendimentos</p>
+
+	<p><strong>Estado</strong>:RJ</p>
+
+	<p><strong>Cidade</strong>:ARMACAO DOS BUZIOS</p>
+
+	<p><strong>Plano</strong>:AMS</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong><b>Foram obtidos:</b>&nbsp;3&nbsp;<b>credenciado(s).</b></strong><b>
+
+    <a href="javascript:bams_listaMaps(3);"><img src="./test_files/mundo.gif" alt="Exibe o resultado da busca no mapa." border="0" class="nao_imprimir"></a>
+
+    
+    
+
+
+    </b></p><div id="botoes" class="nao_imprimir"><b>
+        <input type="button" name="" value="Imprimir" onclick="javascript:window.print();" class="bt-verde" title="Imprime o resultado da busca.">
+    </b></div><b>
+
+<p></p>
+      
+
+
+         </b></td>
+      </tr>
+      <!--
+      =============================================================================
+      Inicio - Barra de Tarefas Superior
+      =============================================================================
+      -->
+		
+			<tr>
+            <td align="center" valign="middle">
+					<!-- Page: pages/resultbarratarefas.jsp -->
+
+
+
+
+<table cellpadding="0" cellspacing="3" border="0" width="100%">
+    <tbody><tr>
+      
+         
+            <td align="left" valign="middle">
+                  <b><a href="javascript:bams_goback();" class="nao_imprimir">Voltar</a></b>
+            </td>
+         
+      
+      <td align="right" valign="middle">
+         <b><a href="javascript:bams_goback();" class="nao_imprimir">Voltar</a></b>
+      </td>
+   </tr>
+</tbody></table>
+
+
+            </td>
+         </tr>
+		
+      <!--
+      ==========================================================================
+      Fim - Barra de Tarefas Superior
+      ==========================================================================
+      -->
+		<tr>
+         <td align="center" valign="middle">
+            <!--
+            ============================================================================
+            Inicio - Resultado da Busca
+            ============================================================================
+            -->
+            
+            
+               <table align="left" width="100%" border="0" cellpadding="0" cellspacing="0">
+                  
+                  
+                     
+
+                           <tbody><tr>
+                              <td align="left" valign="middle" nowrap="nowrap" bgcolor="#333333">
+                                 <font color="#FFFFFF">Listando credenciados da cidade:&nbsp;ARMACAO DOS BUZIOS</font>
+                              </td>
+                           </tr>
+
+                        
+                        
+                        <!-- Page: pages/resultpessfisica.jsp -->
+
+
+
+
+
+
+
+<style type="text/css">
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0
+}
+
+</style>
+
+
+
+
+   <tr>
+      <td align="left" valign="middle" nowrap="nowrap" bgcolor="#CCCCCC">
+         Pessoas Físicas
+      </td>
+   </tr>
+   <tr>
+      <td align="left" valign="middle" nowrap="nowrap">
+         <table align="left" cellpadding="3" cellspacing="3" border="0" width="100%" style="border:1px solid #358626;margin: 10px 0; font-size:10px;">
+            <!-- Page: pages/resultcolunas.jsp -->
+
+
+<tbody><tr style="background-color:#b0dda4; padding:0.4em; text-align:left; font-size:10px; color:#333;">
+   <td align="left" valign="middle" nowrap="nowrap" width="15%">
+      <b><a href="javascript:bams_sortresult(&#39;nome&#39;);">Nome</a></b>
+   </td>
+
+   <td align="left" valign="middle" nowrap="nowrap" width="15%">
+       <b><a href="javascript:bams_sortresult(&#39;nomeclasse&#39;);">Tipo de Estabelecimento</a></b>
+   </td>
+
+   <td align="left" valign="middle" nowrap="nowrap" width="15%">
+      <b><a href="javascript:bams_sortresult(&#39;bairro&#39;);">Bairro</a></b>
+   </td>
+   <td align="left" valign="middle" nowrap="nowrap" width="15%">
+      <b><a href="javascript:bams_sortresult(&#39;logradouro&#39;);">Endereço</a></b>
+   </td>
+   <td align="left" valign="middle" nowrap="nowrap" width="10%">
+      <b><a href="javascript:bams_sortresult(&#39;cep&#39;);">Cep</a></b>
+   </td>
+   <td align="left" valign="middle" nowrap="nowrap" width="15%">
+      <b><a href="javascript:bams_sortresult(&#39;telefone&#39;);">Telefone</a></b>
+   </td>
+   <td align="left" valign="middle" nowrap="nowrap" width="15%">
+      <b><a href="javascript:bams_sortresult(&#39;especialidade&#39;);">Especialidade</a></b>
+   </td>
+   
+   <td align="left" valign="middle" nowrap="nowrap" width="5%" class="nao_imprimir">
+      <b>Mapa</b>
+   </td>
+   
+   <td align="left" valign="middle" nowrap="nowrap" width="15%" class="nao_imprimir">
+      <b>Nota</b>
+   </td>
+</tr>
+
+            
+            
+               
+               <tr bgcolor="#FFFFFF" style="padding:0.4em">
+                  <td align="left" valign="middle" width="15%">
+                     TATIANA MIGUEL BARBOSA PACHECO
+                     <br>
+                     <font color="#006400" size="1">
+                         
+                         
+                        CRO
+                        29469
+                        RJ
+                     </font>
+
+                     <br>
+                     
+
+
+
+                  </td>
+
+                   <td>
+                       CONSULTORIO ODONTOLOGICO
+                   </td>
+
+                  <td align="left" valign="middle" width="15%">
+                     MANGUINHOS
+                  </td>
+                  <td align="left" valign="middle" width="15%">
+                     AVENIDA JOSE BENTO RIBEIRO DANTAS, 540
+                     
+                     <br>
+                     ARMACAO DOS BUZIOS - RJ
+                  </td>
+                  <td align="left" valign="middle" width="10%" nowrap="nowrap">
+                     28.950-000
+                  </td>
+                  <td align="left" valign="middle" width="15%" nowrap="nowrap">
+                     
+                        (22)
+                     
+                     2623-7454
+                     
+                  </td>
+                  <td align="left" valign="middle" width="15%">
+                     CLINICA ODONTOLOGICA
+                  </td>
+
+                  <td align="left" valign="middle" width="5%" class="nao_imprimir">
+                     <a href="javascript:bams_openMaps2(&#39;TATIANA MIGUEL BARBOSA PACHECO&#39;, &#39;AVENIDA JOSE BENTO RIBEIRO DANTAS, 540&#39;, &#39;&#39;, &#39;MANGUINHOS&#39;, &#39;ARMACAO DOS BUZIOS&#39;, &#39;RJ&#39;, &#39;28.950-000&#39;, &#39;22&#39;, &#39;2623-7454&#39;, &#39;AVENIDA&#39;, &#39;JOSE BENTO RIBEIRO DANTAS&#39;, &#39;540&#39;, &#39;-22.7683759&#39;, &#39;-41.9331852&#39;);"><img src="./test_files/mundo.gif" alt="MapaGoogle" border="0"></a>
+                     
+                  </td>
+
+                  <td align="left" valign="middle" width="10%" class="nao_imprimir">
+                     
+                     
+                        &nbsp;
+                     
+                  </td>
+               </tr>
+               
+            
+         </tbody></table>
+      </td>
+   </tr>
+
+
+                        <!-- Page: pages/resultpessjuridica.jsp -->
+
+
+
+
+
+
+
+<style type="text/css">
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0
+}
+
+</style>
+
+
+
+
+   <tr>
+      <td align="left" valign="middle" nowrap="nowrap" bgcolor="#CCCCCC">
+         Pessoas Jurídicas
+      </td>
+   </tr>
+   <tr>
+      <td align="left" valign="middle" nowrap="nowrap">
+         <table align="left" cellpadding="3" cellspacing="3" border="0" width="100%" style="border:1px solid #358626; margin: 10px 0; font-size:10px;">
+            <!-- Page: pages/resultcolunas.jsp -->
+
+
+<tbody><tr style="background-color:#b0dda4; padding:0.4em; text-align:left; font-size:10px; color:#333;">
+   <td align="left" valign="middle" nowrap="nowrap" width="15%">
+      <b><a href="javascript:bams_sortresult(&#39;nome&#39;);">Nome</a></b>
+   </td>
+
+   <td align="left" valign="middle" nowrap="nowrap" width="15%">
+       <b><a href="javascript:bams_sortresult(&#39;nomeclasse&#39;);">Tipo de Estabelecimento</a></b>
+   </td>
+
+   <td align="left" valign="middle" nowrap="nowrap" width="15%">
+      <b><a href="javascript:bams_sortresult(&#39;bairro&#39;);">Bairro</a></b>
+   </td>
+   <td align="left" valign="middle" nowrap="nowrap" width="15%">
+      <b><a href="javascript:bams_sortresult(&#39;logradouro&#39;);">Endereço</a></b>
+   </td>
+   <td align="left" valign="middle" nowrap="nowrap" width="10%">
+      <b><a href="javascript:bams_sortresult(&#39;cep&#39;);">Cep</a></b>
+   </td>
+   <td align="left" valign="middle" nowrap="nowrap" width="15%">
+      <b><a href="javascript:bams_sortresult(&#39;telefone&#39;);">Telefone</a></b>
+   </td>
+   <td align="left" valign="middle" nowrap="nowrap" width="15%">
+      <b><a href="javascript:bams_sortresult(&#39;especialidade&#39;);">Especialidade</a></b>
+   </td>
+   
+   <td align="left" valign="middle" nowrap="nowrap" width="5%" class="nao_imprimir">
+      <b>Mapa</b>
+   </td>
+   
+   <td align="left" valign="middle" nowrap="nowrap" width="15%" class="nao_imprimir">
+      <b>Nota</b>
+   </td>
+</tr>
+
+            
+            
+               <tr bgcolor="#FFFFFF" style="padding:0.4em">
+                  <td align="left" valign="middle" width="15%">
+                      Razão Social: LABORATORIO O.S.REZENDE LTDA
+                      <br>Nome Fantasia:
+                      <font color="#696969" size="1">
+                      LABORATORIO O.S.REZENDE
+                      </font>
+                      <font color="#006400" size="1">
+                         <br>
+                          CNPJ:28.848.059/0001-53
+                      </font>
+
+                      <br>
+                      
+
+                  </td>
+
+                   <td>
+                       LABORATORIO
+                   </td>
+
+                  <td align="left" valign="middle" width="15%">
+                     CENTRO
+                  </td>
+                  <td align="left" valign="middle" width="15%">
+                     ESTRADA BENTO RIBEIRO DANTAS, 480
+                     
+                     <br>
+                     ARMACAO DOS BUZIOS - RJ
+                  </td>
+                  <td align="left" valign="middle" width="10%" nowrap="nowrap">
+                     28.950-000
+                  </td>
+                  <td align="left" valign="middle" width="15%" nowrap="nowrap">
+                     
+                        (22)
+                     
+                     2623-2271
+                     
+                  </td>
+                  <td align="left" valign="middle" width="15%">
+                     LAB.DE ANALISES CLINICAS
+                  </td>
+
+                  <td align="left" valign="middle" width="5%" class="nao_imprimir">
+                     <a href="javascript:bams_openMaps2(&#39;LABORATORIO O.S.REZENDE&#39;, &#39;ESTRADA BENTO RIBEIRO DANTAS, 480&#39;, &#39;&#39;, &#39;CENTRO&#39;, &#39;ARMACAO DOS BUZIOS&#39;, &#39;RJ&#39;, &#39;28.950-000&#39;, &#39;22&#39;, &#39;2623-2271&#39;, &#39;ESTRADA&#39;, &#39;BENTO RIBEIRO DANTAS&#39;, &#39;480&#39;, &#39;-22.7502729&#39;, &#39;-41.8825597&#39;);"><img src="./test_files/mundo.gif" alt="MapaGoogle" border="0"></a>
+                     <!--
+                     <a href="javascript:bams_openMaps3('LABORATORIO O.S.REZENDE', 'ESTRADA BENTO RIBEIRO DANTAS, 480', '', 'CENTRO', 'ARMACAO DOS BUZIOS', 'RJ', '28.950-000', '2623-2271','ESTRADA', 'BENTO RIBEIRO DANTAS', '480', '-22.7502729', '-41.8825597');"><img src="/bams/images/mundo.gif" alt="Mapa" border="0"/></a>
+                     <br>
+
+                     -->
+                  </td>
+
+                  <td align="left" valign="middle" width="10%" class="nao_imprimir">
+                     
+                     
+                        &nbsp;
+                     
+                  </td>
+               </tr>
+               
+            
+               <tr bgcolor="#e1f3db" style="padding:0.4em">
+                  <td align="left" valign="middle" width="15%">
+                      Razão Social: LABORATORIO O.S.REZENDE LTDA
+                      <br>Nome Fantasia:
+                      <font color="#696969" size="1">
+                      LABORATORIO O.S.REZENDE
+                      </font>
+                      <font color="#006400" size="1">
+                         <br>
+                          CNPJ:28.848.059/0001-53
+                      </font>
+
+                      <br>
+                      
+
+                  </td>
+
+                   <td>
+                       LABORATORIO
+                   </td>
+
+                  <td align="left" valign="middle" width="15%">
+                     CENTRO
+                  </td>
+                  <td align="left" valign="middle" width="15%">
+                     ESTRADA BENTO RIBEIRO DANTAS, 480
+                     
+                     <br>
+                     ARMACAO DOS BUZIOS - RJ
+                  </td>
+                  <td align="left" valign="middle" width="10%" nowrap="nowrap">
+                     28.950-000
+                  </td>
+                  <td align="left" valign="middle" width="15%" nowrap="nowrap">
+                     
+                        (22)
+                     
+                     2623-2271
+                     
+                  </td>
+                  <td align="left" valign="middle" width="15%">
+                     LAB ANATOMIA PATOLOGICA
+                  </td>
+
+                  <td align="left" valign="middle" width="5%" class="nao_imprimir">
+                     <a href="javascript:bams_openMaps2(&#39;LABORATORIO O.S.REZENDE&#39;, &#39;ESTRADA BENTO RIBEIRO DANTAS, 480&#39;, &#39;&#39;, &#39;CENTRO&#39;, &#39;ARMACAO DOS BUZIOS&#39;, &#39;RJ&#39;, &#39;28.950-000&#39;, &#39;22&#39;, &#39;2623-2271&#39;, &#39;ESTRADA&#39;, &#39;BENTO RIBEIRO DANTAS&#39;, &#39;480&#39;, &#39;-22.7502729&#39;, &#39;-41.8825597&#39;);"><img src="./test_files/mundo.gif" alt="MapaGoogle" border="0"></a>
+                     <!--
+                     <a href="javascript:bams_openMaps3('LABORATORIO O.S.REZENDE', 'ESTRADA BENTO RIBEIRO DANTAS, 480', '', 'CENTRO', 'ARMACAO DOS BUZIOS', 'RJ', '28.950-000', '2623-2271','ESTRADA', 'BENTO RIBEIRO DANTAS', '480', '-22.7502729', '-41.8825597');"><img src="/bams/images/mundo.gif" alt="Mapa" border="0"/></a>
+                     <br>
+
+                     -->
+                  </td>
+
+                  <td align="left" valign="middle" width="10%" class="nao_imprimir">
+                     
+                     
+                        &nbsp;
+                     
+                  </td>
+               </tr>
+               
+            
+               <tr bgcolor="#FFFFFF" style="padding:0.4em">
+                  <td align="left" valign="middle" width="15%">
+                      Razão Social: VIRGULINO JOSE DA SILVA NETO - EPP
+                      <br>Nome Fantasia:
+                      <font color="#696969" size="1">
+                      RADIO MED - DIAGNOSTICO E IMAGENS EM GERAL
+                      </font>
+                      <font color="#006400" size="1">
+                         <br>
+                          CNPJ:08.508.696/0004-16
+                      </font>
+
+                      <br>
+                      
+
+                  </td>
+
+                   <td>
+                       RADIODIAGNOSTICO
+                   </td>
+
+                  <td align="left" valign="middle" width="15%">
+                     MANGUINHOS
+                  </td>
+                  <td align="left" valign="middle" width="15%">
+                     AVENIDA JOSE BENTO RIBEIRO DANTAS, 5400
+                     
+                        , LOJAS 12 E 13
+                     
+                     <br>
+                     ARMACAO DOS BUZIOS - RJ
+                  </td>
+                  <td align="left" valign="middle" width="10%" nowrap="nowrap">
+                     28.950-000
+                  </td>
+                  <td align="left" valign="middle" width="15%" nowrap="nowrap">
+                     
+                        (22)
+                     
+                     2623-3597
+                     
+                  </td>
+                  <td align="left" valign="middle" width="15%">
+                     SERV RADIOLOGIA E DIAGNOS
+                  </td>
+
+                  <td align="left" valign="middle" width="5%" class="nao_imprimir">
+                     <a href="javascript:bams_openMaps2(&#39;RADIO MED - DIAGNOSTICO E IMAGENS EM GERAL&#39;, &#39;AVENIDA JOSE BENTO RIBEIRO DANTAS, 5400&#39;, &#39;LOJAS 12 E 13&#39;, &#39;MANGUINHOS&#39;, &#39;ARMACAO DOS BUZIOS&#39;, &#39;RJ&#39;, &#39;28.950-000&#39;, &#39;22&#39;, &#39;2623-3597&#39;, &#39;AVENIDA&#39;, &#39;JOSE BENTO RIBEIRO DANTAS&#39;, &#39;5400&#39;, &#39;-22.7744099&#39;, &#39;-41.9151443&#39;);"><img src="./test_files/mundo.gif" alt="MapaGoogle" border="0"></a>
+                     <!--
+                     <a href="javascript:bams_openMaps3('RADIO MED - DIAGNOSTICO E IMAGENS EM GERAL', 'AVENIDA JOSE BENTO RIBEIRO DANTAS, 5400', 'LOJAS 12 E 13', 'MANGUINHOS', 'ARMACAO DOS BUZIOS', 'RJ', '28.950-000', '2623-3597','AVENIDA', 'JOSE BENTO RIBEIRO DANTAS', '5400', '-22.7744099', '-41.9151443');"><img src="/bams/images/mundo.gif" alt="Mapa" border="0"/></a>
+                     <br>
+
+                     -->
+                  </td>
+
+                  <td align="left" valign="middle" width="10%" class="nao_imprimir">
+                     
+                        
+                        <div id="nota1" style="position:absolute; width:300px; height:100px; background-color:yellow; border:1px solid #333333; display:none; ">
+                              <table align="left" cellpadding="0" cellspacing="0" border="0">
+                                 <tbody><tr bgcolor="#333333">
+                                    <td align="left" valign="middle" width="200" height="10">
+                                       <font color="#FFFFFF">Nota</font>
+                                    </td>
+                                    <td align="right" valign="middle" width="100" height="10">
+                                       <font color="#FFFFFF"><b>[ <a href="javascript:bams_hide_nota(&#39;nota1&#39;)">Fechar</a> ]</b></font>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td align="left" valign="middle" width="300" height="90" colspan="2">
+                                       <div style="width:300px; height:90px; overflow-y:auto; overflow-x:auto;">
+                                          MAMOGRAFIA
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </tbody></table>
+                           </div>
+                           <a id="link1" href="javascript:bams_show_nota(&#39;nota1&#39;,&#39;link1&#39;);">
+                              Exibir
+                           </a>
+                     
+                     
+                  </td>
+               </tr>
+               
+            
+               <tr bgcolor="#e1f3db" style="padding:0.4em">
+                  <td align="left" valign="middle" width="15%">
+                      Razão Social: VIRGULINO JOSE DA SILVA NETO - EPP
+                      <br>Nome Fantasia:
+                      <font color="#696969" size="1">
+                      RADIO MED - DIAGNOSTICO E IMAGENS EM GERAL
+                      </font>
+                      <font color="#006400" size="1">
+                         <br>
+                          CNPJ:08.508.696/0004-16
+                      </font>
+
+                      <br>
+                      
+
+                  </td>
+
+                   <td>
+                       RADIODIAGNOSTICO
+                   </td>
+
+                  <td align="left" valign="middle" width="15%">
+                     MANGUINHOS
+                  </td>
+                  <td align="left" valign="middle" width="15%">
+                     AVENIDA JOSE BENTO RIBEIRO DANTAS, 5400
+                     
+                        , LOJAS 12 E 13
+                     
+                     <br>
+                     ARMACAO DOS BUZIOS - RJ
+                  </td>
+                  <td align="left" valign="middle" width="10%" nowrap="nowrap">
+                     28.950-000
+                  </td>
+                  <td align="left" valign="middle" width="15%" nowrap="nowrap">
+                     
+                        (22)
+                     
+                     2623-3597
+                     
+                  </td>
+                  <td align="left" valign="middle" width="15%">
+                     SERV DE TOMOGRAFIA
+                  </td>
+
+                  <td align="left" valign="middle" width="5%" class="nao_imprimir">
+                     <a href="javascript:bams_openMaps2(&#39;RADIO MED - DIAGNOSTICO E IMAGENS EM GERAL&#39;, &#39;AVENIDA JOSE BENTO RIBEIRO DANTAS, 5400&#39;, &#39;LOJAS 12 E 13&#39;, &#39;MANGUINHOS&#39;, &#39;ARMACAO DOS BUZIOS&#39;, &#39;RJ&#39;, &#39;28.950-000&#39;, &#39;22&#39;, &#39;2623-3597&#39;, &#39;AVENIDA&#39;, &#39;JOSE BENTO RIBEIRO DANTAS&#39;, &#39;5400&#39;, &#39;-22.7744099&#39;, &#39;-41.9151443&#39;);"><img src="./test_files/mundo.gif" alt="MapaGoogle" border="0"></a>
+                     <!--
+                     <a href="javascript:bams_openMaps3('RADIO MED - DIAGNOSTICO E IMAGENS EM GERAL', 'AVENIDA JOSE BENTO RIBEIRO DANTAS, 5400', 'LOJAS 12 E 13', 'MANGUINHOS', 'ARMACAO DOS BUZIOS', 'RJ', '28.950-000', '2623-3597','AVENIDA', 'JOSE BENTO RIBEIRO DANTAS', '5400', '-22.7744099', '-41.9151443');"><img src="/bams/images/mundo.gif" alt="Mapa" border="0"/></a>
+                     <br>
+
+                     -->
+                  </td>
+
+                  <td align="left" valign="middle" width="10%" class="nao_imprimir">
+                     
+                        
+                        <div id="nota2" style="position:absolute; width:300px; height:100px; background-color:yellow; border:1px solid #333333; display:none; ">
+                              <table align="left" cellpadding="0" cellspacing="0" border="0">
+                                 <tbody><tr bgcolor="#333333">
+                                    <td align="left" valign="middle" width="200" height="10">
+                                       <font color="#FFFFFF">Nota</font>
+                                    </td>
+                                    <td align="right" valign="middle" width="100" height="10">
+                                       <font color="#FFFFFF"><b>[ <a href="javascript:bams_hide_nota(&#39;nota2&#39;)">Fechar</a> ]</b></font>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td align="left" valign="middle" width="300" height="90" colspan="2">
+                                       <div style="width:300px; height:90px; overflow-y:auto; overflow-x:auto;">
+                                          MAMOGRAFIA
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </tbody></table>
+                           </div>
+                           <a id="link2" href="javascript:bams_show_nota(&#39;nota2&#39;,&#39;link2&#39;);">
+                              Exibir
+                           </a>
+                     
+                     
+                  </td>
+               </tr>
+               
+            
+               <tr bgcolor="#FFFFFF" style="padding:0.4em">
+                  <td align="left" valign="middle" width="15%">
+                      Razão Social: VIRGULINO JOSE DA SILVA NETO - EPP
+                      <br>Nome Fantasia:
+                      <font color="#696969" size="1">
+                      RADIO MED - DIAGNOSTICO E IMAGENS EM GERAL
+                      </font>
+                      <font color="#006400" size="1">
+                         <br>
+                          CNPJ:08.508.696/0004-16
+                      </font>
+
+                      <br>
+                      
+
+                  </td>
+
+                   <td>
+                       RADIODIAGNOSTICO
+                   </td>
+
+                  <td align="left" valign="middle" width="15%">
+                     MANGUINHOS
+                  </td>
+                  <td align="left" valign="middle" width="15%">
+                     AVENIDA JOSE BENTO RIBEIRO DANTAS, 5400
+                     
+                        , LOJAS 12 E 13
+                     
+                     <br>
+                     ARMACAO DOS BUZIOS - RJ
+                  </td>
+                  <td align="left" valign="middle" width="10%" nowrap="nowrap">
+                     28.950-000
+                  </td>
+                  <td align="left" valign="middle" width="15%" nowrap="nowrap">
+                     
+                        (22)
+                     
+                     2623-3597
+                     
+                  </td>
+                  <td align="left" valign="middle" width="15%">
+                     SERV DE ULTRASSONOGRAFIA
+                  </td>
+
+                  <td align="left" valign="middle" width="5%" class="nao_imprimir">
+                     <a href="javascript:bams_openMaps2(&#39;RADIO MED - DIAGNOSTICO E IMAGENS EM GERAL&#39;, &#39;AVENIDA JOSE BENTO RIBEIRO DANTAS, 5400&#39;, &#39;LOJAS 12 E 13&#39;, &#39;MANGUINHOS&#39;, &#39;ARMACAO DOS BUZIOS&#39;, &#39;RJ&#39;, &#39;28.950-000&#39;, &#39;22&#39;, &#39;2623-3597&#39;, &#39;AVENIDA&#39;, &#39;JOSE BENTO RIBEIRO DANTAS&#39;, &#39;5400&#39;, &#39;-22.7744099&#39;, &#39;-41.9151443&#39;);"><img src="./test_files/mundo.gif" alt="MapaGoogle" border="0"></a>
+                     <!--
+                     <a href="javascript:bams_openMaps3('RADIO MED - DIAGNOSTICO E IMAGENS EM GERAL', 'AVENIDA JOSE BENTO RIBEIRO DANTAS, 5400', 'LOJAS 12 E 13', 'MANGUINHOS', 'ARMACAO DOS BUZIOS', 'RJ', '28.950-000', '2623-3597','AVENIDA', 'JOSE BENTO RIBEIRO DANTAS', '5400', '-22.7744099', '-41.9151443');"><img src="/bams/images/mundo.gif" alt="Mapa" border="0"/></a>
+                     <br>
+
+                     -->
+                  </td>
+
+                  <td align="left" valign="middle" width="10%" class="nao_imprimir">
+                     
+                        
+                        <div id="nota3" style="position:absolute; width:300px; height:100px; background-color:yellow; border:1px solid #333333; display:none; ">
+                              <table align="left" cellpadding="0" cellspacing="0" border="0">
+                                 <tbody><tr bgcolor="#333333">
+                                    <td align="left" valign="middle" width="200" height="10">
+                                       <font color="#FFFFFF">Nota</font>
+                                    </td>
+                                    <td align="right" valign="middle" width="100" height="10">
+                                       <font color="#FFFFFF"><b>[ <a href="javascript:bams_hide_nota(&#39;nota3&#39;)">Fechar</a> ]</b></font>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td align="left" valign="middle" width="300" height="90" colspan="2">
+                                       <div style="width:300px; height:90px; overflow-y:auto; overflow-x:auto;">
+                                          MAMOGRAFIA
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </tbody></table>
+                           </div>
+                           <a id="link3" href="javascript:bams_show_nota(&#39;nota3&#39;,&#39;link3&#39;);">
+                              Exibir
+                           </a>
+                     
+                     
+                  </td>
+               </tr>
+               
+            
+         </tbody></table>
+      </td>
+   </tr>
+
+
+
+                        <!-- Page: pages/resultpesspae.jsp -->
+
+
+
+
+
+
+
+<style type="text/css">
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0
+}
+
+</style>
+
+
+
+
+
+                        
+                     
+                  
+                  
+                  
+               </tbody></table>
+            
+            
+            <!--
+            ============================================================================
+            Fim - Resultado da Busca
+            ============================================================================
+            -->
+			</td>
+      </tr>
+      <!--
+      =============================================================================
+      Inicio - Barra de Tarefas Inferior
+      =============================================================================
+      -->
+      <tr>
+         <td align="center" valign="middle">
+            <!-- Page: pages/resultbarratarefas.jsp -->
+
+
+
+
+<table cellpadding="0" cellspacing="3" border="0" width="100%">
+    <tbody><tr>
+      
+         
+            <td align="left" valign="middle">
+                  <b><a href="javascript:bams_goback();" class="nao_imprimir">Voltar</a></b>
+            </td>
+         
+      
+      <td align="right" valign="middle">
+         <b><a href="javascript:bams_goback();" class="nao_imprimir">Voltar</a></b>
+      </td>
+   </tr>
+</tbody></table>
+
+
+         </td>
+      </tr>
+      <tr>
+         <td>
+             <img src="./test_files/Qualificacoes-ANS.jpg">
+         </td>
+      </tr>
+      <!--
+      ==========================================================================
+      Fim - Barra de Tarefas Inferior
+      ==========================================================================
+      -->
+	</tbody></table>
+</form>
+
+            </td>
+		</tr>
+		<tr>
+            <td align="center" valign="top" height="1%" width="100%">
+               
+               <!-- Page: layout/blank.jsp -->
+&nbsp;
+
+            </td>
+		</tr>
+	</tbody></table>
+
+
+</body></html>
