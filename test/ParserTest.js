@@ -1,4 +1,4 @@
-var assert = require('assert');
+var should = require('should');
 var cheerio = require('cheerio');
 var fs = require('fs');
 var Parser = require('../src/Parser.js');
@@ -20,7 +20,7 @@ describe('Parser', function() {
       let tr = $('tr');
       let parser = new Parser($);
 
-      assert.ok(parser.isData(tr));
+      (parser.isData(tr)).should.be.exactly(true);
     });
 
     it('should identify a header line as not a data line', function() {
@@ -28,7 +28,7 @@ describe('Parser', function() {
       let tr = $('tr');
       let parser = new Parser($);
 
-      assert.ok(!parser.isData(tr));
+      (parser.isData(tr)).should.be.exactly(false);
     })
 
   });
