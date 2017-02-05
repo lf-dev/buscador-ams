@@ -1,7 +1,7 @@
 var S = require('string');
 
 const TABLE_HEADER_BG_COLOR = "#b0dda4";
-const INDEX_NOME = 0;
+const INDEX_PESSOA = 0;
 
 function Parser($) {
   this.$ = $;
@@ -13,24 +13,26 @@ Parser.prototype.isData = function(tr) {
             tr.find('>td').length === 9;
 }
 
-Parser.prototype.getNome = function(tr) {
-    let td = this.$(tr.find('>td')[INDEX_NOME])
+Parser.prototype.getPessoa = function(tr) {
+    let td = this.getPessoaTd(tr);
     let text = td.text();
 
-    if(this.isEmpresa(text)){
-      return this.getEmpresa(text);
+    if(this.isPessoaJuridica(text)){
+      return this.getPessoaJuridica(text);
     }else {
       return this.getPessoaFisica(td);
     }
-
-    return " ";
 }
 
-Parser.prototype.isEmpresa = function(text){
+Parser.prototype.getPessoaTd = function(tr) {
+    return this.$(tr.find('>td')[INDEX_PESSOA]);
+}
+
+Parser.prototype.isPessoaJuridica = function(text){
   return text.indexOf('CNPJ:') > -1;
 }
 
-Parser.prototype.getEmpresa = function(text){
+Parser.prototype.getPessoaJuridica = function(text){
 
   const razao = "Razão Social:";
   const fantasia = "Nome Fantasia:";
@@ -51,7 +53,11 @@ Parser.prototype.getPessoaFisica = function(td) {
 
     let conselhoTxt = td.find("font").text();
     let nome = td.text().replace(conselhoTxt, "").trim();
-    let conselhoData = S(conselhoTxt).trim().replaceAll(" ","").replaceAll("\r\n",",").s.split(",");
+    let conselhoData = S(conselhoTxt).trim()
+                                      .replaceAll(" ","")
+                                      .replaceAll("\r","")
+                                      .replaceAll("\n",",")
+                                      .s.split(",");
 
     return {
       "nome": nome,

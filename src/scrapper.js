@@ -27,7 +27,7 @@ request.post({url:url, formData: formData}, function(err, httpResponse, body) {
     if(parser.isData(tr)){
       total++;
       console.log("---------------------");
-      console.log(parser.getNome(tr));
+      console.log(parser.getPessoa(tr));
     }
   }
   console.log("total " + total);

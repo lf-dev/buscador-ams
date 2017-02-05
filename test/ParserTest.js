@@ -29,7 +29,59 @@ describe('Parser', function() {
       let parser = new Parser($);
 
       (parser.isData(tr)).should.be.exactly(false);
-    })
+    });
+  });
+
+  describe('#getPessoa', function() {
+
+    let $PJ = load("pessoaJuridica.html");
+    let trPJ = $PJ('tr');
+    let parserPJ = new Parser($PJ);
+
+    let $PF = load("pessoaFisica.html");
+    let trPF = $PF('tr');
+    let parserPF = new Parser($PF);
+
+    it('should return pessoa td', function() {
+
+      let td = parserPJ.getPessoaTd(trPJ);
+      (td.text().trim()).should.startWith("Razão Social: ANGRA ");
+    });
+
+    it('should identify Pessoa Juridica', function() {
+
+        let pjTxt = parserPJ.getPessoaTd(trPJ).text();
+        (parserPJ.isPessoaJuridica(pjTxt)).should.be.exactly(true);
+
+        let pfTxt = parserPF.getPessoaTd(trPF).text();
+        (parserPF.isPessoaJuridica(pfTxt)).should.be.exactly(false);
+    });
+
+    it('should return Pessoa Juridica', function() {
+
+        let expected = {
+            "razao social": "ANGRA LAB LABORATORIO DE ANALISES CLINICAS ANGRA",
+            "fantasia": "ANGRA LAB LABORATORIO DE ANALISES CLINICAS ANGRA 123",
+            "cnpj": "28.588.747/0001-21"
+        };
+
+        let pjTxt = parserPJ.getPessoaTd(trPJ).text();
+        (parserPJ.getPessoaJuridica(pjTxt)).should.be.eql(expected);
+    });
+
+    it('should return Pessoa Fisica', function() {
+
+      let expected = {
+          "nome": "ALEXANDRE ALMEIDA L'HOTELLIER",
+          "conselho": "CRO",
+          "numero": "38064",
+          "estado": "RJ"
+      };
+
+      let pfTd = parserPJ.getPessoaTd(trPF);
+      (parserPF.getPessoaFisica(pfTd)).should.be.eql(expected);
+    });
 
   });
+
 });
