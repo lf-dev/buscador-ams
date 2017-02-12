@@ -2,6 +2,7 @@ var S = require('string');
 
 const TABLE_HEADER_BG_COLOR = "#b0dda4";
 const INDEX_PESSOA = 0;
+const INDEX_TIPO_ESTABELECIMENTO = 1;
 
 function Parser($) {
   this.$ = $;
@@ -65,4 +66,8 @@ Parser.prototype._getPessoaFisica = function(td) {
       "numero": conselhoData[1],
       "estado": conselhoData[2]
     }
+}
+
+Parser.prototype.getTipoEstabelecimento = function(tr) {
+    return this.$(tr.find('>td')[INDEX_TIPO_ESTABELECIMENTO]).text().trim();
 }

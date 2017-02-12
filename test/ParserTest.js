@@ -9,9 +9,13 @@ function load(file) {
 
 describe('Parser', function() {
 
-  before(function() {
-    // var $ = cheerio.load(fs.readFileSync('test/test.html'));
-  });
+  let $PJ = load("pessoaJuridica.html");
+  let trPJ = $PJ('tr');
+  let parserPJ = new Parser($PJ);
+
+  let $PF = load("pessoaFisica.html");
+  let trPF = $PF('tr');
+  let parserPF = new Parser($PF);
 
   describe('#isData', function() {
 
@@ -34,18 +38,12 @@ describe('Parser', function() {
 
   describe('#getPessoa', function() {
 
-    let $PJ = load("pessoaJuridica.html");
-    let trPJ = $PJ('tr');
-    let parserPJ = new Parser($PJ);
     let expectedPJ = {
         "razao social": "ANGRA LAB LABORATORIO DE ANALISES CLINICAS ANGRA",
         "fantasia": "ANGRA LAB LABORATORIO DE ANALISES CLINICAS ANGRA 123",
         "cnpj": "28.588.747/0001-21"
     };
 
-    let $PF = load("pessoaFisica.html");
-    let trPF = $PF('tr');
-    let parserPF = new Parser($PF);
     let expectedPF = {
         "nome": "ALEXANDRE ALMEIDA L'HOTELLIER",
         "conselho": "CRO",
@@ -89,6 +87,20 @@ describe('Parser', function() {
       (actualPJ).should.be.eql(expectedPJ);
     });
 
+  });
+
+  describe('#getTipoEstabelecimento', function() {
+
+      it('should return tipo estabelecimento', function() {
+
+        let actualEstabelecimentoPF = parserPF.getTipoEstabelecimento(trPF);
+        (actualEstabelecimentoPF).should.be.exactly('CONSULTORIO ODONTOLOGICO');
+
+        let actualEstabelecimentoPJ = parserPJ.getTipoEstabelecimento(trPJ);
+        (actualEstabelecimentoPJ).should.be.exactly('LABORATORIO');
+
+
+      });
   });
 
 });
