@@ -45,11 +45,14 @@ Parser.prototype._getPessoaJuridica = function(text){
   let indexFantasia = text.indexOf(fantasia);
   let indexCNPJ = text.indexOf(cnpj);
 
-  return {
+  let pj = {
     "razao social": text.substring(indexRazao + razao.length, indexFantasia).trim(),
     "fantasia": text.substring(indexFantasia + fantasia.length, indexCNPJ).trim(),
     "cnpj": text.substring(indexCNPJ + cnpj.length, text.length-1).trim()
-  }
+  };
+
+  pj.id = pj.cnpj;
+  return pj;
 }
 
 Parser.prototype._getPessoaFisica = function(td) {
@@ -62,12 +65,15 @@ Parser.prototype._getPessoaFisica = function(td) {
                                       .replaceAll("\n",",")
                                       .s.split(",");
 
-    return {
+    let pf = {
       "nome": nome,
       "conselho": conselhoData[0],
       "numero": conselhoData[1],
       "estado": conselhoData[2]
     }
+
+    pf.id = pf.conselho + ' ' + pf.numero + ' ' + pf.estado;
+    return pf; 
 }
 
 Parser.prototype.getEndereco = function(tr) {

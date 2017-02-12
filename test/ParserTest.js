@@ -21,7 +21,8 @@ describe('Parser', function() {
       "pessoa": {
         "razao social": "ANGRA LAB LABORATORIO DE ANALISES CLINICAS ANGRA",
         "fantasia": "ANGRA LAB LABORATORIO DE ANALISES CLINICAS ANGRA 123",
-        "cnpj": "28.588.747/0001-21"
+        "cnpj": "28.588.747/0001-21",
+        "id": "28.588.747/0001-21"
       },
       "tipo estabelecimento": "LABORATORIO",
       "bairro": "CENTRO",
@@ -43,7 +44,8 @@ describe('Parser', function() {
         "nome": "ALEXANDRE ALMEIDA L'HOTELLIER",
         "conselho": "CRO",
         "numero": "38064",
-        "estado": "RJ"
+        "estado": "RJ",
+        "id": "CRO 38064 RJ"
       },
       "tipo estabelecimento": "CONSULTORIO ODONTOLOGICO",
       "bairro": "CENTRO",
