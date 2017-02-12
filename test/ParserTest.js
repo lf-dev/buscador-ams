@@ -9,6 +9,10 @@ function load(file) {
 
 describe('Parser', function() {
 
+  let $ = load("data_line.html");
+  let tr = $('tr');
+  let parser = new Parser($);
+
   let $PJ = load("pessoaJuridica.html");
   let trPJ = $PJ('tr');
   let parserPJ = new Parser($PJ);
@@ -17,13 +21,21 @@ describe('Parser', function() {
   let trPF = $PF('tr');
   let parserPF = new Parser($PF);
 
+  describe('tr and tds', function() {
+
+      it('should return the td from the nth index of the tr', function() {
+        (parser._getTd(tr, 0).text()).should.be.exactly(' 0 ');
+      });
+
+      it('should return de td text from the nth index of the tr', function() {
+        (parser._getText(tr, 0)).should.be.exactly('0');
+      })
+
+  });
+
   describe('#isData', function() {
 
     it('should identify a data line', function() {
-      let $ = load("data_line.html");
-      let tr = $('tr');
-      let parser = new Parser($);
-
       (parser.isData(tr)).should.be.exactly(true);
     });
 

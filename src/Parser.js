@@ -13,6 +13,10 @@ Parser.prototype._getTd = function(tr, index) {
   return this.$(tr.find('>td')[index]);
 }
 
+Parser.prototype._getText = function(tr, index) {
+  return this._getTd(tr, index).text().trim();
+}
+
 Parser.prototype.isData = function(tr) {
     return tr.css('background-color') !== TABLE_HEADER_BG_COLOR &&
             tr.find('>td').length === 9;
