@@ -17,9 +17,33 @@ describe('Parser', function() {
   let trPJ = $PJ('tr');
   let parserPJ = new Parser($PJ);
 
+  let expectedJsonPJ = {
+      "pessoa": {
+        "razao social": "ANGRA LAB LABORATORIO DE ANALISES CLINICAS ANGRA",
+        "fantasia": "ANGRA LAB LABORATORIO DE ANALISES CLINICAS ANGRA 123",
+        "cnpj": "28.588.747/0001-21"
+      },
+      "tipo estabelecimento": "LABORATORIO",
+      "bairro": "CENTRO",
+      "cep": "23.900-300",
+      "especialidade": "LAB.DE ANALISES CLINICAS"
+  };
+
   let $PF = load("pessoaFisica.html");
   let trPF = $PF('tr');
   let parserPF = new Parser($PF);
+  let expectedJsonPF = {
+      "pessoa": {
+        "nome": "ALEXANDRE ALMEIDA L'HOTELLIER",
+        "conselho": "CRO",
+        "numero": "38064",
+        "estado": "RJ"
+      },
+      "tipo estabelecimento": "CONSULTORIO ODONTOLOGICO",
+      "bairro": "CENTRO",
+      "cep": "23.900-470",
+      "especialidade": "ORTODONTIA"
+  };
 
   describe('tr and tds', function() {
 
@@ -30,7 +54,6 @@ describe('Parser', function() {
       it('should return de td text from the nth index of the tr', function() {
         (parser._getText(tr, 0)).should.be.exactly('0');
       })
-
   });
 
   describe('#isData', function() {
@@ -50,19 +73,6 @@ describe('Parser', function() {
 
   describe('#getPessoa', function() {
 
-    let expectedPJ = {
-        "razao social": "ANGRA LAB LABORATORIO DE ANALISES CLINICAS ANGRA",
-        "fantasia": "ANGRA LAB LABORATORIO DE ANALISES CLINICAS ANGRA 123",
-        "cnpj": "28.588.747/0001-21"
-    };
-
-    let expectedPF = {
-        "nome": "ALEXANDRE ALMEIDA L'HOTELLIER",
-        "conselho": "CRO",
-        "numero": "38064",
-        "estado": "RJ"
-    };
-
     it('should identify Pessoa Juridica', function() {
 
         let pjTxt = parserPJ._getTd(trPJ, Parser.INDEX_PESSOA).text();
@@ -75,35 +85,36 @@ describe('Parser', function() {
     it('should return Pessoa Juridica', function() {
 
         let pjTxt = parserPJ._getTd(trPJ, Parser.INDEX_PESSOA).text();
-        (parserPJ._getPessoaJuridica(pjTxt)).should.be.eql(expectedPJ);
+        (parserPJ._getPessoaJuridica(pjTxt)).should.be.eql(expectedJsonPJ.pessoa);
     });
 
     it('should return Pessoa Fisica', function() {
 
         let pfTd = parserPJ._getTd(trPF, Parser.INDEX_PESSOA);
-        (parserPF._getPessoaFisica(pfTd)).should.be.eql(expectedPF);
+        (parserPF._getPessoaFisica(pfTd)).should.be.eql(expectedJsonPF.pessoa);
     });
 
     it('should return Pessoa', function() {
 
       let actualPF = parserPF.getPessoa(trPF);
-      (actualPF).should.be.eql(expectedPF);
+      (actualPF).should.be.eql(expectedJsonPF.pessoa);
 
       let actualPJ = parserPJ.getPessoa(trPJ);
-      (actualPJ).should.be.eql(expectedPJ);
+      (actualPJ).should.be.eql(expectedJsonPJ.pessoa);
     });
 
   });
 
-  describe('#getTipoEstabelecimento', function() {
+  describe('#toJSON', function() {
 
-      it('should return tipo estabelecimento', function() {
+      it('should return json PF', function() {
+          let actualJsonPF = parserPF.toJSON(trPF);
+          (actualJsonPF).should.be.eql(expectedJsonPF);
+      });
 
-        let actualEstabelecimentoPF = parserPF.getTipoEstabelecimento(trPF);
-        (actualEstabelecimentoPF).should.be.exactly('CONSULTORIO ODONTOLOGICO');
-
-        let actualEstabelecimentoPJ = parserPJ.getTipoEstabelecimento(trPJ);
-        (actualEstabelecimentoPJ).should.be.exactly('LABORATORIO');
+      it('should return json PJ', function() {
+          let actualJsonPJ = parserPJ.toJSON(trPJ);
+          (actualJsonPJ).should.be.eql(expectedJsonPJ);
       });
   });
 

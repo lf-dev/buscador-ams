@@ -2,7 +2,6 @@ var S = require('string');
 
 const TABLE_HEADER_BG_COLOR = "#b0dda4";
 Parser.INDEX_PESSOA = 0;
-Parser.INDEX_TIPO_ESTABELECIMENTO = 1;
 
 function Parser($) {
   this.$ = $;
@@ -72,6 +71,15 @@ Parser.prototype._getPessoaFisica = function(td) {
     }
 }
 
-Parser.prototype.getTipoEstabelecimento = function(tr) {
-    return this._getText(tr, Parser.INDEX_TIPO_ESTABELECIMENTO);
+Parser.prototype.toJSON = function(tr) {
+
+    return {
+      "pessoa": this.getPessoa(tr),
+      "tipo estabelecimento": this._getText(tr, 1),
+      "bairro": this._getText(tr, 2),
+      //"endereco": this._getText(tr, 3),
+      "cep": this._getText(tr, 4),
+      //"telefone": this._getText(tr, 5),
+      "especialidade": this._getText(tr, 6)
+    }
 }
