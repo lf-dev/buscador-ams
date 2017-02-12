@@ -37,10 +37,21 @@ describe('Parser', function() {
     let $PJ = load("pessoaJuridica.html");
     let trPJ = $PJ('tr');
     let parserPJ = new Parser($PJ);
+    let expectedPJ = {
+        "razao social": "ANGRA LAB LABORATORIO DE ANALISES CLINICAS ANGRA",
+        "fantasia": "ANGRA LAB LABORATORIO DE ANALISES CLINICAS ANGRA 123",
+        "cnpj": "28.588.747/0001-21"
+    };
 
     let $PF = load("pessoaFisica.html");
     let trPF = $PF('tr');
     let parserPF = new Parser($PF);
+    let expectedPF = {
+        "nome": "ALEXANDRE ALMEIDA L'HOTELLIER",
+        "conselho": "CRO",
+        "numero": "38064",
+        "estado": "RJ"
+    };
 
     it('should return pessoa td', function() {
 
@@ -59,27 +70,23 @@ describe('Parser', function() {
 
     it('should return Pessoa Juridica', function() {
 
-        let expected = {
-            "razao social": "ANGRA LAB LABORATORIO DE ANALISES CLINICAS ANGRA",
-            "fantasia": "ANGRA LAB LABORATORIO DE ANALISES CLINICAS ANGRA 123",
-            "cnpj": "28.588.747/0001-21"
-        };
-
         let pjTxt = parserPJ._getPessoaTd(trPJ).text();
-        (parserPJ._getPessoaJuridica(pjTxt)).should.be.eql(expected);
+        (parserPJ._getPessoaJuridica(pjTxt)).should.be.eql(expectedPJ);
     });
 
     it('should return Pessoa Fisica', function() {
 
-      let expected = {
-          "nome": "ALEXANDRE ALMEIDA L'HOTELLIER",
-          "conselho": "CRO",
-          "numero": "38064",
-          "estado": "RJ"
-      };
-
       let pfTd = parserPJ._getPessoaTd(trPF);
-      (parserPF._getPessoaFisica(pfTd)).should.be.eql(expected);
+      (parserPF._getPessoaFisica(pfTd)).should.be.eql(expectedPF);
+    });
+
+    it('should return Pessoa', function() {
+
+      let actualPF = parserPF.getPessoa(trPF);
+      (actualPF).should.be.eql(expectedPF);
+
+      let actualPJ = parserPJ.getPessoa(trPJ);
+      (actualPJ).should.be.eql(expectedPJ);
     });
 
   });
