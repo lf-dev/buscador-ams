@@ -73,5 +73,5 @@ Parser.prototype._getPessoaFisica = function(td) {
 }
 
 Parser.prototype.getTipoEstabelecimento = function(tr) {
-    return this.$(tr.find('>td')[Parser.INDEX_TIPO_ESTABELECIMENTO]).text().trim();
+    return this._getText(tr, Parser.INDEX_TIPO_ESTABELECIMENTO);
 }
