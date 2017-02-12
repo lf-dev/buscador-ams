@@ -1,13 +1,17 @@
 var S = require('string');
 
 const TABLE_HEADER_BG_COLOR = "#b0dda4";
-const INDEX_PESSOA = 0;
-const INDEX_TIPO_ESTABELECIMENTO = 1;
+Parser.INDEX_PESSOA = 0;
+Parser.INDEX_TIPO_ESTABELECIMENTO = 1;
 
 function Parser($) {
   this.$ = $;
 }
 module.exports = Parser;
+
+Parser.prototype._getTd = function(tr, index) {
+  return this.$(tr.find('>td')[index]);
+}
 
 Parser.prototype.isData = function(tr) {
     return tr.css('background-color') !== TABLE_HEADER_BG_COLOR &&
@@ -15,7 +19,7 @@ Parser.prototype.isData = function(tr) {
 }
 
 Parser.prototype.getPessoa = function(tr) {
-    let td = this._getPessoaTd(tr);
+    let td = this._getTd(tr, Parser.INDEX_PESSOA);
     let text = td.text();
 
     if(this._isPessoaJuridica(text)){
@@ -23,10 +27,6 @@ Parser.prototype.getPessoa = function(tr) {
     }else {
       return this._getPessoaFisica(td);
     }
-}
-
-Parser.prototype._getPessoaTd = function(tr) {
-    return this.$(tr.find('>td')[INDEX_PESSOA]);
 }
 
 Parser.prototype._isPessoaJuridica = function(text){
@@ -69,5 +69,5 @@ Parser.prototype._getPessoaFisica = function(td) {
 }
 
 Parser.prototype.getTipoEstabelecimento = function(tr) {
-    return this.$(tr.find('>td')[INDEX_TIPO_ESTABELECIMENTO]).text().trim();
+    return this.$(tr.find('>td')[Parser.INDEX_TIPO_ESTABELECIMENTO]).text().trim();
 }

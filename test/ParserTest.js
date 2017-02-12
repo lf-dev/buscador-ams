@@ -51,31 +51,25 @@ describe('Parser', function() {
         "estado": "RJ"
     };
 
-    it('should return pessoa td', function() {
-
-      let td = parserPJ._getPessoaTd(trPJ);
-      (td.text().trim()).should.startWith("Razão Social: ANGRA ");
-    });
-
     it('should identify Pessoa Juridica', function() {
 
-        let pjTxt = parserPJ._getPessoaTd(trPJ).text();
+        let pjTxt = parserPJ._getTd(trPJ, Parser.INDEX_PESSOA).text();
         (parserPJ._isPessoaJuridica(pjTxt)).should.be.exactly(true);
 
-        let pfTxt = parserPF._getPessoaTd(trPF).text();
+        let pfTxt = parserPF._getTd(trPF, Parser.INDEX_PESSOA).text();
         (parserPF._isPessoaJuridica(pfTxt)).should.be.exactly(false);
     });
 
     it('should return Pessoa Juridica', function() {
 
-        let pjTxt = parserPJ._getPessoaTd(trPJ).text();
+        let pjTxt = parserPJ._getTd(trPJ, Parser.INDEX_PESSOA).text();
         (parserPJ._getPessoaJuridica(pjTxt)).should.be.eql(expectedPJ);
     });
 
     it('should return Pessoa Fisica', function() {
 
-      let pfTd = parserPJ._getPessoaTd(trPF);
-      (parserPF._getPessoaFisica(pfTd)).should.be.eql(expectedPF);
+        let pfTd = parserPJ._getTd(trPF, Parser.INDEX_PESSOA);
+        (parserPF._getPessoaFisica(pfTd)).should.be.eql(expectedPF);
     });
 
     it('should return Pessoa', function() {
@@ -98,8 +92,6 @@ describe('Parser', function() {
 
         let actualEstabelecimentoPJ = parserPJ.getTipoEstabelecimento(trPJ);
         (actualEstabelecimentoPJ).should.be.exactly('LABORATORIO');
-
-
       });
   });
 
