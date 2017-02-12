@@ -75,22 +75,22 @@ describe('Parser', function() {
 
     it('should identify Pessoa Juridica', function() {
 
-        let pjTxt = parserPJ._getTd(trPJ, Parser.INDEX_PESSOA).text();
+        let pjTxt = parserPJ._getTd(trPJ, 0).text();
         (parserPJ._isPessoaJuridica(pjTxt)).should.be.exactly(true);
 
-        let pfTxt = parserPF._getTd(trPF, Parser.INDEX_PESSOA).text();
+        let pfTxt = parserPF._getTd(trPF, 0).text();
         (parserPF._isPessoaJuridica(pfTxt)).should.be.exactly(false);
     });
 
     it('should return Pessoa Juridica', function() {
 
-        let pjTxt = parserPJ._getTd(trPJ, Parser.INDEX_PESSOA).text();
+        let pjTxt = parserPJ._getTd(trPJ, 0).text();
         (parserPJ._getPessoaJuridica(pjTxt)).should.be.eql(expectedJsonPJ.pessoa);
     });
 
     it('should return Pessoa Fisica', function() {
 
-        let pfTd = parserPJ._getTd(trPF, Parser.INDEX_PESSOA);
+        let pfTd = parserPJ._getTd(trPF, 0);
         (parserPF._getPessoaFisica(pfTd)).should.be.eql(expectedJsonPF.pessoa);
     });
 

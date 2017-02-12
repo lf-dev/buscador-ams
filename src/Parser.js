@@ -1,7 +1,6 @@
 var S = require('string');
 
 const TABLE_HEADER_BG_COLOR = "#b0dda4";
-Parser.INDEX_PESSOA = 0;
 
 function Parser($) {
   this.$ = $;
@@ -22,7 +21,7 @@ Parser.prototype.isData = function(tr) {
 }
 
 Parser.prototype.getPessoa = function(tr) {
-    let td = this._getTd(tr, Parser.INDEX_PESSOA);
+    let td = this._getTd(tr, 0);
     let text = td.text();
 
     if(this._isPessoaJuridica(text)){
