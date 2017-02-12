@@ -25,6 +25,11 @@ describe('Parser', function() {
       },
       "tipo estabelecimento": "LABORATORIO",
       "bairro": "CENTRO",
+      "endereco": {
+        "rua": "RUA DOS CONEGOS BITTENCOURT, 22, (ANTIGA N 28)",
+        "cidade": "ANGRA DOS REIS",
+        "estado": "RJ"
+      },
       "cep": "23.900-300",
       "especialidade": "LAB.DE ANALISES CLINICAS"
   };
@@ -41,6 +46,11 @@ describe('Parser', function() {
       },
       "tipo estabelecimento": "CONSULTORIO ODONTOLOGICO",
       "bairro": "CENTRO",
+      "endereco": {
+        "rua": "TRAVESSA JORDAO GALINDO, 30, SALA 102",
+        "cidade": "ANGRA DOS REIS",
+        "estado": "RJ"
+      },
       "cep": "23.900-470",
       "especialidade": "ORTODONTIA"
   };
@@ -103,6 +113,16 @@ describe('Parser', function() {
       (actualPJ).should.be.eql(expectedJsonPJ.pessoa);
     });
 
+  });
+
+  describe('#getEndereco', function() {
+
+      it('should return the PJ address', function() {
+
+          let actualAddress = parserPJ.getEndereco(trPJ);
+          (actualAddress).should.be.eql(expectedJsonPJ.endereco);
+
+      });
   });
 
   describe('#toJSON', function() {

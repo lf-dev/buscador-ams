@@ -70,13 +70,27 @@ Parser.prototype._getPessoaFisica = function(td) {
     }
 }
 
+Parser.prototype.getEndereco = function(tr) {
+    let td = this._getTd(tr, 3);
+
+    let endereco = td.html().split('<br>');
+    let cidadeEstado = endereco[1].split('-');
+
+    let rua = S(endereco[0]).collapseWhitespace().replaceAll(" ,",",").s;
+    return {
+      "rua": rua,
+      "cidade": cidadeEstado[0].trim(),
+      "estado": cidadeEstado[1].trim()
+    }
+}
+
 Parser.prototype.toJSON = function(tr) {
 
     return {
       "pessoa": this.getPessoa(tr),
       "tipo estabelecimento": this._getText(tr, 1),
       "bairro": this._getText(tr, 2),
-      //"endereco": this._getText(tr, 3),
+      "endereco": this.getEndereco(tr),
       "cep": this._getText(tr, 4),
       //"telefone": this._getText(tr, 5),
       "especialidade": this._getText(tr, 6)
