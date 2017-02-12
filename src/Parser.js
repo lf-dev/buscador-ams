@@ -74,13 +74,17 @@ Parser.prototype.getEndereco = function(tr) {
     let td = this._getTd(tr, 3);
 
     let endereco = td.html().split('<br>');
-    let cidadeEstado = endereco[1].split('-');
-
     let rua = S(endereco[0]).collapseWhitespace().replaceAll(" ,",",").s;
+
+    let cidadeEstado = endereco[1];
+    let index = cidadeEstado.lastIndexOf('-');
+    let cidade = cidadeEstado.substring(0, index).trim();
+    let estado = cidadeEstado.substring(index+1, cidadeEstado.length-1).trim();
+
     return {
       "rua": rua,
-      "cidade": cidadeEstado[0].trim(),
-      "estado": cidadeEstado[1].trim()
+      "cidade": cidade,
+      "estado": estado
     }
 }
 
