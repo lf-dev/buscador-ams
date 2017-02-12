@@ -88,6 +88,11 @@ Parser.prototype.getEndereco = function(tr) {
     }
 }
 
+Parser.prototype.getTelefone = function(tr) {
+    let telefone = this._getText(tr, 5);
+    return S(telefone).collapseWhitespace().s;
+}
+
 Parser.prototype.toJSON = function(tr) {
 
     return {
@@ -96,7 +101,7 @@ Parser.prototype.toJSON = function(tr) {
       "bairro": this._getText(tr, 2),
       "endereco": this.getEndereco(tr),
       "cep": this._getText(tr, 4),
-      //"telefone": this._getText(tr, 5),
+      "telefone": this.getTelefone(tr),
       "especialidade": this._getText(tr, 6)
     }
 }

@@ -31,6 +31,7 @@ describe('Parser', function() {
         "estado": "RJ"
       },
       "cep": "23.900-300",
+      "telefone": "(24) 3365-2808",
       "especialidade": "LAB.DE ANALISES CLINICAS"
   };
 
@@ -52,6 +53,7 @@ describe('Parser', function() {
         "estado": "RJ"
       },
       "cep": "23.900-470",
+      "telefone": "(24) 3368-5329",
       "especialidade": "ORTODONTIA"
   };
 
@@ -124,6 +126,14 @@ describe('Parser', function() {
 
       });
   });
+
+  describe('#getTelefone', function() {
+      it('should return the PJ phone number', function() {
+
+          let actual = parserPJ.getTelefone(trPJ);
+          (actual).should.be.exactly(expectedJsonPJ.telefone);
+      })
+  })
 
   describe('#toJSON', function() {
 
