@@ -14,25 +14,25 @@ Parser.prototype.isData = function(tr) {
 }
 
 Parser.prototype.getPessoa = function(tr) {
-    let td = this.getPessoaTd(tr);
+    let td = this._getPessoaTd(tr);
     let text = td.text();
 
-    if(this.isPessoaJuridica(text)){
-      return this.getPessoaJuridica(text);
+    if(this._isPessoaJuridica(text)){
+      return this._getPessoaJuridica(text);
     }else {
-      return this.getPessoaFisica(td);
+      return this._getPessoaFisica(td);
     }
 }
 
-Parser.prototype.getPessoaTd = function(tr) {
+Parser.prototype._getPessoaTd = function(tr) {
     return this.$(tr.find('>td')[INDEX_PESSOA]);
 }
 
-Parser.prototype.isPessoaJuridica = function(text){
+Parser.prototype._isPessoaJuridica = function(text){
   return text.indexOf('CNPJ:') > -1;
 }
 
-Parser.prototype.getPessoaJuridica = function(text){
+Parser.prototype._getPessoaJuridica = function(text){
 
   const razao = "Razão Social:";
   const fantasia = "Nome Fantasia:";
@@ -49,7 +49,7 @@ Parser.prototype.getPessoaJuridica = function(text){
   }
 }
 
-Parser.prototype.getPessoaFisica = function(td) {
+Parser.prototype._getPessoaFisica = function(td) {
 
     let conselhoTxt = td.find("font").text();
     let nome = td.text().replace(conselhoTxt, "").trim();

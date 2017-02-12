@@ -44,17 +44,17 @@ describe('Parser', function() {
 
     it('should return pessoa td', function() {
 
-      let td = parserPJ.getPessoaTd(trPJ);
+      let td = parserPJ._getPessoaTd(trPJ);
       (td.text().trim()).should.startWith("Razão Social: ANGRA ");
     });
 
     it('should identify Pessoa Juridica', function() {
 
-        let pjTxt = parserPJ.getPessoaTd(trPJ).text();
-        (parserPJ.isPessoaJuridica(pjTxt)).should.be.exactly(true);
+        let pjTxt = parserPJ._getPessoaTd(trPJ).text();
+        (parserPJ._isPessoaJuridica(pjTxt)).should.be.exactly(true);
 
-        let pfTxt = parserPF.getPessoaTd(trPF).text();
-        (parserPF.isPessoaJuridica(pfTxt)).should.be.exactly(false);
+        let pfTxt = parserPF._getPessoaTd(trPF).text();
+        (parserPF._isPessoaJuridica(pfTxt)).should.be.exactly(false);
     });
 
     it('should return Pessoa Juridica', function() {
@@ -65,8 +65,8 @@ describe('Parser', function() {
             "cnpj": "28.588.747/0001-21"
         };
 
-        let pjTxt = parserPJ.getPessoaTd(trPJ).text();
-        (parserPJ.getPessoaJuridica(pjTxt)).should.be.eql(expected);
+        let pjTxt = parserPJ._getPessoaTd(trPJ).text();
+        (parserPJ._getPessoaJuridica(pjTxt)).should.be.eql(expected);
     });
 
     it('should return Pessoa Fisica', function() {
@@ -78,8 +78,8 @@ describe('Parser', function() {
           "estado": "RJ"
       };
 
-      let pfTd = parserPJ.getPessoaTd(trPF);
-      (parserPF.getPessoaFisica(pfTd)).should.be.eql(expected);
+      let pfTd = parserPJ._getPessoaTd(trPF);
+      (parserPF._getPessoaFisica(pfTd)).should.be.eql(expected);
     });
 
   });
