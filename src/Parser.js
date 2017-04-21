@@ -1,5 +1,4 @@
 var S = require('string');
-var Credenciado = require('./Credenciado.js');
 
 const TABLE_HEADER_BG_COLOR = "#b0dda4";
 
@@ -110,8 +109,4 @@ Parser.prototype.toJSON = function(tr) {
         "telefone": this.getTelefone(tr),
         "especialidade": this._getText(tr, 6)
     }
-}
-
-Parser.prototype.toCredenciado = function(tr) {
-    return new Credenciado(this.toJSON(tr));
 }
