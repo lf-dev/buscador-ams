@@ -1,4 +1,5 @@
 var S = require('string');
+var Credenciado = require('./Credenciado.js');
 
 const TABLE_HEADER_BG_COLOR = "#b0dda4";
 
@@ -73,7 +74,7 @@ Parser.prototype._getPessoaFisica = function(td) {
     }
 
     pf.id = pf.conselho + ' ' + pf.numero + ' ' + pf.estado;
-    return pf; 
+    return pf;
 }
 
 Parser.prototype.getEndereco = function(tr) {
@@ -100,14 +101,17 @@ Parser.prototype.getTelefone = function(tr) {
 }
 
 Parser.prototype.toJSON = function(tr) {
-
     return {
-      "pessoa": this.getPessoa(tr),
-      "tipo estabelecimento": this._getText(tr, 1),
-      "bairro": this._getText(tr, 2),
-      "endereco": this.getEndereco(tr),
-      "cep": this._getText(tr, 4),
-      "telefone": this.getTelefone(tr),
-      "especialidade": this._getText(tr, 6)
+        "pessoa": this.getPessoa(tr),
+        "tipo estabelecimento": this._getText(tr, 1),
+        "bairro": this._getText(tr, 2),
+        "endereco": this.getEndereco(tr),
+        "cep": this._getText(tr, 4),
+        "telefone": this.getTelefone(tr),
+        "especialidade": this._getText(tr, 6)
     }
+}
+
+Parser.prototype.toCredenciado = function(tr) {
+    return new Credenciado(this.toJSON(tr));
 }
