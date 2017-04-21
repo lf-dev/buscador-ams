@@ -35,5 +35,18 @@ describe('Credenciado', function() {
 
     });
 
+    it('should identify equality by pessoa.id property', function() {
 
+        let c1 = new Credenciado({pessoa: {id: 123}});
+        let c2 = new Credenciado({pessoa: {id: 123}});
+        let c3 = new Credenciado({pessoa: {id: 456}});
+
+        c1.equals(c2).should.be.true();
+        c2.equals(c1).should.be.true();
+
+        c3.equals(c1).should.not.be.true();
+        c3.equals(c2).should.not.be.true();
+        c1.equals(c3).should.not.be.true();
+        c2.equals(c3).should.not.be.true();
+    });
 });

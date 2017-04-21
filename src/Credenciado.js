@@ -10,3 +10,7 @@ function Credenciado(json) {
     this.especialidades = [json.especialidade];
 }
 module.exports = Credenciado;
+
+Credenciado.prototype.equals = function(credenciado) {
+    return credenciado.pessoa.id == this.pessoa.id;
+}
