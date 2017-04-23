@@ -5,6 +5,7 @@
   "main": "./src/scrapper.js",
   "dependencies": {
     "cheerio": "^0.22.0",
+    "lodash": "^4.17.4",
     "request": "^2.79.0",
     "string": "^3.3.3"
   },
