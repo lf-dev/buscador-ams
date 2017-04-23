@@ -100,13 +100,18 @@ Parser.prototype.getTelefone = function(tr) {
 }
 
 Parser.prototype.toJSON = function(tr) {
+
+    var endereco = this.getEndereco(tr);
+
     return {
-        "pessoa": this.getPessoa(tr),
+        pessoa: this.getPessoa(tr),
         "tipo estabelecimento": this._getText(tr, 1),
-        "bairro": this._getText(tr, 2),
-        "endereco": this.getEndereco(tr),
-        "cep": this._getText(tr, 4),
-        "telefone": this.getTelefone(tr),
-        "especialidade": this._getText(tr, 6)
+        bairro: this._getText(tr, 2),
+        rua: endereco.rua,
+        cidade: endereco.cidade,
+        estado: endereco.estado,
+        cep: this._getText(tr, 4),
+        telefone: this.getTelefone(tr),
+        especialidade: this._getText(tr, 6)
     }
 }

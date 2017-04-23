@@ -1,16 +1,13 @@
+var Endereco = require('../src/Endereco.js');
+
 function Credenciado(json) {
 
     this.pessoa = json.pessoa;
-
-    this.tipos_estabelecimentos = [json['tipo estabelecimento']];
-    this.bairros = [json.bairro];
-    this.enderecos = [json.endereco];
-    this.ceps = [json.cep];
-    this.telefones = [json.telefone];
-    this.especialidades = [json.especialidade];
+    this.enderecos = [new Endereco(json)];
 }
 module.exports = Credenciado;
 
 Credenciado.prototype.equals = function(credenciado) {
     return credenciado.pessoa.id == this.pessoa.id;
 }
+

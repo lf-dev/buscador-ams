@@ -18,45 +18,41 @@ describe('Parser', function() {
   let parserPJ = new Parser($PJ);
 
   let expectedJsonPJ = {
-      "pessoa": {
+      pessoa: {
         "razao social": "ANGRA LAB LABORATORIO DE ANALISES CLINICAS ANGRA",
-        "fantasia": "ANGRA LAB LABORATORIO DE ANALISES CLINICAS ANGRA 123",
-        "cnpj": "28.588.747/0001-21",
-        "id": "28.588.747/0001-21"
+        fantasia: "ANGRA LAB LABORATORIO DE ANALISES CLINICAS ANGRA 123",
+        cnpj: "28.588.747/0001-21",
+        id: "28.588.747/0001-21"
       },
       "tipo estabelecimento": "LABORATORIO",
-      "bairro": "CENTRO",
-      "endereco": {
-        "rua": "RUA DOS CONEGOS BITTENCOURT, 22, (ANTIGA N 28)",
-        "cidade": "ANGRA DOS REIS",
-        "estado": "RJ"
-      },
-      "cep": "23.900-300",
-      "telefone": "(24) 3365-2808",
-      "especialidade": "LAB.DE ANALISES CLINICAS"
+      bairro: "CENTRO",
+      rua: "RUA DOS CONEGOS BITTENCOURT, 22, (ANTIGA N 28)",
+      cidade: "ANGRA DOS REIS",
+      estado: "RJ",
+      cep: "23.900-300",
+      telefone: "(24) 3365-2808",
+      especialidade: "LAB.DE ANALISES CLINICAS"
   };
 
   let $PF = load("pessoaFisica.html");
   let trPF = $PF('tr');
   let parserPF = new Parser($PF);
   let expectedJsonPF = {
-      "pessoa": {
-        "nome": "ALEXANDRE ALMEIDA L'HOTELLIER",
-        "conselho": "CRO",
-        "numero": "38064",
-        "estado": "RJ",
-        "id": "CRO 38064 RJ"
+      pessoa: {
+        nome: "ALEXANDRE ALMEIDA L'HOTELLIER",
+        conselho: "CRO",
+        numero: "38064",
+        estado: "RJ",
+        id: "CRO 38064 RJ"
       },
       "tipo estabelecimento": "CONSULTORIO ODONTOLOGICO",
-      "bairro": "CENTRO",
-      "endereco": {
-        "rua": "TRAVESSA JORDAO GALINDO, 30, SALA 102",
-        "cidade": "ANGRA DOS REIS",
-        "estado": "RJ"
-      },
-      "cep": "23.900-470",
-      "telefone": "(24) 3368-5329",
-      "especialidade": "ORTODONTIA"
+      bairro: "CENTRO",
+      rua: "TRAVESSA JORDAO GALINDO, 30, SALA 102",
+      cidade: "ANGRA DOS REIS",
+      estado: "RJ",
+      cep: "23.900-470",
+      telefone: "(24) 3368-5329",
+      especialidade: "ORTODONTIA"
   };
 
   describe('tr and tds', function() {
@@ -124,7 +120,13 @@ describe('Parser', function() {
       it('should return the PJ address', function() {
 
           let actualAddress = parserPJ.getEndereco(trPJ);
-          (actualAddress).should.be.eql(expectedJsonPJ.endereco);
+          let expectedAddress = {
+              rua: expectedJsonPJ.rua,
+              cidade: expectedJsonPJ.cidade,
+              estado: expectedJsonPJ.estado
+          };
+
+          (actualAddress).should.be.eql(expectedAddress);
 
       });
   });
