@@ -1,5 +1,6 @@
 var should = require('should');
 var Credenciado = require('../src/Credenciado.js');
+var Endereco = require('../src/Endereco.js');
 
 describe('Credenciado', function() {
 
@@ -40,5 +41,31 @@ describe('Credenciado', function() {
         c3.equals(c2).should.not.be.true();
         c1.equals(c3).should.not.be.true();
         c2.equals(c3).should.not.be.true();
+    });
+
+    it('e2 should be merged into e1 and e3 should be added', function() {
+
+        let e1 = new Endereco(json);
+        e1.especialidades.push("especialidade 2");
+
+        let e2 = new Endereco(json);
+        e2.telefones.push("4321-4321");
+
+        let e3 = new Endereco(json);
+        e3.rua = "nova rua";
+
+        let c1 = new Credenciado({});
+        c1.enderecos = [e1];
+
+        let c2 = new Credenciado({});
+        c2.enderecos = [e2,e3];
+
+        c1.merge(c2);
+
+        let expectedMerged = new Endereco(json);
+        expectedMerged.especialidades.push("especialidade 2");
+        expectedMerged.telefones.push("4321-4321");
+
+        c1.enderecos.should.be.eql([expectedMerged, e3]);
     });
 });
