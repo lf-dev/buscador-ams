@@ -10,7 +10,7 @@ describe('Endereco', function() {
             cnpj: "12345",
             id: "12345"
         },
-        "tipo estabelecimento": "especialidade 1",
+        "tipo estabelecimento": "tipo 1",
         bairro: "bairro",
         rua: "rua abc",
         cidade: "cidade abc",
@@ -56,6 +56,22 @@ describe('Endereco', function() {
         e3.estado = json.estado;
         e3.cep = json.cep + "abc";
         e3.equals(e1).should.not.be.true();
+    });
+
+    it('should merge enderecos', function() {
+
+        let e1 = new Endereco(json);
+        let e2 = new Endereco(json);
+        e2.telefones = ["4321-4321"];
+        e2.tipos = ["tipo 1", "tipo 2"];
+        e2.especialidades = ["especialidade 2"];
+
+        e1.merge(e2);
+
+        e1.telefones.should.be.eql(["1234-1234","4321-4321"]);
+        e1.tipos.should.be.eql(["tipo 1", "tipo 2"]);
+        e1.especialidades.should.be.eql(["especialidade", "especialidade 2"]);
+
     });
 
 });

@@ -1,3 +1,5 @@
+var _ = require('lodash');
+
 function Endereco(json) {
 
     this.rua = json.rua;
@@ -17,5 +19,11 @@ Endereco.prototype.equals = function(endereco) {
             this.cidade == endereco.cidade &&
             this.estado == endereco.estado &&
             this.cep == endereco.cep
+}
 
+Endereco.prototype.merge = function(endereco) {
+
+    this.telefones = _.union(this.telefones, endereco.telefones);
+    this.tipos = _.union(this.tipos, endereco.tipos);
+    this.especialidades = _.union(this.especialidades, endereco.especialidades);
 }
