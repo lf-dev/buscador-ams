@@ -44,6 +44,8 @@ request.post({url: url, formData: formData}, function (err, httpResponse, body) 
         }
     }
 
+    console.log(JSON.stringify(credenciados, null, 2));
+
     console.log("total linhas:  " + trs.length);
     console.log("total linhas com credenciados: " + total);
     console.log("total credenciados unicos: " + credenciados.length);
