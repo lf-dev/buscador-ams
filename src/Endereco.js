@@ -10,3 +10,12 @@ function Endereco(json) {
 
 }
 module.exports = Endereco;
+
+Endereco.prototype.equals = function(endereco) {
+
+    return this.rua == endereco.rua &&
+            this.cidade == endereco.cidade &&
+            this.estado == endereco.estado &&
+            this.cep == endereco.cep
+
+}
