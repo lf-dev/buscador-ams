@@ -4,25 +4,41 @@ var _ = require('lodash');
 var Parser = require('./Parser.js');
 var Credenciado = require('./Credenciado.js');
 
-var url = 'https://seguro2.petrobras.com.br/buscaams/busca.do';
-var formData = {
-    estado: 'RJ',
-    cidade: 'ARMACAO DOS BUZIOS',
-    atendimento: 'true',
-    method: 'buscar'
+obterCredenciados("RJ");
+
+function obterCredenciados(estado) {
+    var url = 'https://seguro2.petrobras.com.br/buscaams/busca.do';
+    var formData = {
+        estado: estado,
+        cidade: "RIO DE JANEIRO",
+        atendimento: 'true',
+        method: 'buscar'
+    }
+
+    var credencidados = [];
+
+    console.log("Consultando AMS");
+    request.post({url: url, formData: formData}, function (err, httpResponse, body) {
+        if (err) {
+            return console.error('upload failed:', err);
+        }
+
+        console.log("Realizando parser");
+        credencidados = parseCredenciados(body);
+    });
+
+    return credencidados;
 }
 
-request.post({url: url, formData: formData}, function (err, httpResponse, body) {
-    if (err) {
-        return console.error('upload failed:', err);
-    }
+function parseCredenciados(body) {
 
     var $ = cheerio.load(body);
     var parser = new Parser($);
 
+    var credenciados = [];
     var total = 0;
     var trs = $('tr');
-    let credenciados = [];
+
     for (var i = 0; i < trs.length; i++) {
 
         var tr = $(trs[i]);
@@ -32,22 +48,27 @@ request.post({url: url, formData: formData}, function (err, httpResponse, body) 
             let json = parser.toJSON(tr);
             let novoCredenciado = new Credenciado(json);
 
-            let mesmoCredenciado = _.find(credenciados, function(credenciadoExistente) {
+            let mesmoCredenciado = _.find(credenciados, function (credenciadoExistente) {
                 return novoCredenciado.equals(credenciadoExistente);
             });
 
-            if(mesmoCredenciado == null){
+            if (mesmoCredenciado == null) {
                 credenciados.push(novoCredenciado);
-            }else {
+            } else {
                 mesmoCredenciado.merge(novoCredenciado);
             }
         }
     }
 
-    console.log(JSON.stringify(credenciados, null, 2));
+    //console.log(JSON.stringify(credenciados, null, 2));
 
+    console.log("relatorio:");
     console.log("total linhas:  " + trs.length);
     console.log("total linhas com credenciados: " + total);
     console.log("total credenciados unicos: " + credenciados.length);
 
-});
+    return credenciados;
+}
+
+
+
