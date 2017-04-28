@@ -1,6 +1,7 @@
 var request = require('request');
 var cheerio = require('cheerio');
 var _ = require('lodash');
+var fs = require('fs');
 var Parser = require('./Parser.js');
 var Credenciado = require('./Credenciado.js');
 
@@ -10,12 +11,10 @@ function obterCredenciados(estado) {
     var url = 'https://seguro2.petrobras.com.br/buscaams/busca.do';
     var formData = {
         estado: estado,
-        cidade: "RIO DE JANEIRO",
+        cidade: "NITEROI",
         atendimento: 'true',
         method: 'buscar'
     }
-
-    var credencidados = [];
 
     console.log("Consultando AMS");
     request.post({url: url, formData: formData}, function (err, httpResponse, body) {
@@ -24,10 +23,9 @@ function obterCredenciados(estado) {
         }
 
         console.log("Realizando parser");
-        credencidados = parseCredenciados(body);
+        var credenciados = parseCredenciados(body);
+        fs.writeFile("credenciados.json", JSON.stringify(credenciados, null, 2));
     });
-
-    return credencidados;
 }
 
 function parseCredenciados(body) {
@@ -59,8 +57,6 @@ function parseCredenciados(body) {
             }
         }
     }
-
-    //console.log(JSON.stringify(credenciados, null, 2));
 
     console.log("relatorio:");
     console.log("total linhas:  " + trs.length);
