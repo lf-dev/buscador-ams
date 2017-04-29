@@ -26,6 +26,7 @@ describe('Endereco', function() {
 
         endereco.rua.should.be.eql(json.rua);
         endereco.cidade.should.be.eql(json.cidade);
+        endereco.bairro.should.be.eql(json.bairro);
         endereco.estado.should.be.eql(json.estado);
         endereco.cep.should.be.eql(json.cep);
         endereco.telefones.should.be.eql([json.telefone]);

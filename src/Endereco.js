@@ -3,6 +3,7 @@ var _ = require('lodash');
 function Endereco(json) {
 
     this.rua = json.rua;
+    this.bairro = json.bairro;
     this.cidade = json.cidade;
     this.estado = json.estado;
     this.cep = json.cep;
