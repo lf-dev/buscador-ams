@@ -8,7 +8,21 @@ var Credenciado = require('./Credenciado.js');
 //var estados = ["AL", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RS", "SC", "SE", "SP", "TO"];
 var estados = ["DF","DF"];
 
-fetchOneByOne(estados, []);
+//fetchOneByOne(estados, []);
+fetchParallel(estados);
+
+function fetchParallel(estados) {
+
+    var promises = estados.map(function (estado) {
+        return fetch(estado).then(function (body) {
+            return parseCredenciados(body, estado);
+        });
+    });
+
+    Promise.all(promises).then(function(credenciadosPorEstado) {
+        reduceCredenciados(credenciadosPorEstado);
+    });
+}
 
 function fetchOneByOne(estados, credenciadosPorEstado) {
 
@@ -22,7 +36,7 @@ function fetchOneByOne(estados, credenciadosPorEstado) {
 
         fetch(estado).then(function(body) {
 
-            return parseCredenciados(body)
+            return parseCredenciados(body, estado)
 
         }).then(function(novosCredenciados) {
 
@@ -50,7 +64,7 @@ function fetch(estado) {
             method: 'buscar'
         }
 
-        console.log("Consultando AMS - " + estado);
+        console.log("Consultando " + estado);
         request.post({url: url, formData: formData}, function (err, httpResponse, body) {
             if (err) {
                 reject(httpResponse);
@@ -61,9 +75,8 @@ function fetch(estado) {
     });
 }
 
-function parseCredenciados(body) {
+function parseCredenciados(body, estado) {
 
-    console.log("Realizando parser");
     var $ = cheerio.load(body);
     var parser = new Parser($);
 
@@ -92,10 +105,7 @@ function parseCredenciados(body) {
         }
     }
 
-    //console.log("relatorio:");
-    //console.log("total linhas:  " + trs.length);
-    //console.log("total linhas com credenciados: " + total);
-    console.log("total credenciados unicos: " + credenciados.length);
+    console.log(estado + " : " + credenciados.length + " credenciados");
 
     return credenciados;
 }
