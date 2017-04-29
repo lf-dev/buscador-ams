@@ -6,7 +6,7 @@ var Parser = require('./Parser.js');
 var Credenciado = require('./Credenciado.js');
 
 //var estados = ["AL", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RS", "SC", "SE", "SP", "TO"];
-var estados = ["DF","DF"];
+var estados = ["AL", "AM", "BA", "CE"];
 
 //fetchOneByOne(estados, []);
 fetchParallel(estados);
@@ -65,10 +65,13 @@ function fetch(estado) {
         }
 
         console.log("Consultando " + estado);
+        var start = new Date().getTime();
         request.post({url: url, formData: formData}, function (err, httpResponse, body) {
             if (err) {
                 reject(httpResponse);
             }else {
+                var end = new Date().getTime();
+                console.log("Tempo consulta " + estado + ": " + (end-start) + " ms");
                 resolve(body);
             }
         });
