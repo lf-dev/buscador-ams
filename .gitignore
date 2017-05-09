@@ -1,6 +1,6 @@
 credenciados.json
 .idea
-ams-scrapper.iml
+*.iml
 .git
 .DS_Store
 node_modules
