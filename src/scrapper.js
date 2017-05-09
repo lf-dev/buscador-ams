@@ -6,7 +6,7 @@ var Parser = require('./Parser.js');
 var Credenciado = require('./Credenciado.js');
 
 //var estados = ["AL", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RS", "SC", "SE", "SP", "TO"];
-var estados = ["AL", "AM", "BA", "CE"];
+var estados = ["DF"];
 
 //fetchOneByOne(estados, []);
 fetchParallel(estados);
@@ -50,7 +50,17 @@ function fetchOneByOne(estados, credenciadosPorEstado) {
 function reduceCredenciados(credenciadosPorEstado){
 
     let todosCredenciados = _.flatten(credenciadosPorEstado);
-    fs.writeFile("credenciados.json", JSON.stringify(todosCredenciados, null, 2));
+
+    var stream = fs.createWriteStream("credenciados.json");
+    stream.once('open', function(fd) {
+        let id;
+        for(id = 0; id < todosCredenciados.length; id++){
+
+            stream.write('{"index":{"_id":"' + (id+1) + '"} }\n');
+            stream.write('{"credenciado":' + JSON.stringify(todosCredenciados[id], null, 0) + '}\n');
+        }
+        stream.end();
+    });
 }
 
 function fetch(estado) {
