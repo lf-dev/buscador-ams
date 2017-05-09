@@ -8,14 +8,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById("buscar").addEventListener("click", function() {
 
-        //var query = document.getElementById("query").value;
-        //sendGetRequest("/search?q="+query, function(json) {
-        //    console.log(json);
-        //});
-
         document.getElementById("header").classList.add("top");
         document.getElementById("home-logo").classList.add("top");
+
+        var query = document.getElementById("query").value;
+        sendGetRequest("/search?q="+query, function(json) {
+            preencherConsulta(json);
+        });
     });
+
+    function preencherConsulta(json) {
+
+    }
 
     // Returns an HTTP request object
     function getRequestObject() {

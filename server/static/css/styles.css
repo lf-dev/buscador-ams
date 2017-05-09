@@ -90,6 +90,49 @@
     transition: top 1s, transform 1s;
 }
 
+.container {
+    transform: translateY(-100px);
+    margin: 30px 145px;
+}
+
+.row {
+    width: 100%;
+    margin: 2px 0;
+    padding: 10px 0;
+
+    border-color: rgb(51, 118, 99);
+    border-bottom: solid 1px;
+}
+
+.nome-credenciado {
+    color: rgb(51, 118, 99);
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.conselho {
+    color: grey;
+    font-size: 11px;
+    margin-bottom: 10px;
+}
+
+.especialidades {
+    font-size: 15px;
+    margin-bottom: 3px;
+}
+
+.telefone {
+    color: rgb(51, 118, 99);
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.endereco {
+    font-size: 11px;
+    color: grey;
+
+}
+
 @media (max-width: 768px) {
     .buscar-xs {
         width: 100%;
