@@ -1,24 +1,17 @@
 var http = require('http');
-var fs = require('fs');
+var finalhandler = require('finalhandler');
+var serveStatic = require('serve-static');
 var url = require('url');
 
-http.createServer(function(req, res) {
+var staticBasePath = './static';
+
+var serve = serveStatic(staticBasePath);
+
+var server = http.createServer(function(req, res){
 
     var q = url.parse(req.url, true);
-    console.log(q.pathname);
 
-    if(q.pathname.endsWith('js') || q.pathname.endsWith('css') || q.pathname === "/") {
-
-        if(q.pathname === "/"){
-            q.pathname = "index.html"
-        }
-
-        fs.createReadStream("./" + q.pathname).pipe(res, function() {
-            res.statusCode = 200;
-            res.end();
-        });
-    }
-    else if(q.pathname === '/search') {
+    if(q.pathname === '/search') {
 
         console.log(q.query.q);
         var formData = { "query":{ "fuzzy": {"_all": q.query.q}}} ;
@@ -38,8 +31,10 @@ http.createServer(function(req, res) {
         esReq.end();
     }
     else {
-        res.statusCode = 404;
-        res.end();
+        var done = finalhandler(req, res);
+        serve(req, res, done);
     }
+});
 
-}).listen(3000);
+server.listen(3000);
+
