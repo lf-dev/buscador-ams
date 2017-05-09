@@ -1,0 +1,126 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.faixa {
+    background-color: rgb(51, 118, 99);
+}
+
+.logo-font {
+    color: white;
+    font-family: Verdana, Geneva, sans-serif;
+    font-weight: normal;
+}
+
+.logo {
+    height: 100px;
+}
+
+.logo > h1 {
+    font-size: 35px;
+}
+
+#home-logo {
+    position: absolute;
+    top: -44px;
+    height: 44px;
+    width: 145px;
+    margin-left: 30px;
+}
+
+.query-box {
+    float: left;
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 6px 0 0 16px;
+    width: 100%;
+    margin-bottom: 1px;
+    background-color: white;
+}
+
+#query {
+    display: inline-block;
+    font: 16px arial,sans-serif;
+    line-height: 34px;
+    height: 34px;
+    border: none;
+    outline: none;
+    background: transparent;
+    width: 100%;
+}
+
+#buscar {
+    float: left;
+
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+    margin-top: 4px;
+
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.clear-header {
+    clear: left;
+    margin-bottom: 20px;
+}
+
+#header.top {
+    top: 0;
+    transform: translateY(-100px);
+    transition: top 1s, transform 1s;
+}
+
+@media (max-width: 768px) {
+    .buscar-xs {
+        width: 100%;
+    }
+}
+
+@media (min-width: 769px) {
+
+    .faixa-sm {
+        background-color: rgb(51, 118, 99);
+        padding-left: 145px;
+    }
+
+    #header {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    #home-logo.top {
+        top: 20px;
+        transition: top 1s 1s;
+        z-index: 1;
+    }
+
+    .query-box-sm {
+        max-width: 400px;
+    }
+
+    .buscar-sm {
+        margin-left: 20px;
+    }
+
+}
