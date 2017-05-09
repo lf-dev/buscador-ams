@@ -19,6 +19,67 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function preencherConsulta(json) {
 
+        var container = document.getElementById("main-container");
+
+        var html = ""
+        json.hits.hits.forEach(function(it) {
+            html += obterHTMLCredenciado(it._source.credenciado);
+        });
+
+        container.innerHTML = html;
+    }
+
+    function obterHTMLCredenciado(credenciado){
+
+        var html = "<div class='row'>" +
+                    "<p class='nome-credenciado'>" + obterNome(credenciado.pessoa) + "</p>" +
+                    "<p class='conselho'>" + obterConselho(credenciado.pessoa) + "</p>";
+
+        credenciado.enderecos.forEach(function(endereco){
+            html += obterHTMLEndereco(endereco);
+        });
+
+
+        html += "</div>";
+
+        return html;
+    }
+
+    function obterHTMLEndereco(endereco) {
+        var html = "<p class='especialidades'>" + endereco.especialidades.join(", ") + "</p>" +
+                    "<p class='telefone'>" + endereco.telefones.join(", ") + "</p>" +
+                    "<p class='endereco'>" +
+                            endereco.tipos.join(", ") + ": " +
+                            endereco.rua + ", " +
+                            "CEP: " + endereco.cep + " - " +
+                            endereco.bairro + " - " +
+                            endereco.cidade + " - " +
+                            endereco.estado + "</p>"
+        return html;
+    }
+
+    function obterNome(pessoa) {
+        if(isPessoaJuridica(pessoa)){
+            return pessoa["razao social"]
+        }else {
+            return pessoa.nome;
+        }
+    }
+
+    function obterConselho(pessoa) {
+        if(isPessoaJuridica(pessoa)){
+            return pessoa.fantasia + ", CNPJ: " + pessoa.cnpj;
+        }else {
+            return pessoa.id;
+        }
+    }
+
+    function isPessoaJuridica(pessoa) {
+        return pessoa.cnpj != undefined;
+    }
+
+    function obterEspecialidades(credenciado) {
+
     }
 
     // Returns an HTTP request object
