@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-    console.log("carregou");
+    document.getElementById("main-container").style.display = "none";
 
 });
 
@@ -15,6 +15,28 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById("buscar").addEventListener("click", function() {
         realizarConsulta();
     });
+
+    var transitionEvent = whichTransitionEvent();
+    document.getElementById("header").addEventListener(transitionEvent, function(e) {
+        document.getElementById("main-container").style.display = "block";
+    });
+
+    function whichTransitionEvent(){
+        var t;
+        var el = document.createElement('fakeelement');
+        var transitions = {
+            'transition':'transitionend',
+            'OTransition':'oTransitionEnd',
+            'MozTransition':'transitionend',
+            'WebkitTransition':'webkitTransitionEnd'
+        }
+
+        for(t in transitions){
+            if( el.style[t] !== undefined ){
+                return transitions[t];
+            }
+        }
+    }
 
     function realizarConsulta() {
 
