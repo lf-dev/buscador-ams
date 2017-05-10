@@ -133,15 +133,15 @@
 
 }
 
-@media (max-width: 768px) {
-    .buscar-xs {
+@media (max-width: 767px) {
+    #buscar {
         width: 100%;
     }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 768px) {
 
-    .faixa-sm {
+    .faixa {
         background-color: rgb(51, 118, 99);
         padding-left: 145px;
     }
@@ -158,11 +158,11 @@
         z-index: 1;
     }
 
-    .query-box-sm {
+    .query-box {
         max-width: 400px;
     }
 
-    .buscar-sm {
+    #buscar {
         margin-left: 20px;
     }
 
