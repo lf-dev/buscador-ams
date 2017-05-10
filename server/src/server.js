@@ -8,7 +8,15 @@ app.get('/search', function (req, res) {
 
     var q = url.parse(req.url, true);
     console.log(q.query.q);
-    var formData = { "query":{ "fuzzy": {"_all": q.query.q}}} ;
+    var formData =
+            {
+                from: 0,
+                size: 10000,
+                "query":
+                {
+                    "fuzzy": {"_all": q.query.q}
+                }
+            };
 
     var options = {
         host: 'localhost',
