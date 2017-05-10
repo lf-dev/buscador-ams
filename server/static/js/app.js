@@ -6,16 +6,31 @@ document.addEventListener('DOMContentLoaded', function () {
 
 (function (global) {
 
+    document.getElementById("query").addEventListener("keypress", function(e){
+        if(e.keyCode == 13){
+            realizarConsulta();
+        }
+    });
+
     document.getElementById("buscar").addEventListener("click", function() {
+        realizarConsulta();
+    });
+
+    function realizarConsulta() {
+
+        var query = document.getElementById("query").value;
+
+        if(!query){
+            return;
+        }
 
         document.getElementById("header").classList.add("top");
         document.getElementById("home-logo").classList.add("top");
 
-        var query = document.getElementById("query").value;
         sendGetRequest("/search?q="+query, function(json) {
             preencherConsulta(json);
         });
-    });
+    }
 
     function preencherConsulta(json) {
 
