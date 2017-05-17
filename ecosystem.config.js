@@ -18,7 +18,7 @@ module.exports = {
     // Scrapper
     {
       name      : 'scrapper',
-      script    : 'scr/scrapper',
+      script    : 'src/scrapper.js',
       cwd       : './buscador-ams/ams-scrapper',
       cron_restart      : '0 3 * * *'
     }
