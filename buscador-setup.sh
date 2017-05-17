@@ -60,7 +60,7 @@ npm -g install pm2
 # INSTALACAO GIT
 # --------------
 
-sudo -y yum install git
+sudo yum -y install git
 
 # -clona o projeto
 git clone https://github.com/lf-dev/buscador-ams.git
