@@ -73,6 +73,10 @@ npm install --prefix buscador-ams/ams-scrapper/
 npm install --prefix buscador-ams/server/
 pm2 start ./buscador-ams/ecosystem.config.js
 
+sudo env PATH=$PATH:/home/ec2-user/.nvm/versions/node/v6.10.2/bin /home/ec2-user/.nvm/versions/node/v6.10.2/lib/node_modules/pm2/bin/pm2 startup amazon -u ec2-user --hp /home/ec2-user
+
+pm2 save
+
 
 # curl -H "Content-Type: application/json" -XPOST 'localhost:9200/ams/credenciado/_bulk?pretty&refresh' --data-binary "@credenciados.json"
 
