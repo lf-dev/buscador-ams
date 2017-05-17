@@ -9,7 +9,7 @@ module.exports = {
     {
       name      : 'server',
       script    : 'src/server.js',
-      cwd       : './server',
+      cwd       : './buscador-ams/server',
       env_production : {
         NODE_ENV: 'production'
       }
@@ -19,7 +19,7 @@ module.exports = {
     {
       name      : 'scrapper',
       script    : 'scr/scrapper',
-      cwd       : './ams-scrapper',
+      cwd       : './buscador-ams/ams-scrapper',
       cron_restart      : '0 3 * * *'
     }
   ]
