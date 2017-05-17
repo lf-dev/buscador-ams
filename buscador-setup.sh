@@ -69,6 +69,8 @@ git clone https://github.com/lf-dev/buscador-ams.git
 # INSTALACAO SCRAPPER & SERVIDOR
 # ------------------------------
 
+npm install --prefix buscador-ams/ams-scrapper/
+npm install --prefix buscador-ams/server/
 pm2 start ./buscador-ams/ecosystem.config.js
 
 
