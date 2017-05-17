@@ -47,7 +47,8 @@ sudo service elasticsearch start
 
 # -instala o nvm (node version manager)
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.0/install.sh | bash
-. ~/.nvm/nvm.sh
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
 # -instala o node js
 nvm install 6.10.2
@@ -59,28 +60,19 @@ npm -g install pm2
 # INSTALACAO GIT
 # --------------
 
-sudo yum install git
+sudo -y yum install git
 
 # -clona o projeto
 git clone https://github.com/lf-dev/buscador-ams.git
 
-# -------------------
-# INSTALACAO SCRAPPER
-# -------------------
+# ------------------------------
+# INSTALACAO SCRAPPER & SERVIDOR
+# ------------------------------
 
-npm install --prefix ./buscador-ams/ams-scrapper/
+pm2 start ./buscador-ams/ecosystem.config.js
 
-node src/scrapper.js
 
-curl -H "Content-Type: application/json" -XPOST 'localhost:9200/ams/credenciado/_bulk?pretty&refresh' --data-binary "@credenciados.json"
+# curl -H "Content-Type: application/json" -XPOST 'localhost:9200/ams/credenciado/_bulk?pretty&refresh' --data-binary "@credenciados.json"
 
 # TODO: tratar falha no site da AMS
 # TODO: agendar scrapper e carga em cron
-
-# -------------------
-# INSTALACAO SERVIDOR
-# -------------------
-
-npm install --prefix ./buscador-ams/server/
-
-# TODO: Configurar para iniciar servidor automaticamente
