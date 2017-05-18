@@ -4,3 +4,4 @@ credenciados.json
 .git
 .DS_Store
 node_modules
+ams-scrapper/run_scrapper.sh
