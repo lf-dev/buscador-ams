@@ -5,8 +5,8 @@ var fs = require('fs');
 var Parser = require('./Parser.js');
 var Credenciado = require('./Credenciado.js');
 
-//var estados = ["AL", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RS", "SC", "SE", "SP", "TO"];
-var estados = ["DF"];
+var estados = ["AL", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RS", "SC", "SE", "SP", "TO"];
+//var estados = ["DF"];
 
 //fetchOneByOne(estados, []);
 fetchParallel(estados);
