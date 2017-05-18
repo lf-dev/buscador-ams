@@ -13,14 +13,6 @@ module.exports = {
       env_production : {
         NODE_ENV: 'production'
       }
-    },
-
-    // Scrapper
-    {
-      name      : 'scrapper',
-      script    : 'src/scrapper.js',
-      cwd       : './buscador-ams/ams-scrapper',
-      cron_restart      : '0 3 * * *'
     }
   ]
 }

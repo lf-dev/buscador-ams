@@ -65,20 +65,18 @@ sudo yum -y install git
 # -clona o projeto
 git clone https://github.com/lf-dev/buscador-ams.git
 
-# ------------------------------
-# INSTALACAO SCRAPPER & SERVIDOR
-# ------------------------------
+# -------------------
+# INSTALACAO SERVIDOR
+# -------------------
 
-npm install --prefix buscador-ams/ams-scrapper/
 npm install --prefix buscador-ams/server/
 pm2 start ./buscador-ams/ecosystem.config.js
 
+# -configura pm2 para iniciar servidor no boot
 sudo env PATH=$PATH:/home/ec2-user/.nvm/versions/node/v6.10.2/bin /home/ec2-user/.nvm/versions/node/v6.10.2/lib/node_modules/pm2/bin/pm2 startup amazon -u ec2-user --hp /home/ec2-user
-
 pm2 save
 
-
-# curl -H "Content-Type: application/json" -XPOST 'localhost:9200/ams/credenciado/_bulk?pretty&refresh' --data-binary "@credenciados.json"
-
-# TODO: tratar falha no site da AMS
-# TODO: agendar scrapper e carga em cron
+# -configura crontab para atualizar Elastic Search quando existir arquivo de credenciados
+echo "* * * * * /home/ec2-user/buscador-ams/ams-scrapper/carga_es.sh /home/ec2-user/buscador-ams/ams-scrapper/credenciados.json" > es_cron
+crontab es_cron
+rm es_cron
