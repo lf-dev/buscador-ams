@@ -38,6 +38,13 @@ sudo chkconfig --levels 3 elasticsearch on
 sudo sed -i 's/Xmx2g/Xmx100m/g' /etc/elasticsearch/jvm.options
 sudo sed -i 's/Xms2g/Xms100m/g' /etc/elasticsearch/jvm.options
 
+# -configura para aceitar conexoes de outros hosts
+# -necessario para o scrapper salvar o conteudo. Limitar acesso via SecurityGroup
+echo "network.host= 0.0.0.0" | sudo tee -a /etc/elasticsearch/elasticsearch.yml
+# -a configuracao de network.host= 0.0.0.0 coloca o ES em modo de producao que
+#exige um minimo de 2048 threads para o processo do ES
+echo "elasticsearch - nproc 2048" | sudo tee -a /etc/security/limits.conf
+
 # -inicia servico do ES
 sudo service elasticsearch start
 
