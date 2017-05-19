@@ -40,7 +40,7 @@ sudo sed -i 's/Xms2g/Xms100m/g' /etc/elasticsearch/jvm.options
 
 # -configura para aceitar conexoes de outros hosts
 # -necessario para o scrapper salvar o conteudo. Limitar acesso via SecurityGroup
-echo "network.host= 0.0.0.0" | sudo tee -a /etc/elasticsearch/elasticsearch.yml
+echo "network.host: 0.0.0.0" | sudo tee -a /etc/elasticsearch/elasticsearch.yml
 # -a configuracao de network.host= 0.0.0.0 coloca o ES em modo de producao que
 #exige um minimo de 2048 threads para o processo do ES
 echo "elasticsearch - nproc 2048" | sudo tee -a /etc/security/limits.conf
@@ -77,7 +77,7 @@ git clone https://github.com/lf-dev/buscador-ams.git
 # -------------------
 
 npm install --prefix buscador-ams/server/
-pm2 start ./buscador-ams/ecosystem.config.js
+pm2 start ./buscador-ams/server/ecosystem.config.js
 
 # -configura pm2 para iniciar servidor no boot
 sudo env PATH=$PATH:/home/ec2-user/.nvm/versions/node/v6.10.2/bin /home/ec2-user/.nvm/versions/node/v6.10.2/lib/node_modules/pm2/bin/pm2 startup amazon -u ec2-user --hp /home/ec2-user
