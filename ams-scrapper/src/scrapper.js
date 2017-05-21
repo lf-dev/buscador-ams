@@ -2,6 +2,7 @@ var request = require('request');
 var cheerio = require('cheerio');
 var _ = require('lodash');
 var fs = require('fs');
+var moment = require('moment');
 var Parser = require('./Parser.js');
 var Credenciado = require('./Credenciado.js');
 
@@ -94,9 +95,7 @@ function saveReport(report) {
         fs.mkdirSync(reportsDir);
     }
 
-    var s = report["start"];
-    var reportFile = s.getFullYear() + "" + (s.getMonth()+1) + "" + s.getUTCDate() + "_" + s.getHours() + ":" + s.getMinutes() + ":" + s.getSeconds() + ".json";
-
+    var reportFile = moment(report["start"]).format() + ".json";
     var file = reportsDir + reportFile;
 
     fs.writeFile(file, JSON.stringify(report, null, 2), function(err) {
