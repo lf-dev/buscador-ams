@@ -6,8 +6,8 @@ var moment = require('moment');
 var Parser = require('./Parser.js');
 var Credenciado = require('./Credenciado.js');
 
-//var estados = ["AL", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RS", "SC", "SE", "SP", "TO"];
-var estados = ["DF", "AL"];
+var estados = ["AL", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RS", "SC", "SE", "SP", "TO"];
+//var estados = ["DF", "AL"];
 
 //fetchSync(estados);
 fetchAsync(estados);
