@@ -5,49 +5,68 @@ var fs = require('fs');
 var Parser = require('./Parser.js');
 var Credenciado = require('./Credenciado.js');
 
-var estados = ["AL", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RS", "SC", "SE", "SP", "TO"];
-//var estados = ["DF"];
+//var estados = ["AL", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RS", "SC", "SE", "SP", "TO"];
+var estados = ["DF", "AL"];
 
-//fetchSync(estados, []);
+//fetchSync(estados);
 fetchAsync(estados);
 
 function fetchAsync(estados) {
 
+    var report = {};
+    report["fetch_mode"] = "Async";
+    report["start"] = new Date();
+
     var promises = estados.map(function (estado) {
-        return fetch(estado).then(function (body) {
-            return parseCredenciados(body, estado);
+
+        report[estado] = {};
+
+        return fetch(estado, report[estado]).then(function (body) {
+            return parseCredenciados(body, estado, report[estado]);
         });
     });
 
     Promise.all(promises).then(function(credenciadosPorEstado) {
-        reduceCredenciados(credenciadosPorEstado);
+        reduceCredenciados(credenciadosPorEstado, report);
+        saveReport(report);
     });
 }
 
-function fetchSync(estados, credenciadosPorEstado) {
+function fetchSync(estados) {
+
+    var report = {};
+    report["fetch_mode"] = "Sync";
+    report["start"] = new Date();
+    _fetchSync(estados, [], report);
+
+}
+
+function _fetchSync(estados, credenciadosPorEstado, report) {
 
     if(credenciadosPorEstado.length == estados.length){
 
-        reduceCredenciados(credenciadosPorEstado);
+        reduceCredenciados(credenciadosPorEstado, report);
+        saveReport(report);
 
     }else{
 
         var estado = estados[credenciadosPorEstado.length];
+        report[estado] = {};
 
-        fetch(estado).then(function(body) {
+        fetch(estado, report[estado]).then(function(body) {
 
-            return parseCredenciados(body, estado)
+            return parseCredenciados(body, estado, report[estado]);
 
         }).then(function(novosCredenciados) {
 
             credenciadosPorEstado.push(novosCredenciados);
 
-            fetchSync(estados, credenciadosPorEstado);
+            _fetchSync(estados, credenciadosPorEstado, report);
         });
     }
 }
 
-function reduceCredenciados(credenciadosPorEstado){
+function reduceCredenciados(credenciadosPorEstado, report){
 
     let todosCredenciados = _.flatten(credenciadosPorEstado);
 
@@ -61,9 +80,36 @@ function reduceCredenciados(credenciadosPorEstado){
         }
         stream.end();
     });
+
+    report["total_credenciados"] = todosCredenciados.length;
 }
 
-function fetch(estado) {
+function saveReport(report) {
+
+    report["end"] = new Date();
+    report["total_time"] = report["end"].getTime() - report["start"].getTime();
+
+    var reportsDir = "./reports/"
+    if (!fs.existsSync(reportsDir)) {
+        fs.mkdirSync(reportsDir);
+    }
+
+    var s = report["start"];
+    var reportFile = s.getFullYear() + "" + (s.getMonth()+1) + "" + s.getUTCDate() + "_" + s.getHours() + ":" + s.getMinutes() + ":" + s.getSeconds() + ".json";
+
+    var file = reportsDir + reportFile;
+
+    fs.writeFile(file, JSON.stringify(report, null, 2), function(err) {
+        if(err) {
+            return console.log(err);
+        }
+
+        console.log("Relatorio de scrapper salvo!");
+    });
+
+}
+
+function fetch(estado, report) {
 
     return new Promise(function(resolve, reject){
 
@@ -82,14 +128,16 @@ function fetch(estado) {
             }else {
                 var end = new Date().getTime();
                 console.log("Tempo consulta " + estado + ": " + (end-start) + " ms");
+                report["fetch_time"] = (end-start);
                 resolve(body);
             }
         });
     });
 }
 
-function parseCredenciados(body, estado) {
+function parseCredenciados(body, estado, report) {
 
+    var start = new Date().getTime();
     var $ = cheerio.load(body);
     var parser = new Parser($);
 
@@ -118,7 +166,12 @@ function parseCredenciados(body, estado) {
         }
     }
 
+    var end = new Date().getTime();
+    report["parse_time"] = end - start;
+
     console.log(estado + " : " + credenciados.length + " credenciados");
+    report["num_credenciados"] = credenciados.length;
+
 
     return credenciados;
 }
