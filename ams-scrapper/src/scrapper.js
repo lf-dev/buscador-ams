@@ -8,10 +8,10 @@ var Credenciado = require('./Credenciado.js');
 var estados = ["AL", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RS", "SC", "SE", "SP", "TO"];
 //var estados = ["DF"];
 
-//fetchOneByOne(estados, []);
-fetchParallel(estados);
+//fetchSync(estados, []);
+fetchAsync(estados);
 
-function fetchParallel(estados) {
+function fetchAsync(estados) {
 
     var promises = estados.map(function (estado) {
         return fetch(estado).then(function (body) {
@@ -24,7 +24,7 @@ function fetchParallel(estados) {
     });
 }
 
-function fetchOneByOne(estados, credenciadosPorEstado) {
+function fetchSync(estados, credenciadosPorEstado) {
 
     if(credenciadosPorEstado.length == estados.length){
 
@@ -42,7 +42,7 @@ function fetchOneByOne(estados, credenciadosPorEstado) {
 
             credenciadosPorEstado.push(novosCredenciados);
 
-            fetchOneByOne(estados, credenciadosPorEstado);
+            fetchSync(estados, credenciadosPorEstado);
         });
     }
 }
