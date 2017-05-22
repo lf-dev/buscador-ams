@@ -53,11 +53,19 @@
 
 #buscar {
     float: left;
-
     color: #333;
     background-color: #fff;
     border-color: #ccc;
     margin-top: 4px;
+}
+
+#paginar {
+    color: #fff;
+    background-color: rgb(51, 118, 99);
+    margin-top: 15px;
+}
+
+button {
 
     padding: 6px 12px;
     margin-bottom: 0;
