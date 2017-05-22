@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById("main-container").style.display = "none";
+    document.getElementById("query").focus();
 
 });
 
