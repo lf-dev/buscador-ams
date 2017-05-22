@@ -12,11 +12,16 @@ app.get('/search', function (req, res) {
             {
                 from: 0,
                 size: 10000,
-                "query":
-                {
-                    "fuzzy": {"_all": q.query.q}
+                query: {
+                    match: {
+                        _all: {
+                            query: q.query.q,
+                            fuzziness: "AUTO"
+                        }
+                    }
                 }
             };
+
 
     var options = {
         host: 'localhost',
