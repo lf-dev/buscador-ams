@@ -50,7 +50,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         document.getElementById("header").classList.add("top");
         document.getElementById("home-logo").classList.add("top");
-        document.getElementById("main-container").innerHTML = "";
 
         carregarResultados(query, 0);
     }
@@ -64,12 +63,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function preencherConsulta(json, query, pagina) {
 
+        var container = document.getElementById("main-container");
+
         removerBotaoPaginacao();
 
-        var html = preencherHTMLConsulta(json);
+        var html = "";
+        if(pagina == 0) {
+            container.innerHTML = "";
+            html = htmlTotalResultados(json);
+        }
+
+        html += preencherHTMLConsulta(json);
         html += htmlBotaoPaginacao(json, pagina);
 
-        var container = document.getElementById("main-container");
+
         container.innerHTML += html;
 
         incluirListnerPaginacao(query, pagina + 1);
@@ -81,6 +88,12 @@ document.addEventListener('DOMContentLoaded', function () {
         if(botaoPaginacao){
             botaoPaginacao.parentNode.removeChild(botaoPaginacao);
         }
+    }
+
+    function htmlTotalResultados(json) {
+
+        return '<p id="sumario-resultados">Encontrados ' + json.hits.total + ' resultados</p>';
+
     }
 
     function preencherHTMLConsulta(json) {

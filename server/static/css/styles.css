@@ -100,7 +100,13 @@ button {
 
 .container {
     transform: translateY(-100px);
-    margin: 30px 145px;
+    margin: 0 145px;
+    padding-top: 10px;
+}
+
+#sumario-resultados{
+    font-size: 15px;
+    color: grey;
 }
 
 .row {
@@ -143,7 +149,7 @@ button {
 
 @media (max-width: 425px) {
     .container {
-        margin: 30px 20px;
+        margin: 0 20px;
     }
 }
 
