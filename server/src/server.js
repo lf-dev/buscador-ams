@@ -6,12 +6,15 @@ var app = router(3000);
 
 app.get('/search', function (req, res) {
 
+    var pageSize = 10;
     var q = url.parse(req.url, true);
     console.log(q.query.q);
+    console.log("page: " + q.query.from);
+
     var formData =
             {
-                from: 0,
-                size: 10000,
+                from: q.query.from*pageSize,
+                size: pageSize,
                 query: {
                     match: {
                         _all: {
