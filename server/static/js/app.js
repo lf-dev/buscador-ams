@@ -2,6 +2,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById("main-container").style.display = "none";
     document.getElementById("query").focus();
+    
+    var query = window.location.hash;
+    if(query && query.length > 1) {
+
+        document.getElementById("query").value = query.substr(1, query.length);
+        window.realizarConsulta();
+    }
 
 });
 
@@ -41,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    function realizarConsulta() {
+    global.realizarConsulta = function() {
 
         var query = document.getElementById("query").value;
 
