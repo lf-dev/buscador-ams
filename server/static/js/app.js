@@ -44,6 +44,11 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     window.addEventListener("popstate", function(e){
+
+        if(!location.hash){
+            location.reload(false);
+        }
+
         realizarConsultaAPartirDeHash();
     });
 
