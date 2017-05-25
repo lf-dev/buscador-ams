@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById("main-container").style.display = "none";
     document.getElementById("query").focus();
-    
+
     var query = window.location.hash;
     if(query && query.length > 1) {
 
@@ -55,6 +55,8 @@ document.addEventListener('DOMContentLoaded', function () {
         if(!query){
             return;
         }
+
+        window.location.hash = query;
 
         document.getElementById("header").classList.add("top");
         document.getElementById("home-logo").classList.add("top");
