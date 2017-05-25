@@ -3,12 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById("main-container").style.display = "none";
     document.getElementById("query").focus();
 
-    var query = window.location.hash;
-    if(query && query.length > 1) {
-
-        document.getElementById("query").value = query.substr(1, query.length);
-        window.realizarConsulta();
-    }
+    window.realizarConsultaAPartirDeHash();
 
 });
 
@@ -18,12 +13,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById("query").addEventListener("keypress", function(e){
         if(e.keyCode == 13){
-            realizarConsulta();
+            realizaConsultaComHistorico();
         }
     });
 
     document.getElementById("buscar").addEventListener("click", function() {
-        realizarConsulta();
+        realizaConsultaComHistorico();
     });
 
     var transitionEvent = whichTransitionEvent();
@@ -48,15 +43,33 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    global.realizarConsulta = function() {
+    window.addEventListener("popstate", function(e){
+        realizarConsultaAPartirDeHash();
+    });
+
+    global.realizarConsultaAPartirDeHash = function() {
+        var queryWithHash = window.location.hash;
+        if(queryWithHash && queryWithHash.length > 1) {
+
+            var query = queryWithHash.substr(1, queryWithHash.length);
+            document.getElementById("query").value = query
+            realizarConsulta(query);
+        }
+    }
+
+    function realizaConsultaComHistorico() {
 
         var query = document.getElementById("query").value;
-
-        if(!query){
+        if(!query) {
             return;
         }
 
-        window.location.hash = query;
+        window.history.pushState(null, null, "#" + query);
+        realizarConsulta(query);
+
+    }
+
+    function realizarConsulta(query) {
 
         document.getElementById("header").classList.add("top");
         document.getElementById("home-logo").classList.add("top");
