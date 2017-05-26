@@ -74,7 +74,7 @@ Parser.prototype._getPessoaFisica = function(td) {
       "estado": conselhoData[2]
     }
 
-    pf.id = pf.conselho + ' ' + pf.numero + ' ' + pf.estado;
+    pf.id = (pf.conselho ? pf.conselho : '') + ' ' + (pf.numero ? pf.numero : '') + ' ' + (pf.estado ? pf.estado : '');
     return pf;
 }
 
