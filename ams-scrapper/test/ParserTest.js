@@ -106,11 +106,19 @@ describe('Parser', function() {
 
     it('should return Pessoa', function() {
 
-      let actualPF = parserPF.getPessoa(trPF);
-      (actualPF).should.be.eql(expectedJsonPF.pessoa);
+        let actualPF = parserPF.getPessoa(trPF);
+        (actualPF).should.be.eql(expectedJsonPF.pessoa);
 
-      let actualPJ = parserPJ.getPessoa(trPJ);
-      (actualPJ).should.be.eql(expectedJsonPJ.pessoa);
+        let actualPJ = parserPJ.getPessoa(trPJ);
+        (actualPJ).should.be.eql(expectedJsonPJ.pessoa);
+    });
+
+    it('should remove CPF from conselho when needed', function() {
+
+        let conselhoWithCPF = "CPF:313.803.558-26          CREFITO8272RJ";
+        let conselhoTratado = parser._tratarTextoConselho(conselhoWithCPF);
+
+        (conselhoTratado).should.be.eql("CREFITO,8272,RJ");
     });
 
   });

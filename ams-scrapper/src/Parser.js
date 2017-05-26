@@ -59,7 +59,9 @@ Parser.prototype._getPessoaFisica = function(td) {
 
     let conselhoTxt = td.find("font").text();
     let nome = td.text().replace(conselhoTxt, "").trim();
-    let conselhoData = S(conselhoTxt).trim()
+
+    let conselhoTxtTratado = this._tratarTextoConselho(conselhoTxt);
+    let conselhoData = S(conselhoTxtTratado).trim()
                                       .replaceAll(" ","")
                                       .replaceAll("\r","")
                                       .replaceAll("\n",",")
@@ -74,6 +76,25 @@ Parser.prototype._getPessoaFisica = function(td) {
 
     pf.id = pf.conselho + ' ' + pf.numero + ' ' + pf.estado;
     return pf;
+}
+
+Parser.prototype._tratarTextoConselho = function(conselhoTxt) {
+
+    conselhoTxt = conselhoTxt.toUpperCase().trim();
+    if(!conselhoTxt.startsWith("CPF")){
+        return conselhoTxt;
+    }
+
+    //remove informacao de CPF
+    var primeiroEspaco = conselhoTxt.indexOf(" ");
+    conselhoTxt = conselhoTxt.substr(primeiroEspaco, conselhoTxt.length).trim();
+
+    //altera a string de conselho inserindo virgulas para separar os digitos CCC NNNNNN CCCC
+    var regex =  /[\d]+/;
+    var num = regex.exec(conselhoTxt)[0];
+
+    return conselhoTxt.replace(num, ","+num+",");
+
 }
 
 Parser.prototype.getEndereco = function(tr) {
