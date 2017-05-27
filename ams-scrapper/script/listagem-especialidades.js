@@ -1,3 +1,9 @@
+/*
+Lista todas as especialidades encontradas no arquivo de credenciados.json
+Verifica se as especialidades listadas ja existem no dicionario de especialidades (resources/especialidades_unicas.json)
+Escreve um arquivo (especialidades_unicas_template.json) com as especialidades que não existem no dicionario
+ */
+
 var fs = require('fs'),
     readline = require('readline');
 
