@@ -1,6 +1,8 @@
-var S = require('string');
+var S = require('string'),
+    fs = require('fs');
 
 const TABLE_HEADER_BG_COLOR = "#b0dda4";
+const docionarioEspecialidades = JSON.parse(fs.readFileSync('resources/especialidades_unicas.json'));
 
 function Parser($) {
   this.$ = $;
@@ -120,6 +122,15 @@ Parser.prototype.getTelefone = function(tr) {
     return S(telefone).collapseWhitespace().s;
 }
 
+Parser.prototype.getEspecialidade = function(tr, dicionario) {
+    let especialidade = this._getText(tr, 6);
+    if(dicionario[especialidade]){
+        return dicionario[especialidade];
+    } else {
+        return especialidade;
+    }
+}
+
 Parser.prototype.toJSON = function(tr) {
 
     var endereco = this.getEndereco(tr);
@@ -133,6 +144,6 @@ Parser.prototype.toJSON = function(tr) {
         estado: endereco.estado,
         cep: this._getText(tr, 4),
         telefone: this.getTelefone(tr),
-        especialidade: this._getText(tr, 6)
+        especialidade: this.getEspecialidade(tr, docionarioEspecialidades)
     }
 }

@@ -31,7 +31,7 @@ describe('Parser', function() {
       estado: "RJ",
       cep: "23.900-300",
       telefone: "(24) 3365-2808",
-      especialidade: "LAB.DE ANALISES CLINICAS"
+      especialidade: "laboratório de análises clínicas"
   };
 
   let $PF = load("pessoaFisica.html");
@@ -52,7 +52,7 @@ describe('Parser', function() {
       estado: "RJ",
       cep: "23.900-470",
       telefone: "(24) 3368-5329",
-      especialidade: "ORTODONTIA"
+      especialidade: "ortodontia"
   };
 
   describe('tr and tds', function() {
@@ -145,7 +145,28 @@ describe('Parser', function() {
           let actual = parserPJ.getTelefone(trPJ);
           (actual).should.be.exactly(expectedJsonPJ.telefone);
       })
-  })
+  });
+
+    describe('#getEspecialidade', function() {
+
+        let dictionary = {
+            "LAB.DE ANALISES CLINICAS": "laboratório de análises clínicas"
+        }
+
+       it('should return specialty from PJ from dictionary', function() {
+
+           let actual = parserPJ.getEspecialidade(trPJ, dictionary);
+           (actual).should.be.eql("laboratório de análises clínicas");
+
+       });
+
+        it('should return specialty from PF not from dictionary', function() {
+
+            let actual = parserPF.getEspecialidade(trPF, dictionary);
+            (actual).should.be.eql("ORTODONTIA");
+
+        });
+    });
 
   describe('#toJSON', function() {
 
