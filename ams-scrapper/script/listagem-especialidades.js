@@ -1,6 +1,7 @@
 var fs = require('fs'),
     readline = require('readline');
 
+var especialidadesExistentes = JSON.parse(fs.readFileSync('resources/especialidades_unicas.json'));
 var especialidades = [];
 
 var rd = readline.createInterface({
@@ -19,7 +20,7 @@ rd.on('line', function(line) {
 
         e.especialidades.forEach(function(esp) {
 
-            if(especialidades.indexOf(esp) == -1) {
+            if(!especialidadesExistentes[esp] && especialidades.indexOf(esp) == -1) {
                 especialidades.push(esp);
             }
         });
