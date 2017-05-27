@@ -12,7 +12,7 @@ fi
 
 cd /home/ec2-user/buscador-ams/ams-scrapper
 /home/ec2-user/.nvm/versions/node/v6.10.2/bin/node src/scrapper.js
-/home/ec2-user/.nvm/versions/node/v6.10.2/bin/node src/exportar-elasticsearch.js
+/home/ec2-user/.nvm/versions/node/v6.10.2/bin/node script/exportar-elasticsearch.js
 
 if [ -e "$FILE" ] && [ ! -z "$FILE" ]
 then
