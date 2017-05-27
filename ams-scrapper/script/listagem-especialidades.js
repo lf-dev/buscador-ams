@@ -19,9 +19,6 @@ var rd = readline.createInterface({
 rd.on('line', function(line) {
 
     let json = JSON.parse(line);
-    if(json.index){
-        return;
-    }
 
     json.credenciado.enderecos.forEach(function(e) {
 

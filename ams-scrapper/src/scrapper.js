@@ -73,12 +73,11 @@ function reduceCredenciados(credenciadosPorEstado, report){
 
     var stream = fs.createWriteStream("credenciados.json");
     stream.once('open', function(fd) {
-        let id;
-        for(id = 0; id < todosCredenciados.length; id++){
 
-            stream.write('{"index":{"_id":"' + (id+1) + '"} }\n');
-            stream.write('{"credenciado":' + JSON.stringify(todosCredenciados[id], null, 0) + '}\n');
-        }
+        todosCredenciados.forEach(function(credenciado){
+            stream.write('{"credenciado":' + JSON.stringify(credenciado, null, 0) + '}\n');
+        });
+
         stream.end();
     });
 
