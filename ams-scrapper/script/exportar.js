@@ -6,14 +6,17 @@ var rd = readline.createInterface({
     console: false
 });
 
-var handlers = [new CidadeHandler(), new EstadoHandler(), new EspecialidadeHandler(), new BairroHandler()];
+var handlers = [    new Handler("estados_es_batch.json", "credenciado.enderecos.estado"),
+                    new Handler("cidades_es_batch.json", "credenciado.enderecos.cidade"),
+                    new Handler("bairros_es_batch.json", "credenciado.enderecos.bairro"),
+                    new Handler("especialidades_es_batch.json", "credenciado.enderecos.especialidades")];
 
 rd.on('line', function(line) {
 
     var json = JSON.parse(line);
 
     handlers.forEach(function(handler) {
-        handler.export(json);
+        handler.collectUniques(json);
     });
 });
 
@@ -34,54 +37,27 @@ rd.on('close', function() {
 
 });
 
+function Handler(filename, path) {
 
-function CidadeHandler() {
     this.elements = new Set();
-    this.filename = "cidades_es_batch.json";
-
-    this.export = function(json){
-        var self = this;
-        json.credenciado.enderecos.forEach(function(e) {
-            self.elements.add(e.cidade);
-        });
-    }
+    this.filename = filename;
+    this.path = path;
 }
 
-function EstadoHandler() {
-    this.elements = new Set();
-    this.filename = "estados_es_batch.json";
-
-    this.export = function(json){
-        var self = this;
-        json.credenciado.enderecos.forEach(function(e) {
-            self.elements.add(e.estado);
-        });
-    }
+Handler.prototype.collectUniques = function(json) {
+    this._collectUniques(json, this.path.split('.'), this);
 }
 
-function EspecialidadeHandler() {
-    this.elements = new Set();
-    this.filename = "especialidades_es_batch.json";
+Handler.prototype._collectUniques = function(currentNode, path, self){
 
-    this.export = function(json){
-        var self = this;
-        json.credenciado.enderecos.forEach(function(endereco) {
+    //Objectos nao arrays serao tratados como um array de um unico objeto
+    ([].concat(currentNode)).forEach(function(element) {
 
-            endereco.especialidades.forEach(function(especialidade) {
-                self.elements.add(especialidade);
-            });
-        });
-    }
-}
-
-function BairroHandler() {
-    this.elements = new Set();
-    this.filename = "bairros_es_batch.json";
-
-    this.export = function(json){
-        var self = this;
-        json.credenciado.enderecos.forEach(function(endereco) {
-            self.elements.add(endereco.bairro);
-        });
-    }
+        if(path.length == 0) {
+            self.elements.add(element);
+        }else {
+            var key = path[0];
+            self._collectUniques(element[key], path.slice(1), self);
+        }
+    });
 }
