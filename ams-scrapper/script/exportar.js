@@ -6,7 +6,7 @@ var rd = readline.createInterface({
     console: false
 });
 
-var handlers = [new CidadeHandler()];
+var handlers = [new CidadeHandler(), new EstadoHandler()];
 
 rd.on('line', function(line) {
 
@@ -43,6 +43,18 @@ function CidadeHandler() {
         var self = this;
         json.credenciado.enderecos.forEach(function(e) {
             self.elements.add(e.cidade);
+        });
+    }
+}
+
+function EstadoHandler() {
+    this.elements = new Set();
+    this.filename = "estados_es_batch.json";
+
+    this.export = function(line, json){
+        var self = this;
+        json.credenciado.enderecos.forEach(function(e) {
+            self.elements.add(e.estado);
         });
     }
 }
