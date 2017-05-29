@@ -25,7 +25,7 @@ rd.on('close', function() {
 
         var index = 1;
         handler.elements.forEach(function(element) {
-            stream.write('{"index":{"_id":"' + (index+1) + '"} }\n');
+            stream.write('{"index":{"_id":"' + (index) + '"} }\n');
             stream.write(JSON.stringify(element)+'\n');
             index++;
         });
