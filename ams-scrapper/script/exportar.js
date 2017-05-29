@@ -13,7 +13,7 @@ rd.on('line', function(line) {
     var json = JSON.parse(line);
 
     handlers.forEach(function(handler) {
-        handler.export(line, json);
+        handler.export(json);
     });
 });
 
@@ -39,7 +39,7 @@ function CidadeHandler() {
     this.elements = new Set();
     this.filename = "cidades_es_batch.json";
 
-    this.export = function(line, json){
+    this.export = function(json){
         var self = this;
         json.credenciado.enderecos.forEach(function(e) {
             self.elements.add(e.cidade);
@@ -51,7 +51,7 @@ function EstadoHandler() {
     this.elements = new Set();
     this.filename = "estados_es_batch.json";
 
-    this.export = function(line, json){
+    this.export = function(json){
         var self = this;
         json.credenciado.enderecos.forEach(function(e) {
             self.elements.add(e.estado);
@@ -63,7 +63,7 @@ function EspecialidadeHandler() {
     this.elements = new Set();
     this.filename = "especialidades_es_batch.json";
 
-    this.export = function(line, json){
+    this.export = function(json){
         var self = this;
         json.credenciado.enderecos.forEach(function(endereco) {
 
@@ -78,7 +78,7 @@ function BairroHandler() {
     this.elements = new Set();
     this.filename = "bairros_es_batch.json";
 
-    this.export = function(line, json){
+    this.export = function(json){
         var self = this;
         json.credenciado.enderecos.forEach(function(endereco) {
             self.elements.add(endereco.bairro);
