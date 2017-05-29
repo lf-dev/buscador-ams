@@ -37,7 +37,7 @@ rd.on('close', function() {
 
 function CidadeHandler() {
     this.elements = new Set();
-    this.filename = "cidades.json";
+    this.filename = "cidades_es_batch.json";
 
     this.export = function(line, json){
         var self = this;
