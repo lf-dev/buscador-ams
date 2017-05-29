@@ -6,7 +6,7 @@ var rd = readline.createInterface({
     console: false
 });
 
-var handlers = [new CidadeHandler(), new EstadoHandler(), new EspecialidadeHandler()];
+var handlers = [new CidadeHandler(), new EstadoHandler(), new EspecialidadeHandler(), new BairroHandler()];
 
 rd.on('line', function(line) {
 
@@ -70,6 +70,18 @@ function EspecialidadeHandler() {
             endereco.especialidades.forEach(function(especialidade) {
                 self.elements.add(especialidade);
             });
+        });
+    }
+}
+
+function BairroHandler() {
+    this.elements = new Set();
+    this.filename = "bairros_es_batch.json";
+
+    this.export = function(line, json){
+        var self = this;
+        json.credenciado.enderecos.forEach(function(endereco) {
+            self.elements.add(endereco.bairro);
         });
     }
 }
