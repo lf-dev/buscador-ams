@@ -6,7 +6,7 @@ var rd = readline.createInterface({
     console: false
 });
 
-var handlers = [new CidadeHandler(), new EstadoHandler()];
+var handlers = [new CidadeHandler(), new EstadoHandler(), new EspecialidadeHandler()];
 
 rd.on('line', function(line) {
 
@@ -55,6 +55,21 @@ function EstadoHandler() {
         var self = this;
         json.credenciado.enderecos.forEach(function(e) {
             self.elements.add(e.estado);
+        });
+    }
+}
+
+function EspecialidadeHandler() {
+    this.elements = new Set();
+    this.filename = "especialidades_es_batch.json";
+
+    this.export = function(line, json){
+        var self = this;
+        json.credenciado.enderecos.forEach(function(endereco) {
+
+            endereco.especialidades.forEach(function(especialidade) {
+                self.elements.add(especialidade);
+            });
         });
     }
 }
