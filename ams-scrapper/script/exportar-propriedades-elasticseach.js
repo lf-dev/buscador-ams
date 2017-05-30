@@ -6,10 +6,10 @@ var rd = readline.createInterface({
     console: false
 });
 
-var handlers = [    new Handler("estados_es_batch.json", "credenciado.enderecos.estado"),
-                    new Handler("cidades_es_batch.json", "credenciado.enderecos.cidade"),
-                    new Handler("bairros_es_batch.json", "credenciado.enderecos.bairro"),
-                    new Handler("especialidades_es_batch.json", "credenciado.enderecos.especialidades")];
+var handlers = [    new Handler("estados_es_batch.json", "credenciado.enderecos.estado", "estado"),
+                    new Handler("cidades_es_batch.json", "credenciado.enderecos.cidade", "cidade"),
+                    new Handler("bairros_es_batch.json", "credenciado.enderecos.bairro", "bairro"),
+                    new Handler("especialidades_es_batch.json", "credenciado.enderecos.especialidades", "especialidade")];
 
 rd.on('line', function(line) {
 
@@ -28,8 +28,12 @@ rd.on('close', function() {
 
         var index = 1;
         handler.elements.forEach(function(element) {
+
+            var json = {};
+            json[handler.property] = element;
+
             stream.write('{"index":{"_id":"' + (index) + '"} }\n');
-            stream.write(JSON.stringify(element)+'\n');
+            stream.write(JSON.stringify(json)+'\n');
             index++;
         });
         stream.end();
@@ -37,11 +41,12 @@ rd.on('close', function() {
 
 });
 
-function Handler(filename, path) {
+function Handler(filename, path, property) {
 
     this.elements = new Set();
     this.filename = filename;
     this.path = path;
+    this.property = property;
 }
 
 Handler.prototype.collectUniques = function(json) {
