@@ -12,6 +12,50 @@ const matchAllQuery = {
     }
 };
 
+var buildFilter = function(queryTxt) {
+
+    var query = queryTxt.toUpperCase();
+
+    return {
+        "filter": [
+            buildFilterIndice(query, estados, "credencidado.enderecos.estado"),
+            buildFilterIndice(query, cidades, "credencidado.enderecos.cidade"),
+            buildFilterIndice(query, bairros, "credencidado.enderecos.bairro"),
+            buildFilterIndice(query, especialidades, "credencidado.enderecos.especialidades")
+    ]};
+}
+module.exports.buildFilter = buildFilter;
+
+
+var buildFilterIndice = function(query, todosValoresIndices, path) {
+
+    var matchQueries = todosValoresIndices.filter(function(value) {
+        return query.indexOf(" " + value + " ") > -1;
+    }).map(function(value) {
+        return buildMatchQuery(value, path);
+    });
+
+    return {
+        "bool": {
+            "should": matchQueries
+        }
+    };
+}
+
+var buildMatchQuery = function(value, path) {
+
+    var matchQuery = {
+        "match": {}
+    };
+
+    matchQuery.match[path] = {
+        "query": value,
+        "operator": "and"
+    };
+
+    return matchQuery;
+}
+
 var carregarIndice = function(indice, array) {
 
     consultarES(indice, matchAllQuery, function(json) {
