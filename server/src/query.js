@@ -23,8 +23,9 @@ var carregarIndice = function(indice, array) {
         while(array.length) {
             array.pop();
         }
-
-        array.push(...values);
+        values.forEach(function(v) {
+            array.push(v);
+        });
     });
 }
 
