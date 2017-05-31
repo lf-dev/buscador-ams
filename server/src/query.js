@@ -1,36 +1,31 @@
 var http = require('http');
 
-const cidades = [];
+const   estados = [],
+        cidades = [],
+        bairros = [],
+        especialidades = [];
 
+const matchAllQuery = {
+    "size": 10000,
+    "query": {
+        "match_all": {}
+    }
+};
 
-var build = function(query) {
+var carregarIndice = function(indice, array) {
 
-}
-exports.build = build;
+    consultarES(indice, matchAllQuery, function(json) {
 
-var listarCidades = function() {
-
-    const matchAllQuery = {
-        "size": 10000,
-        "query": {
-            "match_all": {}
-        }
-    };
-
-    consultarES("cidade", matchAllQuery, function(json) {
-        var c = json.hits.hits.map(function(hit) {
-            return hit._source.cidade;
+        var values = json.hits.hits.map(function(hit) {
+            return hit._source[indice];
         });
 
-        while(cidades.length) {
-            cidades.pop();
+        while(array.length) {
+            array.pop();
         }
 
-        cidades.push(...c);
-
-        console.log(cidades);
-    })
-
+        array.push(...values);
+    });
 }
 
 var consultarES = function(index, jsonQuery, callback) {
@@ -60,4 +55,7 @@ var consultarES = function(index, jsonQuery, callback) {
     req.end();
 }
 
-listarCidades();
+carregarIndice("estado", estados);
+carregarIndice("cidade", cidades);
+carregarIndice("bairro", bairros);
+carregarIndice("especialidade", especialidades);
