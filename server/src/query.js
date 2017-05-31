@@ -30,7 +30,7 @@ module.exports.buildFilter = buildFilter;
 var buildFilterIndice = function(query, todosValoresIndices, path) {
 
     var matchQueries = todosValoresIndices.filter(function(value) {
-        return query.indexOf(" " + value + " ") > -1;
+        return query.indexOf(value) > -1;
     }).map(function(value) {
         return buildMatchQuery(value, path);
     });
