@@ -11,19 +11,34 @@ app.get('/search', function (req, res) {
     console.log(q.query.q);
     console.log("page: " + q.query.from);
 
-    var formData =
-            {
-                from: q.query.from*pageSize,
-                size: pageSize,
-                query: {
-                    match: {
-                        _all: {
-                            query: q.query.q,
-                            fuzziness: "AUTO"
+    var query = {
+        "from": q.query.from*pageSize,
+        "size": pageSize,
+        "query": {
+            "bool": {
+                "should": [
+                    {
+                        "multi_match": {
+                            "query": q.query.q,
+                            "fields": [
+                                "credenciado.pessoa.nome^3",
+                                "credenciado.enderecos.cidade^2",
+                                "_all" ],
+                            "type":     "cross_fields"
+                        }
+                    },
+                    {
+                        "match": {
+                            "credenciado.enderecos.especialidades": {
+                                "query": q.query.q,
+                                "fuzziness": "AUTO"
+                            }
                         }
                     }
-                }
-            };
+                ]
+            }
+        }
+    };
 
 
     var options = {
@@ -37,6 +52,6 @@ app.get('/search', function (req, res) {
         esRes.pipe(res);
     });
 
-    esReq.write(JSON.stringify(formData));
+    esReq.write(JSON.stringify(query));
     esReq.end();
 });
