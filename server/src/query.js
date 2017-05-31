@@ -2,6 +2,7 @@ var http = require('http');
 
 const cidades = [];
 
+
 var build = function(query) {
 
 }
@@ -9,22 +10,39 @@ exports.build = build;
 
 var listarCidades = function() {
 
-    var formData =
-    {
+    const matchAllQuery = {
         "size": 10000,
         "query": {
             "match_all": {}
         }
     };
 
+    consultarES("cidade", matchAllQuery, function(json) {
+        var c = json.hits.hits.map(function(hit) {
+            return hit._source.cidade;
+        });
+
+        while(cidades.length) {
+            cidades.pop();
+        }
+
+        cidades.push(...c);
+
+        console.log(cidades);
+    })
+
+}
+
+var consultarES = function(index, jsonQuery, callback) {
+
     var options = {
         host: 'localhost',
         port: 9200,
-        path: '/ams/cidade/_search',
+        path: '/ams/'+index+'/_search',
         method: 'POST'
     };
 
-    var esReq = http.request(options, function (res) {
+    var req = http.request(options, function (res) {
 
         var body = [];
         res.on('data', function (chunk) {
@@ -32,26 +50,14 @@ var listarCidades = function() {
         });
         res.on('end', function () {
             var bodyTxt = Buffer.concat(body).toString();
-
             var json = JSON.parse(bodyTxt);
 
-            var c = json.hits.hits.map(function(hit) {
-                return hit._source.cidade;
-            });
-
-            while(cidades.length) {
-                cidades.pop();
-            }
-
-            cidades.push(...c);
-
-            console.log(cidades);
-
+            callback(json);
         });
     });
 
-    esReq.write(JSON.stringify(formData));
-    esReq.end();
+    req.write(JSON.stringify(jsonQuery));
+    req.end();
 }
 
 listarCidades();
