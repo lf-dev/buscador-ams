@@ -86,6 +86,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
         sendGetRequest("/search?q="+query+"&from="+pagina, function(json) {
             preencherConsulta(json, query, pagina);
+
+            if(ga){
+                ga('set', 'page', '/search');
+                ga('send', 'pageview');
+            }
         });
     }
 
