@@ -19,13 +19,12 @@ rd.on('line', function(line) {
 
         var codigo = possuiNumero.exec(line)[0];
         var cidade = line.replace(codigo,'').trim();
-        estado.cidades[cidade] = codigo;
+        estado[cidade] = codigo;
 
     }else if(line.trim().length > 0){
 
         var sigla = line.substr(0,2);
         estado = {};
-        estado.cidades = {};
         ddds[sigla] = estado;
     }
 
