@@ -135,10 +135,11 @@ button {
     margin-bottom: 3px;
 }
 
-.telefone {
+.telefone > a {
     color: rgb(51, 118, 99);
     font-weight: bold;
     margin-bottom: 3px;
+    margin-right: 15px;
 }
 
 .endereco {

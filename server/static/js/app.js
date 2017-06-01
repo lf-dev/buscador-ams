@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function obterHTMLEndereco(endereco) {
         var html = "<p class='especialidades'>" + endereco.especialidades.join(", ") + "</p>" +
-            "<p class='telefone'>" + endereco.telefones.join(", ") + "</p>" +
+            obterHTMLTelefone(endereco.telefones) +
             "<p class='endereco'>" +
             endereco.tipos.join(", ") + ": " +
             endereco.rua + ", " +
@@ -158,6 +158,18 @@ document.addEventListener('DOMContentLoaded', function () {
             endereco.bairro + " - " +
             endereco.cidade + " - " +
             endereco.estado + "</p>"
+        return html;
+    }
+
+    function obterHTMLTelefone(telefones) {
+        var html = "<p class='telefone'>";
+
+        telefones.forEach(function(telefone) {
+            html += "<a href='tel:" + telefone + "'>" + telefone + "</a>";
+        });
+
+        html += "</p>";
+
         return html;
     }
 
