@@ -21,8 +21,9 @@ rd.on('line', function(line) {
 rd.on('close', function() {
 
     var regexes = [
-                    /\([\d]{2}\) [\d]{4}-[\d]{4}/,  // (11) 1111-1111
-                    /[\d]{4}-[\d]{4}/]             // 1111-1111
+                    /^\([\d]{2}\) [\d]{4}-[\d]{4}$/,  // (11) 1111-1111
+                    /^[\d]{4}-[\d]{4}$/               // 1111-1111
+    ];
 
     var count = regexes.reduce(function(map, regex) {
         map[regex] = 0;
