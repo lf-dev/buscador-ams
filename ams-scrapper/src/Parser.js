@@ -3,6 +3,7 @@ var S = require('string'),
 
 const TABLE_HEADER_BG_COLOR = "#b0dda4";
 const docionarioEspecialidades = JSON.parse(fs.readFileSync('resources/especialidades_unicas.json'));
+const dicionarioDDDs = JSON.parse(fs.readFileSync('resources/dicionario_ddds.json'));
 
 function Parser($) {
   this.$ = $;
@@ -118,8 +119,25 @@ Parser.prototype.getEndereco = function(tr) {
 }
 
 Parser.prototype.getTelefone = function(tr) {
-    let telefone = this._getText(tr, 5);
-    return S(telefone).collapseWhitespace().s;
+    let telefoneTxt = this._getText(tr, 5);
+    return S(telefoneTxt).collapseWhitespace().s;
+}
+
+const formatoTelefoneCompleto = /^\([\d]{2}\) [\d]{4}-[\d]{4}$/; // (11) 1111-1111
+const formatoTelefoneSemDDD = /^[\d]{4}-[\d]{4}$/; // 1111-1111
+
+Parser.prototype._tratarTelefone = function(telefone, cidade, estado, dicionario) {
+
+    if(formatoTelefoneCompleto.test(telefone)){
+        return telefone;
+    }
+    else if(formatoTelefoneSemDDD.test(telefone)){
+        let ddd = dicionario[estado][cidade];
+        return "("+ddd+") "+telefone;
+    }
+    else {
+        return telefone;
+    }
 }
 
 Parser.prototype.getEspecialidade = function(tr, dicionario) {
@@ -134,6 +152,8 @@ Parser.prototype.getEspecialidade = function(tr, dicionario) {
 Parser.prototype.toJSON = function(tr) {
 
     var endereco = this.getEndereco(tr);
+    var telefone = this.getTelefone(tr);
+    var telefoneTratado = this._tratarTelefone(telefone, endereco.cidade, endereco.estado, dicionarioDDDs);
 
     return {
         pessoa: this.getPessoa(tr),
@@ -143,7 +163,7 @@ Parser.prototype.toJSON = function(tr) {
         cidade: endereco.cidade,
         estado: endereco.estado,
         cep: this._getText(tr, 4),
-        telefone: this.getTelefone(tr),
+        telefone: telefoneTratado,
         especialidade: this.getEspecialidade(tr, docionarioEspecialidades)
     }
 }

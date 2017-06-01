@@ -31,7 +31,7 @@ describe('Parser', function() {
       estado: "RJ",
       cep: "23.900-300",
       telefone: "(24) 3365-2808",
-      especialidade: "laboratório de análises clínicas"
+      especialidade: "LABORATÓRIO DE ANÁLISES CLÍNICAS"
   };
 
   let $PF = load("pessoaFisica.html");
@@ -52,7 +52,7 @@ describe('Parser', function() {
       estado: "RJ",
       cep: "23.900-470",
       telefone: "(24) 3368-5329",
-      especialidade: "ortodontia"
+      especialidade: "ORTODONTIA"
   };
 
   describe('tr and tds', function() {
@@ -140,11 +140,36 @@ describe('Parser', function() {
   });
 
   describe('#getTelefone', function() {
+
+      let dictionary = {
+          "SP" : {
+             "SAO PAULO": "11"
+          }
+      }
+
       it('should return the PJ phone number', function() {
 
-          let actual = parserPJ.getTelefone(trPJ);
-          (actual).should.be.exactly(expectedJsonPJ.telefone);
-      })
+          let actual = parserPF.getTelefone(trPF);
+          (actual).should.be.exactly(expectedJsonPF.telefone);
+      });
+
+      it('should fix telefone without DDD', function() {
+
+          let telefoneTratado = parserPJ._tratarTelefone("1111-1111", "SAO PAULO", "SP", dictionary);
+          (telefoneTratado).should.be.eql("(11) 1111-1111");
+      });
+
+      it('should do nothing with telefone in the format (11) 1111-1111', function() {
+
+          let telefoneTratado = parserPJ._tratarTelefone("(22) 2222-2222", "SAO PAULO", "SP", dictionary);
+          (telefoneTratado).should.be.eql("(22) 2222-2222");
+      });
+
+      it('should do nothing with telefone without pattern sem DDD and Completo', function() {
+
+          let telefoneTratado = parserPJ._tratarTelefone("12345 Ramal 5", "SAO PAULO", "SP", dictionary);
+          (telefoneTratado).should.be.eql("12345 Ramal 5");
+      });
   });
 
     describe('#getEspecialidade', function() {
