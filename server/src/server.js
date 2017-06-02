@@ -8,8 +8,6 @@ app.get('/search', function (req, res) {
 
     var pageSize = 10;
     var q = url.parse(req.url, true);
-    console.log(q.query.q);
-    console.log("page: " + q.query.from);
 
     var query = {
         "from": q.query.from*pageSize,

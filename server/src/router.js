@@ -21,14 +21,16 @@ var createRouter = function (port) {
 
     http.createServer(function (req, res) {
 
-        var path = url.parse(req.url).pathname
-        if (!routes[req.method][path]) {
+        var parsed = url.parse(req.url);
+        console.log(req.connection.remoteAddress + ", " + parsed.path);
+
+        if (!routes[req.method][parsed.pathname]) {
 
             var done = finalhandler(req, res);
             return serve(req, res, done);
 
         }
-        routes[req.method][path](req, res);
+        routes[req.method][parsed.pathname](req, res);
 
     }).listen(port);
 
