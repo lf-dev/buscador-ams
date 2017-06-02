@@ -1,0 +1,7 @@
+/home/ec2-user/.pm2/logs/*.log {
+        size 1M
+        copytruncate
+        rotate 365
+        dateext
+        missingok
+}
