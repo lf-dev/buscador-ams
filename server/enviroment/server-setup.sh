@@ -82,3 +82,6 @@ pm2 start ./buscador-ams/server/ecosystem.config.js
 # -configura pm2 para iniciar servidor no boot
 sudo env PATH=$PATH:/home/ec2-user/.nvm/versions/node/v6.10.2/bin /home/ec2-user/.nvm/versions/node/v6.10.2/lib/node_modules/pm2/bin/pm2 startup amazon -u ec2-user --hp /home/ec2-user
 pm2 save
+
+# -configura logrotate para pm2
+sudo cp ./buscador-ams/server/enviroment/logrotate /etc/logrotate.d/pm2-ec2-user
