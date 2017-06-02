@@ -22,7 +22,7 @@ var createRouter = function (port) {
     http.createServer(function (req, res) {
 
         var parsed = url.parse(req.url);
-        console.log(req.connection.remoteAddress + ", " + parsed.path);
+        console.log(Date.now() + ', ' + req.connection.remoteAddress + ", " + parsed.path);
 
         if (!routes[req.method][parsed.pathname]) {
 
