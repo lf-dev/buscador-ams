@@ -1,6 +1,7 @@
 var request = require('request');
 
 const siteUrl = "http://localhost:3000";
+const search = "/search";
 const resources = ['/js/app.js', '/css/styles.css'];
 
 function User() {
@@ -15,7 +16,10 @@ User.prototype._request = function(url, resolve) {
         if(response.statusCode != 200){
             console.error("erro ao requisitar " + url);
         }
-        resolve();
+
+        if(resolve){
+            resolve();
+        }
     });
 }
 
@@ -46,5 +50,26 @@ User.prototype.land = function() {
     });
 }
 
+User.prototype.search = function() {
+
+    var event = {
+        type: 'search',
+        start: Date.now()
+    }
+
+    var query = this._createQuery();
+    var params = "?q="+query.q+"&"+query.from;
+    this._request(siteUrl + search + params);
+}
+
+User.prototype._createQuery = function() {
+
+    return {
+        q: "ortopedista rio de janeiro",
+        from: 0
+    }
+}
+
 var u = new User();
 u.land();
+u.search();
