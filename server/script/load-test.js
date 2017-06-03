@@ -29,7 +29,7 @@ User.prototype._request = function(url, stack, cb) {
     });
 }
 
-User.prototype.land = function() {
+User.prototype.land = function(done) {
 
     var event = {
         type: 'land',
@@ -52,11 +52,12 @@ User.prototype.land = function() {
         Promise.all(promises).then(function() {
             event.end = Date.now();
             self.events.push(event);
+            done();
         });
     });
 }
 
-User.prototype.search = function() {
+User.prototype.search = function(done) {
 
     var event = {
         type: 'search',
@@ -69,6 +70,7 @@ User.prototype.search = function() {
     this._request(siteUrl + search + params, true, function() {
         event.end = Date.now();
         self.events.push(event);
+        done();
     });
 }
 
@@ -80,7 +82,7 @@ User.prototype._createQuery = function() {
     }
 }
 
-User.prototype.back = function() {
+User.prototype.back = function(done) {
 
     var event = {
         type: 'back',
@@ -92,17 +94,18 @@ User.prototype.back = function() {
     this._request(url, false, function() {
         event.end = Date.now();
         self.events.push(event);
+        done();
     });
 }
 
 var u = new User();
 
-u.land();
-u.search();
-setTimeout(function() {
-       u.back();
-}, 2000);
-
-setTimeout(function() {
-    u.back();
-}, 4000);
+u.land(function() {
+    u.search(function() {
+        u.back(function() {
+            u.back(function() {
+                console.log("fim");
+            })
+        })
+    })
+});
