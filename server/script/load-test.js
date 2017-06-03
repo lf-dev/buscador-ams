@@ -10,15 +10,15 @@ function User() {
 
 }
 
-User.prototype._request = function(url, resolve) {
+User.prototype._request = function(url, cb) {
     request(url, function(error, response, body) {
 
         if(response.statusCode != 200){
             console.error("erro ao requisitar " + url);
         }
 
-        if(resolve){
-            resolve();
+        if(cb){
+            cb();
         }
     });
 }
@@ -56,10 +56,14 @@ User.prototype.search = function() {
         type: 'search',
         start: Date.now()
     }
+    var self = this;
 
     var query = this._createQuery();
     var params = "?q="+query.q+"&"+query.from;
-    this._request(siteUrl + search + params);
+    this._request(siteUrl + search + params, function() {
+        event.end = Date.now();
+        self.events.push(event);
+    });
 }
 
 User.prototype._createQuery = function() {
