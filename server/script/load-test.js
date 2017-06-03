@@ -29,7 +29,14 @@ User.prototype._request = function(url, stack, cb) {
     });
 }
 
-User.prototype.land = function(done) {
+User.prototype.land = function() {
+    var self = this;
+    return new Promise(function(resolve) {
+        self._land(resolve);
+    });
+}
+
+User.prototype._land = function(done) {
 
     var event = {
         type: 'land',
@@ -57,7 +64,14 @@ User.prototype.land = function(done) {
     });
 }
 
-User.prototype.search = function(done) {
+User.prototype.search = function(){
+    var self = this;
+    return new Promise(function(resolve){
+        self._search(resolve);
+    });
+}
+
+User.prototype._search = function(done) {
 
     var event = {
         type: 'search',
@@ -82,7 +96,14 @@ User.prototype._createQuery = function() {
     }
 }
 
-User.prototype.back = function(done) {
+User.prototype.back = function(){
+    var self = this;
+    return new Promise(function(resolve){
+        self._back(resolve);
+    });
+}
+
+User.prototype._back = function(done) {
 
     var event = {
         type: 'back',
@@ -101,18 +122,12 @@ User.prototype.back = function(done) {
 var u = new User();
 
 Promise.resolve()
-    .then(function(){
-        return new Promise(function(resolve) {
-            u.land(resolve);
-        });
+    .then(function() {
+        return u.land();
     })
     .then(function(){
-        return new Promise(function(resolve) {
-            u.search(resolve);
-        })
+        return u.search();
     })
     .then(function(){
-        return new Promise(function(resolve) {
-            u.back(resolve);
-        })
+        return u.back();
     })
