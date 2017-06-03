@@ -52,7 +52,7 @@ User.prototype.land = function(done) {
         Promise.all(promises).then(function() {
             event.end = Date.now();
             self.events.push(event);
-            done();
+            if(done) done();
         });
     });
 }
@@ -70,7 +70,7 @@ User.prototype.search = function(done) {
     this._request(siteUrl + search + params, true, function() {
         event.end = Date.now();
         self.events.push(event);
-        done();
+        if(done) done();
     });
 }
 
@@ -94,18 +94,25 @@ User.prototype.back = function(done) {
     this._request(url, false, function() {
         event.end = Date.now();
         self.events.push(event);
-        done();
+        if(done) done();
     });
 }
 
 var u = new User();
 
-u.land(function() {
-    u.search(function() {
-        u.back(function() {
-            u.back(function() {
-                console.log("fim");
-            })
+Promise.resolve()
+    .then(function(){
+        return new Promise(function(resolve) {
+            u.land(resolve);
+        });
+    })
+    .then(function(){
+        return new Promise(function(resolve) {
+            u.search(resolve);
         })
     })
-});
+    .then(function(){
+        return new Promise(function(resolve) {
+            u.back(resolve);
+        })
+    })
