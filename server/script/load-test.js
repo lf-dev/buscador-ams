@@ -41,7 +41,7 @@ User.prototype.land = function(done) {
     new Promise(function(resolve, reject) {
         self._request(siteUrl, true, resolve);
 
-    }).then(function(resolve, reject) {
+    }).then(function() {
 
         var promises = resources.map(function(resource) {
             return new Promise(function(resolve, reject) {
