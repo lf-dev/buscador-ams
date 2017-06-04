@@ -80,7 +80,7 @@ User.prototype._search = function(done) {
     var self = this;
 
     var query = this._createQuery();
-    var params = "?q="+query.q+"&"+query.from;
+    var params = "?q="+query.q+"&from="+query.from;
     this._request(siteUrl + search + params, true, function() {
         event.end = Date.now();
         self.events.push(event);
