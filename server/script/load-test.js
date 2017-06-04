@@ -111,8 +111,9 @@ User.prototype._back = function(done) {
     }
     var self = this;
 
+    this.stack.pop();
     var url = this.stack.pop();
-    this._request(url, false, function() {
+    this._request(url, true, function() {
         event.end = Date.now();
         self.events.push(event);
         if(done) done();
@@ -179,3 +180,12 @@ Promise.resolve()
     .then(function(){
         return u.back();
     })
+    .then(function(){
+        return u.back();
+    })
+    .then(function(){
+        return u.back();
+    })
+    .then(function(){
+        return u.back();
+    });
