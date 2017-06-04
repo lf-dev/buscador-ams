@@ -119,6 +119,45 @@ User.prototype._back = function(done) {
     });
 }
 
+User.prototype.nextPage = function(){
+    var self = this;
+    return new Promise(function(resolve){
+        self._nextPage(resolve);
+    });
+}
+
+User.prototype._nextPage = function(done) {
+
+    var event = {
+        type: 'next',
+        start: Date.now()
+    }
+    var self = this;
+
+    var nextUrl = this._nextPageUrl();
+
+    this._request(nextUrl, true, function() {
+        event.end = Date.now();
+        self.events.push(event);
+        if(done) done();
+    });
+}
+
+User.prototype._nextPageUrl = function() {
+
+    var url = this.stack[this.stack.length-1];
+    var fromStr = url.substr(url.indexOf("&from="));
+    var page = parseInt(fromStr.substr(6));
+
+    if(isNaN(page)){
+        console.error("erro ao tentar encontrar proxima pagina");
+        return;
+    }
+
+    nextPage = page + 1;
+    return url.replace(fromStr, "&from="+nextPage);
+}
+
 var u = new User();
 
 Promise.resolve()
@@ -127,6 +166,15 @@ Promise.resolve()
     })
     .then(function(){
         return u.search();
+    })
+    .then(function(){
+        return u.nextPage();
+    })
+    .then(function(){
+        return u.nextPage();
+    })
+    .then(function(){
+        return u.nextPage();
     })
     .then(function(){
         return u.back();
