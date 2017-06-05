@@ -164,21 +164,32 @@ User.prototype._nextPageUrl = function() {
     return url.replace(fromStr, "&from="+nextPage);
 }
 
-var u = new User();
+User.prototype.navigate = function(){
 
-Promise.resolve()
-    .then(function() {
-        return u.land();
-    })
-    .then(function(){
-        return u.search();
-    })
-    .then(function(){
-        return u.nextPage();
-    })
-    .then(function(){
-        return u.back();
-    })
-    .then(function(){
-        return u.back();
+    var self = this;
+    var navigation = this._navigationSteps();
+    var p = Promise.resolve();
+
+    navigation.forEach(function(nav) {
+        p = p.then(function(){ return nav.call(self); });
     });
+}
+
+User.prototype._navigationSteps = function() {
+    var navigation = [];
+    navigation.push(User.prototype.land);
+    navigation.push(User.prototype.search);
+    for(var i=0; i<10; i++){
+        navigation.push(User.prototype.nextPage);
+    }
+    navigation.push(User.prototype.search);
+    for(var i=0; i<10; i++){
+        navigation.push(User.prototype.nextPage);
+    }
+    navigation.push(User.prototype.back);
+    navigation.push(User.prototype.back);
+    return navigation;
+}
+
+var u = new User();
+u.navigate();
