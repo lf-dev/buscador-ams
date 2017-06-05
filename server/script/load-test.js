@@ -105,6 +105,11 @@ User.prototype.back = function(){
 
 User.prototype._back = function(done) {
 
+    if(this.stack.length <= 1){
+        if(done) done();
+        return;
+    }
+
     var event = {
         type: 'back',
         start: Date.now()
@@ -170,6 +175,9 @@ Promise.resolve()
     })
     .then(function(){
         return u.nextPage();
+    })
+    .then(function(){
+        return u.back();
     })
     .then(function(){
         return u.back();
