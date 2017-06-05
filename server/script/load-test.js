@@ -179,16 +179,23 @@ User.prototype.navigate = function(){
 User.prototype._navigationSteps = function() {
     var navigation = [];
     navigation.push(User.prototype.land);
-    navigation.push(User.prototype.search);
-    for(var i=0; i<10; i++){
-        navigation.push(User.prototype.nextPage);
-    }
-    navigation.push(User.prototype.search);
-    for(var i=0; i<10; i++){
-        navigation.push(User.prototype.nextPage);
-    }
+    navigation.push(...this._generateSearchAndPaginate());
+    navigation.push(...this._generateSearchAndPaginate());
     navigation.push(User.prototype.back);
     navigation.push(User.prototype.back);
+    return navigation;
+}
+
+User.prototype._generateSearchAndPaginate = function() {
+
+    var navigation = [];
+
+    var paginations = Math.floor(Math.random()*10);
+    navigation.push(User.prototype.search);
+    for(var i=0; i<paginations; i++){
+        navigation.push(User.prototype.nextPage);
+    }
+
     return navigation;
 }
 
