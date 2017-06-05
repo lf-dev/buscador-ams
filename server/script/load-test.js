@@ -8,6 +8,8 @@ function User() {
 
     this.events = [];
     this.stack = [];
+    this.lastPage = 0;
+    this.lastQuery = "";
 }
 
 User.prototype._request = function(url, stack, cb) {
@@ -80,6 +82,9 @@ User.prototype._search = function(done) {
     var self = this;
 
     var query = this._createQuery();
+    this.lastPage = query.from;
+    this.lastQuery = query.q;
+
     var params = "?q="+query.q+"&from="+query.from;
     this._request(siteUrl + search + params, true, function() {
         event.end = Date.now();
@@ -140,28 +145,14 @@ User.prototype._nextPage = function(done) {
     }
     var self = this;
 
-    var nextUrl = this._nextPageUrl();
+    this.lastPage += 1;
+    var params = "?q="+this.lastQuery+"&from="+this.lastPage;
 
-    this._request(nextUrl, false, function() {
+    this._request(siteUrl + search + params, false, function() {
         event.end = Date.now();
         self.events.push(event);
         if(done) done();
     });
-}
-
-User.prototype._nextPageUrl = function() {
-
-    var url = this.stack[this.stack.length-1];
-    var fromStr = url.substr(url.indexOf("&from="));
-    var page = parseInt(fromStr.substr(6));
-
-    if(isNaN(page)){
-        console.error("erro ao tentar encontrar proxima pagina");
-        return;
-    }
-
-    nextPage = page + 1;
-    return url.replace(fromStr, "&from="+nextPage);
 }
 
 User.prototype.navigate = function(){
