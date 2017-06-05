@@ -162,7 +162,17 @@ User.prototype.navigate = function(){
     var p = Promise.resolve();
 
     navigation.forEach(function(nav) {
-        p = p.then(function(){ return nav.call(self); });
+        p = p.then(function(){
+            return nav.call(self);
+        })
+        .then(function () {
+
+            var t = Math.floor(Math.random()*2000);
+            console.log(t);
+            return new Promise(function(resolve) {
+                setTimeout(resolve, t);
+            });
+        });
     });
 }
 
