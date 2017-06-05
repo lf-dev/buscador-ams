@@ -95,8 +95,27 @@ User.prototype._search = function(done) {
 
 User.prototype._createQuery = function() {
 
+    var termos = [    "ortopedista",
+                        "cardiologista",
+                        "rio de janeiro",
+                        "petropolis",
+                        "sao paulo",
+                        "cirurgiao",
+                        "ortopedia",
+                        "barra da tijuca",
+                        "botafogo",
+                        "dermatologista",
+                        "joao"];
+
+    var numTermos = Math.floor((Math.random()*5)+1);
+    var query = [];
+    for(var i=0; i<numTermos; i++) {
+        var indexTermo = Math.floor(Math.random()*termos.length);
+        query.push(termos.splice(indexTermo, 1));
+    }
+
     return {
-        q: "ortopedista rio de janeiro",
+        q: query.join(" "),
         from: 0
     }
 }
@@ -212,6 +231,4 @@ var users = Array(10).fill().map(function() {
 Promise.all(users).then(function() {
         console.log("fim");
 });
-
-
 
