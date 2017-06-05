@@ -17,22 +17,25 @@ function User() {
     this.lastQuery = "";
 }
 
-User.prototype._request = function(url, stack, cb) {
+User.prototype._request = function(url, stack, done) {
 
     var self = this;
     request(url, function(error, response, body) {
 
-        if(stack){
-            self.stack.push(url);
+        if(error || !response) {
+            console.error(error);
+        }
+        else{
+            if(stack){
+                self.stack.push(url);
+            }
+
+            if(response.statusCode != 200){
+                console.error("erro ao requisitar " + url);
+            }
         }
 
-        if(response.statusCode != 200){
-            console.error("erro ao requisitar " + url);
-        }
-
-        if(cb){
-            cb();
-        }
+        if(done) done();
     });
 }
 
