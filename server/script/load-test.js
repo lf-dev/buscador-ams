@@ -1,9 +1,13 @@
 var request = require('request');
 
+//const siteUrl = "http://54.233.163.206:3000";
 const siteUrl = "http://localhost:3000";
 const search = "/search";
 const resources = ['/js/app.js', '/css/styles.css'];
 const MAX_TIMEOUT = 2000;
+const NUM_USUARIOS = 10;
+const NUM_BUSCA_USUARIO = 20;
+const NUM_MAX_PAGINACAO_BUSCA = 10;
 
 function User() {
 
@@ -202,8 +206,9 @@ User.prototype.navigate = function(done){
 User.prototype._navigationSteps = function() {
     var navigation = [];
     navigation.push(User.prototype.land);
-    navigation.push(...this._generateSearchAndPaginate());
-    navigation.push(...this._generateSearchAndPaginate());
+    for(var i=0; i<NUM_BUSCA_USUARIO; i++){
+        navigation.push(...this._generateSearchAndPaginate());
+    }
     navigation.push(User.prototype.back);
     navigation.push(User.prototype.back);
     return navigation;
@@ -213,7 +218,7 @@ User.prototype._generateSearchAndPaginate = function() {
 
     var navigation = [];
 
-    var paginations = Math.floor(Math.random()*10);
+    var paginations = Math.floor(Math.random()*NUM_MAX_PAGINACAO_BUSCA);
     navigation.push(User.prototype.search);
     for(var i=0; i<paginations; i++){
         navigation.push(User.prototype.nextPage);
@@ -243,7 +248,7 @@ function report(users) {
     console.log("Average: " + average + " ms");
 }
 
-var users = Array(10).fill().map(function() {
+var users = Array(NUM_USUARIOS).fill().map(function() {
     return new User();
 });
 
