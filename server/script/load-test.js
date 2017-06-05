@@ -3,6 +3,7 @@ var request = require('request');
 const siteUrl = "http://localhost:3000";
 const search = "/search";
 const resources = ['/js/app.js', '/css/styles.css'];
+const MAX_TIMEOUT = 2000;
 
 function User() {
 
@@ -186,7 +187,7 @@ User.prototype.navigate = function(done){
         })
         .then(function () {
 
-            var t = Math.floor(Math.random()*2000);
+            var t = Math.floor(Math.random()*MAX_TIMEOUT);
             return new Promise(function(resolve) {
                 setTimeout(resolve, t);
             });
