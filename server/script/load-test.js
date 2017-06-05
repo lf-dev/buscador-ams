@@ -221,14 +221,38 @@ User.prototype._generateSearchAndPaginate = function() {
     return navigation;
 }
 
+function report(users) {
+
+    var events = [];
+    users.forEach(function(user){
+        events.push(...user.events);
+    });
+
+    var totalTime = 0;
+    var numRequests = 0;
+    events.forEach(function(e) {
+        numRequests++;
+        totalTime += e.end - e.start;
+    });
+
+    var average = totalTime/numRequests;
+
+    console.log("Num requests: " + numRequests);
+    console.log("Total time: " + totalTime);
+    console.log("Average: " + average + " ms");
+}
+
 var users = Array(10).fill().map(function() {
-    return new Promise(function(resolve) {
-        var user = new User();
+    return new User();
+});
+
+var ps = users.map(function(user) {
+    return new Promise(function(resolve){
         user.navigate(resolve);
     });
 });
 
-Promise.all(users).then(function() {
-        console.log("fim");
+Promise.all(ps).then(function() {
+        report(users);
 });
 
