@@ -155,7 +155,7 @@ User.prototype._nextPage = function(done) {
     });
 }
 
-User.prototype.navigate = function(){
+User.prototype.navigate = function(done){
 
     var self = this;
     var navigation = this._navigationSteps();
@@ -168,11 +168,14 @@ User.prototype.navigate = function(){
         .then(function () {
 
             var t = Math.floor(Math.random()*2000);
-            console.log(t);
             return new Promise(function(resolve) {
                 setTimeout(resolve, t);
             });
         });
+    });
+
+    p.then(function() {
+        done();
     });
 }
 
@@ -199,5 +202,16 @@ User.prototype._generateSearchAndPaginate = function() {
     return navigation;
 }
 
-var u = new User();
-u.navigate();
+var users = Array(10).fill().map(function() {
+    return new Promise(function(resolve) {
+        var user = new User();
+        user.navigate(resolve);
+    });
+});
+
+Promise.all(users).then(function() {
+        console.log("fim");
+});
+
+
+
