@@ -137,7 +137,7 @@ User.prototype._nextPage = function(done) {
 
     var nextUrl = this._nextPageUrl();
 
-    this._request(nextUrl, true, function() {
+    this._request(nextUrl, false, function() {
         event.end = Date.now();
         self.events.push(event);
         if(done) done();
@@ -170,21 +170,6 @@ Promise.resolve()
     })
     .then(function(){
         return u.nextPage();
-    })
-    .then(function(){
-        return u.nextPage();
-    })
-    .then(function(){
-        return u.nextPage();
-    })
-    .then(function(){
-        return u.back();
-    })
-    .then(function(){
-        return u.back();
-    })
-    .then(function(){
-        return u.back();
     })
     .then(function(){
         return u.back();
