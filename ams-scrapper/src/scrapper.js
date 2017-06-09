@@ -35,36 +35,33 @@ function fetchAsync(estados) {
 
 function fetchSync(estados) {
 
-    var report = {};
-    report["fetch_mode"] = "Sync";
-    report["start"] = new Date();
-    _fetchSync(estados, [], report);
+  var report = {};
+  report["fetch_mode"] = "Sync";
+  report["start"] = new Date();
 
-}
+  var credenciadosPorEstado = [];
 
-function _fetchSync(estados, credenciadosPorEstado, report) {
+  let p = Promise.resolve();
+  estados.forEach( estado => {
 
-    if(credenciadosPorEstado.length == estados.length){
+    console.log(estado);
+    report[estado] = {};
+    p = p
+    .then(() => {
+      return fetch(estado, report[estado]);
+    })
+    .then( body => {
+      return new Promise( resolve => {
+          credenciadosPorEstado.push(parseCredenciados(body, estado, report[estado]));
+          resolve();
+      });
+    });
+  });
 
-        reduceCredenciados(credenciadosPorEstado, report);
-        saveReport(report);
-
-    }else{
-
-        var estado = estados[credenciadosPorEstado.length];
-        report[estado] = {};
-
-        fetch(estado, report[estado]).then(function(body) {
-
-            return parseCredenciados(body, estado, report[estado]);
-
-        }).then(function(novosCredenciados) {
-
-            credenciadosPorEstado.push(novosCredenciados);
-
-            _fetchSync(estados, credenciadosPorEstado, report);
-        });
-    }
+  p.then( () => {
+    reduceCredenciados(credenciadosPorEstado, report);
+    saveReport(report);
+  });
 }
 
 function reduceCredenciados(credenciadosPorEstado, report){
@@ -173,6 +170,3 @@ function parseCredenciados(body, estado, report) {
 
     return credenciados;
 }
-
-
-
