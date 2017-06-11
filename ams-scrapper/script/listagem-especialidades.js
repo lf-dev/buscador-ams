@@ -18,9 +18,9 @@ var rd = readline.createInterface({
 
 rd.on('line', function(line) {
 
-    let json = JSON.parse(line);
+    let credenciado = JSON.parse(line);
 
-    json.credenciado.enderecos.forEach(function(e) {
+    credenciado.enderecos.forEach(function(e) {
 
         e.especialidades.forEach(function(esp) {
 
@@ -42,4 +42,3 @@ rd.on('close', function() {
 
     fs.writeFile("especialidades_unicas_template.json", JSON.stringify(especialidadesJson, null, 2));
 });
-
