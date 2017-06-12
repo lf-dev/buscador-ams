@@ -12,152 +12,56 @@
               "enderecos": {
                   "properties": {
                       "bairro": {
-                          "type": "text",
-                          "fields": {
-                              "keyword": {
-                                  "type": "keyword",
-                                  "ignore_above": 256
-                              }
-                          }
+                          "type": "text"
                       },
                       "cep": {
-                          "type": "text",
-                          "fields": {
-                              "keyword": {
-                                  "type": "keyword",
-                                  "ignore_above": 256
-                              }
-                          }
+                          "type": "text"
                       },
                       "cidade": {
-                          "type": "text",
-                          "fields": {
-                              "keyword": {
-                                  "type": "keyword",
-                                  "ignore_above": 256
-                              }
-                          }
+                          "type": "text"
                       },
                       "especialidades": {
-                          "type": "text",
-                          "fields": {
-                              "keyword": {
-                                  "type": "keyword",
-                                  "ignore_above": 256
-                              }
-                          }
+                          "type": "text"
                       },
                       "estado": {
-                          "type": "text",
-                          "fields": {
-                              "keyword": {
-                                  "type": "keyword",
-                                  "ignore_above": 256
-                              }
-                          }
+                          "type": "text"
                       },
                       "rua": {
-                          "type": "text",
-                          "fields": {
-                              "keyword": {
-                                  "type": "keyword",
-                                  "ignore_above": 256
-                              }
-                          }
+                          "type": "text"
                       },
                       "telefones": {
-                          "type": "text",
-                          "fields": {
-                              "keyword": {
-                                  "type": "keyword",
-                                  "ignore_above": 256
-                              }
-                          }
+                          "type": "text"
                       },
                       "tipos": {
-                          "type": "text",
-                          "fields": {
-                              "keyword": {
-                                  "type": "keyword",
-                                  "ignore_above": 256
-                              }
-                          }
+                          "type": "text"
                       }
                   }
               },
               "pessoa": {
                   "properties": {
                       "cnpj": {
-                          "type": "text",
-                          "fields": {
-                              "keyword": {
-                                  "type": "keyword",
-                                  "ignore_above": 256
-                              }
-                          }
+                          "type": "text"
                       },
                       "conselho": {
-                          "type": "text",
-                          "fields": {
-                              "keyword": {
-                                  "type": "keyword",
-                                  "ignore_above": 256
-                              }
-                          }
+                          "type": "text"
                       },
                       "estado": {
-                          "type": "text",
-                          "fields": {
-                              "keyword": {
-                                  "type": "keyword",
-                                  "ignore_above": 256
-                              }
-                          }
+                          "type": "text"
                       },
                       "fantasia": {
-                          "type": "text",
-                          "fields": {
-                              "keyword": {
-                                  "type": "keyword",
-                                  "ignore_above": 256
-                              }
-                          }
+                          "type": "text"
                       },
                       "id": {
-                          "type": "text",
-                          "fields": {
-                              "keyword": {
-                                  "type": "keyword",
-                                  "ignore_above": 256
-                              }
-                          }
+                          "type": "text"
                       },
                       "nome": {
-                          "type": "text",
-                          "fields": {
-                              "keyword": {
-                                  "type": "keyword",
-                                  "ignore_above": 256
-                              }
-                          }
+                          "type": "text"
                       },
                       "numero": {
-                          "type": "text",
-                          "fields": {
-                              "keyword": {
-                                  "type": "keyword",
-                                  "ignore_above": 256
-                              }
-                          }
+                          "type": "text"
                       },
                       "razao social": {
-                          "type": "text",
-                          "fields": {
-                              "keyword": {
-                                  "type": "keyword",
-                                  "ignore_above": 256
-                              }
-                          }
+                          "type": "text"
                       }
                   }
               }
