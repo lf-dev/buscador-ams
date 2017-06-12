@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function preencherHTMLConsulta(json) {
         var html = ""
         json.hits.hits.forEach(function(it) {
-            html += obterHTMLCredenciado(it._source.credenciado);
+            html += obterHTMLCredenciado(it._source);
         });
         return html;
     }
