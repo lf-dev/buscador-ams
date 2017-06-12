@@ -19,17 +19,17 @@ app.get('/search', function (req, res) {
                         "multi_match": {
                             "query": q.query.q,
                             "fields": [
-                                "credenciado.pessoa.id^4",
-                                "credenciado.enderecos.telefones^4",
-                                "credenciado.pessoa.nome^3",
-                                "credenciado.enderecos.cidade^2",
+                                "pessoa.id^4",
+                                "enderecos.telefones^4",
+                                "pessoa.nome^3",
+                                "enderecos.cidade^2",
                                 "_all" ],
                             "type": "cross_fields"
                         }
                     },
                     {
                         "match": {
-                            "credenciado.enderecos.especialidades": {
+                            "enderecos.especialidades": {
                                 "query": q.query.q,
                                 "fuzziness": "AUTO"
                             }
