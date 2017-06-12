@@ -13,9 +13,7 @@ var rd = readline.createInterface({
 var credenciados = [];
 
 rd.on('line', function(line) {
-
-    var json = JSON.parse(line);
-    credenciados.push(json);
+    credenciados.push(JSON.parse(line));
 });
 
 rd.on('close', function() {
@@ -33,7 +31,7 @@ rd.on('close', function() {
     var noMatch = [];
 
    credenciados.forEach(function(cred) {
-       cred.credenciado.enderecos.forEach(function(end) {
+       cred.enderecos.forEach(function(end) {
            end.telefones.forEach(function(tel) {
 
                var matchedOne = false;
