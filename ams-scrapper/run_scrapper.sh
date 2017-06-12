@@ -1,6 +1,7 @@
 #!/bin/sh
 
 CREDENCIADOS=credenciados_es_batch.json
+INDEX_CONFIG=resources/ams_index.json
 
 if [ ! -v ES_HOST ]
 then
@@ -18,17 +19,7 @@ if [ -e "$CREDENCIADOS" ] && [ ! -z "$CREDENCIADOS" ]
 then
 
   curl -XDELETE "$ES_HOST:9200/ams"
-  curl -XPUT "$ES_HOST:9200/ams?pretty" -H 'Content-Type: application/json' -d'
-  {
-    "settings" : {
-        "index" : {
-            "number_of_shards" : 1,
-            "number_of_replicas" : 0
-        }
-    }
-  }'
-
-
+  curl -H "Content-Type: application/json" -XPUT "$ES_HOST:9200/ams?pretty" -d "@$INDEX_CONFIG"
   curl -H "Content-Type: application/json" -XPOST "$ES_HOST:9200/ams/credenciado/_bulk?pretty&refresh" --data-binary "@$CREDENCIADOS"
 
   rm $CREDENCIADOS

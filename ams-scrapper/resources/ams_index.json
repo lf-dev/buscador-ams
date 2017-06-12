@@ -1,0 +1,168 @@
+{
+  "settings" : {
+      "index" : {
+          "number_of_shards" : 1,
+          "number_of_replicas" : 0
+      }
+  },
+
+  "mappings": {
+      "credenciado": {
+          "properties": {
+              "enderecos": {
+                  "properties": {
+                      "bairro": {
+                          "type": "text",
+                          "fields": {
+                              "keyword": {
+                                  "type": "keyword",
+                                  "ignore_above": 256
+                              }
+                          }
+                      },
+                      "cep": {
+                          "type": "text",
+                          "fields": {
+                              "keyword": {
+                                  "type": "keyword",
+                                  "ignore_above": 256
+                              }
+                          }
+                      },
+                      "cidade": {
+                          "type": "text",
+                          "fields": {
+                              "keyword": {
+                                  "type": "keyword",
+                                  "ignore_above": 256
+                              }
+                          }
+                      },
+                      "especialidades": {
+                          "type": "text",
+                          "fields": {
+                              "keyword": {
+                                  "type": "keyword",
+                                  "ignore_above": 256
+                              }
+                          }
+                      },
+                      "estado": {
+                          "type": "text",
+                          "fields": {
+                              "keyword": {
+                                  "type": "keyword",
+                                  "ignore_above": 256
+                              }
+                          }
+                      },
+                      "rua": {
+                          "type": "text",
+                          "fields": {
+                              "keyword": {
+                                  "type": "keyword",
+                                  "ignore_above": 256
+                              }
+                          }
+                      },
+                      "telefones": {
+                          "type": "text",
+                          "fields": {
+                              "keyword": {
+                                  "type": "keyword",
+                                  "ignore_above": 256
+                              }
+                          }
+                      },
+                      "tipos": {
+                          "type": "text",
+                          "fields": {
+                              "keyword": {
+                                  "type": "keyword",
+                                  "ignore_above": 256
+                              }
+                          }
+                      }
+                  }
+              },
+              "pessoa": {
+                  "properties": {
+                      "cnpj": {
+                          "type": "text",
+                          "fields": {
+                              "keyword": {
+                                  "type": "keyword",
+                                  "ignore_above": 256
+                              }
+                          }
+                      },
+                      "conselho": {
+                          "type": "text",
+                          "fields": {
+                              "keyword": {
+                                  "type": "keyword",
+                                  "ignore_above": 256
+                              }
+                          }
+                      },
+                      "estado": {
+                          "type": "text",
+                          "fields": {
+                              "keyword": {
+                                  "type": "keyword",
+                                  "ignore_above": 256
+                              }
+                          }
+                      },
+                      "fantasia": {
+                          "type": "text",
+                          "fields": {
+                              "keyword": {
+                                  "type": "keyword",
+                                  "ignore_above": 256
+                              }
+                          }
+                      },
+                      "id": {
+                          "type": "text",
+                          "fields": {
+                              "keyword": {
+                                  "type": "keyword",
+                                  "ignore_above": 256
+                              }
+                          }
+                      },
+                      "nome": {
+                          "type": "text",
+                          "fields": {
+                              "keyword": {
+                                  "type": "keyword",
+                                  "ignore_above": 256
+                              }
+                          }
+                      },
+                      "numero": {
+                          "type": "text",
+                          "fields": {
+                              "keyword": {
+                                  "type": "keyword",
+                                  "ignore_above": 256
+                              }
+                          }
+                      },
+                      "razao social": {
+                          "type": "text",
+                          "fields": {
+                              "keyword": {
+                                  "type": "keyword",
+                                  "ignore_above": 256
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+      }
+  }
+
+}
