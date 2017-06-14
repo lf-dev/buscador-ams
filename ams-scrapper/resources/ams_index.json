@@ -76,7 +76,13 @@
               "type": "text"
             },
             "nome": {
-              "type": "text"
+              "type": "text",
+              "fields": {
+                "shingles": {
+                  "type": "text",
+                  "analyzer": "shingle_analyser"
+                }
+              }
             },
             "numero": {
               "type": "text"
