@@ -1,72 +1,72 @@
 {
-  "settings" : {
-      "index" : {
-          "number_of_shards" : 1,
-          "number_of_replicas" : 0
-      }
+  "settings": {
+    "index": {
+      "number_of_shards": 1,
+      "number_of_replicas": 0
+    }
   },
 
   "mappings": {
-      "credenciado": {
+    "credenciado": {
+      "properties": {
+        "enderecos": {
           "properties": {
-              "enderecos": {
-                  "properties": {
-                      "bairro": {
-                          "type": "text"
-                      },
-                      "cep": {
-                          "type": "text"
-                      },
-                      "cidade": {
-                          "type": "text"
-                      },
-                      "especialidades": {
-                          "type": "text"
-                      },
-                      "estado": {
-                          "type": "text"
-                      },
-                      "rua": {
-                          "type": "text"
-                      },
-                      "telefones": {
-                          "type": "text"
-                      },
-                      "tipos": {
-                          "type": "text"
-                      }
-                  }
-              },
-              "pessoa": {
-                  "properties": {
-                      "cnpj": {
-                          "type": "text"
-                      },
-                      "conselho": {
-                          "type": "text"
-                      },
-                      "estado": {
-                          "type": "text"
-                      },
-                      "fantasia": {
-                          "type": "text"
-                      },
-                      "id": {
-                          "type": "text"
-                      },
-                      "nome": {
-                          "type": "text"
-                      },
-                      "numero": {
-                          "type": "text"
-                      },
-                      "razao social": {
-                          "type": "text"
-                      }
-                  }
-              }
+            "bairro": {
+              "type": "text"
+            },
+            "cep": {
+              "type": "text"
+            },
+            "cidade": {
+              "type": "text"
+            },
+            "especialidades": {
+              "type": "text"
+            },
+            "estado": {
+              "type": "text"
+            },
+            "rua": {
+              "type": "text"
+            },
+            "telefones": {
+              "type": "text"
+            },
+            "tipos": {
+              "type": "text"
+            }
           }
+        },
+        "pessoa": {
+          "properties": {
+            "cnpj": {
+              "type": "text"
+            },
+            "conselho": {
+              "type": "text"
+            },
+            "estado": {
+              "type": "text"
+            },
+            "fantasia": {
+              "type": "text"
+            },
+            "id": {
+              "type": "text"
+            },
+            "nome": {
+              "type": "text"
+            },
+            "numero": {
+              "type": "text"
+            },
+            "razao social": {
+              "type": "text"
+            }
+          }
+        }
       }
+    }
   }
 
 }
