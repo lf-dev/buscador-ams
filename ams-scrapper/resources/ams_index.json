@@ -76,7 +76,7 @@
               "type": "text"
             },
             "nome": {
-              "type": "text",
+              "type": "text"
             },
             "numero": {
               "type": "text"
