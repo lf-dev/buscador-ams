@@ -1,5 +1,5 @@
 FROM node:8.1.0
-MAINTAINER Matheus Cabral <matheus.cabral@gmail.com>
+MAINTAINER Luiz Fernando Chagas Rodrigues <emaildolf@gmail.com>
 
 # atualiza container
 RUN apt-get update -y
