@@ -10,7 +10,7 @@
         "shingle_filter": {
           "type": "shingle",
           "min_shingle_size": 2,
-          "max_shingle_size": 2,
+          "max_shingle_size": 4,
           "output_unigrams": false
         }
       },
@@ -77,12 +77,6 @@
             },
             "nome": {
               "type": "text",
-              "fields": {
-                "shingles": {
-                  "type": "text",
-                  "analyzer": "shingle_analyser"
-                }
-              }
             },
             "numero": {
               "type": "text"
