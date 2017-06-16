@@ -14,32 +14,22 @@ app.get('/search', function(req, res) {
     "size": pageSize,
     "query": {
       "bool": {
-        "should": [{
-            "multi_match": {
-              "query": q.query.q,
-              "fields": [
-                "pessoa.id^4",
-                "enderecos.telefones^4",
-                "pessoa.nome^3",
-                "enderecos.cidade^2",
-                "_all"
-              ],
-              "type": "cross_fields"
-            }
-          },
-          {
-            "match": {
-              "enderecos.especialidades": {
-                "query": q.query.q,
-                "fuzziness": "AUTO"
-              }
-            }
+        "must": {
+          "multi_match": {
+            "query": q.query.q,
+            "fields": ["_all"],
+            "type": "cross_fields"
           }
-        ]
+        },
+        "should": [{
+          //utiliza match em pessoa.nome como signal
+          "match": {
+              "pessoa.nome": q.query.q
+          }
+        }]
       }
     }
-  };
-
+  }
 
   var options = {
     host: 'localhost',
