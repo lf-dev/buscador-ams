@@ -42,7 +42,8 @@
               "type": "text"
             },
             "especialidades": {
-              "type": "text"
+              "type": "text",
+              "analyzer": "brazilian"
             },
             "estado": {
               "type": "text"
