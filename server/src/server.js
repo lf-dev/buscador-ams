@@ -21,12 +21,17 @@ app.get('/search', function(req, res) {
             "type": "cross_fields"
           }
         },
-        "should": [{
-          //utiliza match em pessoa.nome como signal
-          "match": {
+        "should": [
+          {
+            "match": {
               "pessoa.nome": q.query.q
-          }
-        }]
+            }
+          },
+          {
+            "match": {
+              "enderecos.especialidades": q.query.q
+            }
+          }]
       }
     }
   }
