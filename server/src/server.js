@@ -24,7 +24,10 @@ app.get('/search', function(req, res) {
         "should": [
           {
             "match": {
-              "pessoa.nome": q.query.q
+              "pessoa.nome": {
+                "query": q.query.q,
+                "minimum_should_match": 2
+              }
             }
           },
           {
