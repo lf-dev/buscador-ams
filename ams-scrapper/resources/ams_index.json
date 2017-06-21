@@ -14,7 +14,7 @@
         }
       },
       "analyzer": {
-        "especialidades_synonym_analizer": {
+        "especialidades_synonym_analyzer": {
           "tokenizer": "standard",
           "filter": [
             "lowercase",
@@ -43,6 +43,7 @@
             },
             "especialidades": {
               "type": "text",
+              "analyzer": "especialidades_synonym_analyzer",
               "copy_to": "_all_standard",
               "fields": {
                 "br": {
