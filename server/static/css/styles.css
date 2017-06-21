@@ -109,6 +109,15 @@ button {
     color: grey;
 }
 
+#did-you-mean {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#did-you-mean span{
+  color: #dd4b39;
+}
+
 .row {
     width: 100%;
     margin: 2px 0;

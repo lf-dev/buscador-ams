@@ -104,6 +104,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if(pagina == 0) {
             container.innerHTML = "";
             html = htmlTotalResultados(json);
+            html += htmlDidYouMean(json);
         }
 
         html += preencherHTMLConsulta(json);
@@ -124,9 +125,20 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function htmlTotalResultados(json) {
-
         return '<p id="sumario-resultados">Encontrados ' + json.hits.total + ' resultados</p>';
+    }
 
+    function htmlDidYouMean(json) {
+
+        let html = '';
+        if(json.suggest.didYouMean[0].options.length > 0){
+          html += "<p id='did-you-mean'><span>Você quis dizer:</span>";
+          html += json.suggest.didYouMean[0].options.map( option => {
+            return ` <a href='/#${option.text}'>${option.text}</a>`;
+          }).join(',');
+          html += '</p>';
+        }
+        return html;
     }
 
     function preencherHTMLConsulta(json) {
