@@ -36,6 +36,14 @@ app.get('/search', function(req, res) {
             }
           }]
       }
+    },
+    "suggest": {
+      "didYouMean": {
+        "text": q.query.q,
+        "phrase": {
+          "field": "_all_standard"
+        }
+      }
     }
   }
 
