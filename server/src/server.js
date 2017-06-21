@@ -32,7 +32,7 @@ app.get('/search', function(req, res) {
           },
           {
             "match": {
-              "enderecos.especialidades": q.query.q
+              "enderecos.especialidades.br": q.query.q
             }
           }]
       }
