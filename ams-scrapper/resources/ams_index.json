@@ -43,7 +43,12 @@
             },
             "especialidades": {
               "type": "text",
-              "analyzer": "brazilian"
+              "fields": {
+                "br": {
+                  "analyzer": "brazilian",
+                  "type": "text"
+                }
+              }
             },
             "estado": {
               "type": "text"
@@ -90,5 +95,4 @@
       }
     }
   }
-
 }
