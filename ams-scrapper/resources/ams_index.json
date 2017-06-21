@@ -27,6 +27,10 @@
   "mappings": {
     "credenciado": {
       "properties": {
+        "_all_standard": {
+          "analyzer": "especialidades_synonym_analyzer",
+          "type": "text"
+        },
         "enderecos": {
           "properties": {
             "bairro": {
@@ -43,7 +47,6 @@
             },
             "especialidades": {
               "type": "text",
-              "analyzer": "especialidades_synonym_analyzer",
               "copy_to": "_all_standard",
               "fields": {
                 "br": {
