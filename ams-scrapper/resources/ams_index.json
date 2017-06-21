@@ -12,16 +12,20 @@
         "enderecos": {
           "properties": {
             "bairro": {
-              "type": "text"
+              "type": "text",
+              "copy_to": "_all_standard"
             },
             "cep": {
-              "type": "text"
+              "type": "text",
+              "copy_to": "_all_standard"
             },
             "cidade": {
-              "type": "text"
+              "type": "text",
+              "copy_to": "_all_standard"
             },
             "especialidades": {
               "type": "text",
+              "copy_to": "_all_standard",
               "fields": {
                 "br": {
                   "analyzer": "brazilian",
@@ -30,44 +34,56 @@
               }
             },
             "estado": {
-              "type": "text"
+              "type": "text",
+              "copy_to": "_all_standard"
             },
             "rua": {
-              "type": "text"
+              "type": "text",
+              "copy_to": "_all_standard"
             },
             "telefones": {
-              "type": "text"
+              "type": "text",
+              "copy_to": "_all_standard"
             },
             "tipos": {
-              "type": "text"
+              "type": "text",
+              "copy_to": "_all_standard"
             }
           }
         },
         "pessoa": {
           "properties": {
             "cnpj": {
-              "type": "text"
+              "type": "text",
+              "copy_to": "_all_standard"
             },
             "conselho": {
-              "type": "text"
+              "type": "text",
+              "copy_to": "_all_standard"
             },
             "estado": {
-              "type": "text"
+              "type": "text",
+              "copy_to": "_all_standard"
             },
             "fantasia": {
-              "type": "text"
+              "type": "text",
+              "copy_to": "_all_standard"
             },
             "id": {
-              "type": "text"
+              "type": "text",
+              "copy_to": "_all_standard"
             },
             "nome": {
-              "type": "text"
+              "type": "text",
+              "copy_to": "_all_standard"
             },
             "numero": {
-              "type": "text"
+              "type": "text",
+              "copy_to": "_all_standard"
             },
             "razao social": {
-              "type": "text"
+              "type": "text",
+              "copy_to": "_all_standard"
             }
           }
         }
