@@ -3,9 +3,27 @@
     "index": {
       "number_of_shards": 1,
       "number_of_replicas": 0
+    },
+    "analysis": {
+      "filter": {
+        "especialidades_synonym_filter": {
+          "type": "synonym",
+          "synonyms": [
+            "ortopedia,ortopedista"
+          ]
+        }
+      },
+      "analyzer": {
+        "especialidades_synonym_analizer": {
+          "tokenizer": "standard",
+          "filter": [
+            "lowercase",
+            "especialidades_synonym_filter"
+          ]
+        }
+      }
     }
   },
-
   "mappings": {
     "credenciado": {
       "properties": {
