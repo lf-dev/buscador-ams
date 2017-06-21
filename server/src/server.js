@@ -15,10 +15,10 @@ app.get('/search', function(req, res) {
     "query": {
       "bool": {
         "must": {
-          "multi_match": {
-            "query": q.query.q,
-            "fields": ["_all"],
-            "type": "cross_fields"
+          "match": {
+            "_all_standard": {
+              "query": q.query.q
+            }
           }
         },
         "should": [
