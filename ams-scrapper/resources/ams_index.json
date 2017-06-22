@@ -9,7 +9,7 @@
         "especialidades_synonym_filter": {
           "type": "synonym",
           "synonyms": [
-            "ortopedia,ortopedista"
+            "ortopedia, ortopedica, ortopedista"
           ]
         }
       },
