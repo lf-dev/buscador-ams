@@ -9,7 +9,10 @@
         "especialidades_synonym_filter": {
           "type": "synonym",
           "synonyms": [
-            "ortopedia, ortopedica, ortopedista"
+            "ortopedia, ortopedica, ortopedista",
+            "acupuntura acupunturista",
+            "anestesiologia, anestesia, anestesista",
+            "angiologia, angiologista"
           ]
         }
       },
