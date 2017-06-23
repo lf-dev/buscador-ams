@@ -20,8 +20,13 @@
             "cardiologia, cardiologico, cardiaca, cardiologista",
             "fisioterapia, fisioterapeuta",
             "traumatologia, traumatologista",
-            "oncologia, oncologista",
-            "cancerologia, cancerologista"
+            "oncologia, oncologico, oncologista",
+            "cancerologia, cancerologista",
+            "odontologica, odontologia, odontologista, odontologo, dentista",
+            "radiologia, radiologista",
+            "coloproctologia, coloproctologista, proctologia, proctologista",
+            "gastrologia, gastrologista, gastroenterologia, gastroenterologista",
+            "dermatologia, dermatologista"
           ]
         }
       },
