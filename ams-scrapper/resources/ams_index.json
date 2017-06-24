@@ -15,7 +15,7 @@
             "angiologia, angiologista",
             "alergia, alergista",
             "imunologia, imunologista",
-            "pediatrica, pediatra",
+            "pediatria, puericultura, pediatrica, pediatra, puericulturista",
             "cirurgia, cirurgiao",
             "cardiologia, cardiologico, cardiaca, cardiologista",
             "fisioterapia, fisioterapeuta",
@@ -47,11 +47,15 @@
             "mastologia, mastologista",
             "musicoterapia, musicoterapeuta",
             "nefrologia, nefrologista",
-            "NEUROCIRURGIA, neurocirurgiao",
-            "NEUROLOGIA, neurologista",
-            "NUTRICAO, nutricionista",
-            "NUTROLOGIA, nutrologo, nutrologa",
-            "ORTODONTIA, ortodontista"
+            "neurocirurgia, neurocirurgiao",
+            "neurologia, neurologista",
+            "nutricao, nutricionista",
+            "nutrologia, nutrologo, nutrologa",
+            "ortodontia, ortodontista",
+            "ortoptica, ortoptista",
+            "periodontia, periodontista",
+            "pneumologia, pneumologista",
+            "reumatologia, reumatologista"
           ]
         }
       },
