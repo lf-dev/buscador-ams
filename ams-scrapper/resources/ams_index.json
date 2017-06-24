@@ -31,7 +31,12 @@
             "estomatologia, estomatologista",
             "patologia, patologista",
             "fonoaudiologia, fonoaudiologo, fonoaudiologa",
-            "geriatria, geriatra"
+            "geriatria, geriatra",
+            "ginecologia, ginecologista",
+            "obstetricia, obstetria, obstetra",
+            "hematologia, hemoterapia, hemoterapeuta",
+            "homeopatia, homeopata",
+            "urologia, urologista"
           ]
         }
       },
