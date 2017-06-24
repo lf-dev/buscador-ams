@@ -34,6 +34,11 @@ app.get('/search', function(req, res) {
             "match": {
               "enderecos.especialidades.br": q.query.q
             }
+          },
+          {
+            "match": {
+              "enderecos.cidade": q.query.q
+            }
           }]
       }
     },
