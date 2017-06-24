@@ -41,7 +41,12 @@
             "otorrinologia, otorrinologista",
             "otorrinolaringologia, otorrinolaringologista",
             "otoneurologia, otoneurologista",
-            "psiquiatria, psiquiatra"
+            "psiquiatria, psiquiatra",
+            "PSICOTERAPIA, psicoterapeuta",
+            "INFECTOLOGIA, infectologista",
+            "MASTOLOGIA, mastologista",
+            "MUSICOTERAPIA, musicoterapeuta",
+            "NEFROLOGIA, nefrologista"
           ]
         }
       },
