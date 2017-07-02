@@ -76,6 +76,9 @@ git clone https://github.com/lf-dev/buscador-ams.git
 # INSTALACAO SERVIDOR
 # -------------------
 
+# redirecionando porta 80 para porta 3000
+sudo iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 3000
+
 npm install --prefix buscador-ams/server/
 pm2 start ./buscador-ams/server/ecosystem.config.js
 
