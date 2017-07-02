@@ -2,7 +2,7 @@ var http = require('http');
 var url = require('url');
 var router = require('./router');
 
-var app = router(3000);
+var app = router(80);
 
 app.get('/search', function(req, res) {
 
