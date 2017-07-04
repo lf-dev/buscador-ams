@@ -6,6 +6,12 @@
     },
     "analysis": {
       "filter": {
+        "shingle_filter": {
+          "type": "shingle",
+          "min_shingle_size": 2,
+          "max_shingle_size": 4,
+          "output_unigrams": false
+        },
         "especialidades_synonym_filter": {
           "type": "synonym",
           "synonyms": [
@@ -65,6 +71,14 @@
           "filter": [
             "lowercase",
             "especialidades_synonym_filter"
+          ]
+        },
+        "shingle_analyser": {
+          "type": "custom",
+          "tokenizer": "standard",
+          "filter": [
+            "lowercase",
+            "shingle_filter"
           ]
         }
       }
