@@ -10,12 +10,15 @@ document.addEventListener('DOMContentLoaded', function () {
 (function (global) {
 
     var PAGE_SIZE = 10;
+    const queryField = document.getElementById("query");
 
-    document.getElementById("query").addEventListener("keypress", function(e){
+    queryField.addEventListener("keypress", function(e){
         if(e.keyCode == 13){
             realizaConsultaComHistorico();
         }
     });
+
+    queryField.addEventListener("keypress", handleAutocomplete);
 
     document.getElementById("buscar").addEventListener("click", function() {
         realizaConsultaComHistorico();
@@ -60,6 +63,24 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById("query").value = query
             realizarConsulta(query);
         }
+    }
+
+    function handleAutocomplete(e) {
+      if(this.value.split(' ').length >= 2) {
+        realizarConsultaAutocomplete(this.value);
+      }
+    }
+
+    function realizarConsultaAutocomplete(query) {
+      sendGetRequest(`/autocomplete?q=${query}`, function(json) {
+        preencherAutocomplete(json);
+      });
+    }
+
+    function preencherAutocomplete(json) {
+      json.aggregations.autocomplete.buckets.forEach( it => {
+        console.log(it.key);
+      });
     }
 
     function realizaConsultaComHistorico() {
