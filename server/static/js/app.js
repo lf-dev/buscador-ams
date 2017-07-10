@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var PAGE_SIZE = 10;
     const queryField = document.getElementById("query");
+    const suggestions = document.querySelector(".suggestions");
 
     queryField.addEventListener("keypress", function(e){
         if(e.keyCode == 13){
@@ -78,9 +79,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function preencherAutocomplete(json) {
-      json.aggregations.autocomplete.buckets.forEach( it => {
-        console.log(it.key);
-      });
+      const html = json.aggregations.autocomplete.buckets.map( it => {
+        return `<li>${it.key}</li>`;
+      }).join('');
+      suggestions.innerHTML = html;
     }
 
     function realizaConsultaComHistorico() {
