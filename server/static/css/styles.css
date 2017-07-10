@@ -51,6 +51,22 @@
     width: 100%;
 }
 
+.suggestions {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+}
+
+.suggestions li {
+    background: white;
+    display: flex;
+    list-style: none;
+    border-bottom: 1px solid #D8D8D8;
+    padding:5px;
+    /*transition:background 0.2s;*/
+    text-transform: capitalize;
+}
+
 #buscar {
     float: left;
     color: #333;
@@ -102,6 +118,10 @@ button {
     transform: translateY(-100px);
     margin: 0 145px;
     padding-top: 10px;
+    /* translateY altera o contexto de stack para o z-index fazendo com que o texto
+    do container fique na frente da sugestao de autocomplete */
+    position: absolute;
+    z-index: -1;
 }
 
 #sumario-resultados{
