@@ -9,7 +9,7 @@
         "shingle_filter": {
           "type": "shingle",
           "min_shingle_size": 2,
-          "max_shingle_size": 4,
+          "max_shingle_size": 5,
           "output_unigrams": false
         },
         "especialidades_synonym_filter": {
@@ -91,23 +91,28 @@
           "analyzer": "especialidades_synonym_analyzer",
           "type": "text"
         },
+        "autocomplete": {
+          "analyzer": "shingle_analyser",
+          "type": "text",
+          "fielddata": "true"
+        },
         "enderecos": {
           "properties": {
             "bairro": {
               "type": "text",
-              "copy_to": "_all_standard"
+              "copy_to": ["_all_standard","autocomplete"]
             },
             "cep": {
               "type": "text",
-              "copy_to": "_all_standard"
+              "copy_to": ["_all_standard","autocomplete"]
             },
             "cidade": {
               "type": "text",
-              "copy_to": "_all_standard"
+              "copy_to": ["_all_standard","autocomplete"]
             },
             "especialidades": {
               "type": "text",
-              "copy_to": "_all_standard",
+              "copy_to": ["_all_standard","autocomplete"],
               "fields": {
                 "br": {
                   "analyzer": "brazilian",
@@ -117,19 +122,19 @@
             },
             "estado": {
               "type": "text",
-              "copy_to": "_all_standard"
+              "copy_to": ["_all_standard","autocomplete"]
             },
             "rua": {
               "type": "text",
-              "copy_to": "_all_standard"
+              "copy_to": ["_all_standard","autocomplete"]
             },
             "telefones": {
               "type": "text",
-              "copy_to": "_all_standard"
+              "copy_to": ["_all_standard","autocomplete"]
             },
             "tipos": {
               "type": "text",
-              "copy_to": "_all_standard"
+              "copy_to": ["_all_standard","autocomplete"]
             }
           }
         },
@@ -137,35 +142,35 @@
           "properties": {
             "cnpj": {
               "type": "text",
-              "copy_to": "_all_standard"
+              "copy_to": ["_all_standard","autocomplete"]
             },
             "conselho": {
               "type": "text",
-              "copy_to": "_all_standard"
+              "copy_to": ["_all_standard","autocomplete"]
             },
             "estado": {
               "type": "text",
-              "copy_to": "_all_standard"
+              "copy_to": ["_all_standard","autocomplete"]
             },
             "fantasia": {
               "type": "text",
-              "copy_to": "_all_standard"
+              "copy_to": ["_all_standard","autocomplete"]
             },
             "id": {
               "type": "text",
-              "copy_to": "_all_standard"
+              "copy_to": ["_all_standard","autocomplete"]
             },
             "nome": {
               "type": "text",
-              "copy_to": "_all_standard"
+              "copy_to": ["_all_standard","autocomplete"]
             },
             "numero": {
               "type": "text",
-              "copy_to": "_all_standard"
+              "copy_to": ["_all_standard","autocomplete"]
             },
             "razao social": {
               "type": "text",
-              "copy_to": "_all_standard"
+              "copy_to": ["_all_standard","autocomplete"]
             }
           }
         }
