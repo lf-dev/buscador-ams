@@ -4,6 +4,47 @@ var router = require('./router');
 
 var app = router(3000);
 
+app.get('/autocomplete', function(req, res) {
+
+  var q = url.parse(req.url, true);
+
+  const query = {
+    "size": 0,
+    "aggs": {
+      "autocomplete": {
+        "terms": {
+          "field": "autocomplete",
+          "order": {
+            "_count": "desc"
+          },
+          "include":  `${q.query.q}.*`
+        }
+      }
+    },
+    "query": {
+      "prefix": {
+        "autocomplete": {
+          "value": q.query.q
+        }
+      }
+    }
+  };
+
+  var options = {
+    host: 'localhost',
+    port: 9200,
+    path: '/ams/credenciado/_search',
+    method: 'POST'
+  };
+
+  var esReq = http.request(options, function(esRes) {
+    esRes.pipe(res);
+  });
+
+  esReq.write(JSON.stringify(query));
+  esReq.end();
+});
+
 app.get('/search', function(req, res) {
 
   var pageSize = 10;
