@@ -72,7 +72,7 @@
     list-style: none;
     border-bottom: 1px solid #D8D8D8;
     padding:5px;
-    /*transition:background 0.2s;*/
+    padding-left: 16px;
     text-transform: capitalize;
 }
 
