@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
     queryField.addEventListener("keydown", function(e){
         if(e.keyCode == 13){
             aplicarSugestao();
+            esconderSugestoes();
             realizaConsultaComHistorico();
         }else if(e.keyCode == 38){
             //preventDefault evita que o cursor volte para o inicio
@@ -102,6 +103,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    function esconderSugestoes() {
+        suggestions.style.display = "none";
+    }
+
+    function exibirSugestoes() {
+        suggestions.style.display = "block";
+    }
+
     function handleAutocomplete(e) {
       if(this.value.split(' ').length >= 2) {
         realizarConsultaAutocomplete(this.value);
@@ -119,6 +128,10 @@ document.addEventListener('DOMContentLoaded', function () {
         return `<li data-index="${index}" >${suggestion.key}</li>`;
       }).join('');
       suggestions.innerHTML = html;
+
+      if(json.aggregations.autocomplete.buckets.length > 0){
+          exibirSugestoes();
+      }
     }
 
     function realizaConsultaComHistorico() {
