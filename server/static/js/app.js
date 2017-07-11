@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     queryField.addEventListener("keydown", function(e){
         if(e.keyCode == 13){
+            aplicarSugestao();
             realizaConsultaComHistorico();
         }else if(e.keyCode == 38){
             //preventDefault evita que o cursor volte para o inicio
@@ -92,6 +93,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const proximaSugestao = suggestions.querySelector(`[data-index="${index}"]`);
         proximaSugestao.classList.add('selected');
+    }
+
+    function aplicarSugestao() {
+        const sugestaoSelecionada = suggestions.querySelector('.selected');
+        if(sugestaoSelecionada) {
+            queryField.value = sugestaoSelecionada.innerText;
+        }
     }
 
     function handleAutocomplete(e) {
