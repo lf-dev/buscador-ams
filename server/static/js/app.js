@@ -33,6 +33,26 @@ document.addEventListener('DOMContentLoaded', function () {
         realizaConsultaComHistorico();
     });
 
+    suggestions.addEventListener('mousemove', function(e) {
+
+        const suggestion = e.target;
+        if(!suggestion.classList.contains('selected')) {
+
+            const selected = suggestions.querySelector(".selected");
+            if(selected) {
+                selected.classList.remove("selected");
+            }
+
+            suggestion.classList.add('selected');
+        }
+    })
+
+    suggestions.addEventListener('click', function(e) {
+        aplicarSugestao();
+        esconderSugestoes();
+        realizaConsultaComHistorico();
+    });
+
     var transitionEvent = whichTransitionEvent();
     document.getElementById("header").addEventListener(transitionEvent, function(e) {
         document.getElementById("main-container").style.display = "block";
