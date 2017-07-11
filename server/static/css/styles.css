@@ -68,7 +68,7 @@
 
 .suggestions li {
     background: white;
-    display: flex;
+    /*display: flex;*/
     list-style: none;
     border-bottom: 1px solid #D8D8D8;
     padding: 6px 0 6px 16px;
