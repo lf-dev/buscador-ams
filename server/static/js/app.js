@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded', function () {
         if(e.keyCode == 13){
             realizaConsultaComHistorico();
         }else if(e.keyCode == 38){
+            //preventDefault evita que o cursor volte para o inicio
+            e.preventDefault();
             moverSelecaoSugestao(true);
         }else if(e.keyCode == 40){
             moverSelecaoSugestao(false);
