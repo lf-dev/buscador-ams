@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+.clear-left {
+  clear: left;
+}
+
 .faixa {
     background-color: rgb(51, 118, 99);
 }
@@ -36,7 +40,7 @@
     border-radius: 3px;
     padding: 6px 0 0 16px;
     width: 100%;
-    margin-bottom: 1px;
+    margin-bottom: -3px;
     background-color: white;
 }
 
@@ -55,6 +59,11 @@
     margin: 0;
     padding: 0;
     position: absolute;
+    border: 1px solid black;
+    border-top: 0px;
+    border-radius: 3px;
+    width: 100%;
+    max-width: 400px;
 }
 
 .suggestions li {
