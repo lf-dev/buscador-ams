@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
     suggestions.addEventListener('mousemove', function(e) {
 
         const suggestion = e.target;
-        if(!suggestion.classList.contains('selected')) {
+        if(suggestion.matches('li') && !suggestion.matches('.selected')) {
 
             const selected = suggestions.querySelector(".selected");
             if(selected) {
