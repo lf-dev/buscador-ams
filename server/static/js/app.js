@@ -24,10 +24,10 @@ document.addEventListener('DOMContentLoaded', function () {
             moverSelecaoSugestao(true);
         }else if(e.keyCode == 40){
             moverSelecaoSugestao(false);
+        }else {
+            handleAutocomplete(e);
         }
     });
-
-    queryField.addEventListener("keypress", handleAutocomplete);
 
     document.getElementById("buscar").addEventListener("click", function() {
         realizaConsultaComHistorico();
@@ -132,8 +132,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function handleAutocomplete(e) {
-      if(this.value.split(' ').length >= 2) {
-        realizarConsultaAutocomplete(this.value);
+      if(e.target.value.split(' ').length >= 2) {
+        realizarConsultaAutocomplete(e.target.value);
       }
     }
 
