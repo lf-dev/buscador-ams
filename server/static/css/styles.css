@@ -76,7 +76,7 @@
     cursor: default;
 }
 
-.suggestions li:hover {
+.suggestions li.selected {
     background-color: rgb(51, 118, 99);
     color: white;
 }

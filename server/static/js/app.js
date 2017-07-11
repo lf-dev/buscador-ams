@@ -13,9 +13,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const queryField = document.getElementById("query");
     const suggestions = document.querySelector(".suggestions");
 
-    queryField.addEventListener("keypress", function(e){
+    queryField.addEventListener("keydown", function(e){
         if(e.keyCode == 13){
             realizaConsultaComHistorico();
+        }else if(e.keyCode == 38){
+            moverSelecaoSugestao(true);
+        }else if(e.keyCode == 40){
+            moverSelecaoSugestao(false);
         }
     });
 
@@ -66,6 +70,28 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    function moverSelecaoSugestao(up) {
+        const sugestaoSelecionada = suggestions.querySelector('.selected');
+        const totalSugestoes = suggestions.querySelectorAll('li').length;
+
+        let index;
+        if(sugestaoSelecionada) {
+            index = parseInt(sugestaoSelecionada.dataset.index) + (up ? -1 : 1);
+            if(index < 0){
+              index = totalSugestoes - 1;
+            } else if(index == totalSugestoes) {
+              index = 0;
+            }
+
+            sugestaoSelecionada.classList.remove('selected');
+        } else {
+            index = up ? totalSugestoes -1 : 0;
+        }
+
+        const proximaSugestao = suggestions.querySelector(`[data-index="${index}"]`);
+        proximaSugestao.classList.add('selected');
+    }
+
     function handleAutocomplete(e) {
       if(this.value.split(' ').length >= 2) {
         realizarConsultaAutocomplete(this.value);
@@ -79,8 +105,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function preencherAutocomplete(json) {
-      const html = json.aggregations.autocomplete.buckets.map( it => {
-        return `<li>${it.key}</li>`;
+      const html = json.aggregations.autocomplete.buckets.map( (suggestion, index) => {
+        return `<li data-index="${index}" >${suggestion.key}</li>`;
       }).join('');
       suggestions.innerHTML = html;
     }
