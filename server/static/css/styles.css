@@ -71,9 +71,14 @@
     display: flex;
     list-style: none;
     border-bottom: 1px solid #D8D8D8;
-    padding:5px;
-    padding-left: 16px;
+    padding: 6px 0 6px 16px;
     text-transform: capitalize;
+    cursor: default;
+}
+
+.suggestions li:hover {
+    background-color: rgb(51, 118, 99);
+    color: white;
 }
 
 #buscar {
