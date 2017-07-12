@@ -4,10 +4,6 @@
     box-sizing: border-box;
 }
 
-.clear-left {
-  clear: left;
-}
-
 .faixa {
     background-color: rgb(51, 118, 99);
 }
@@ -36,6 +32,7 @@
 
 .query-box {
     float: left;
+    position: relative;
     border: 1px solid black;
     border-radius: 3px;
     padding: 6px 0 0 16px;
@@ -55,15 +52,26 @@
     width: 100%;
 }
 
+.query-box-with-suggestions {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
 .suggestions {
     margin: 0;
     padding: 0;
     position: absolute;
+    top: 100%;
+    /*posiciona sugestao exatamente sobre a borda da query-box */
+    left: -1px;
+    /*extrapola o tamanho mas limita ao tamanho da query-box para a borda
+    direita ficar exatamente posicionada sobre a borda da query-box*/
+    width: 110%;
+    max-width: 400px;
     border: 1px solid black;
     border-top: 0px;
-    border-radius: 3px;
-    width: 100%;
-    max-width: 400px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
 }
 
 .suggestions li {
@@ -73,6 +81,10 @@
     padding: 6px 0 6px 16px;
     text-transform: capitalize;
     cursor: default;
+}
+
+.suggestions li:last-child {
+    border-bottom: 0;
 }
 
 .suggestions li.selected {

@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
 (function (global) {
 
     var PAGE_SIZE = 10;
+    const queryBox = document.querySelector(".query-box");
     const queryField = document.getElementById("query");
     const suggestions = document.querySelector(".suggestions");
 
@@ -125,10 +126,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function esconderSugestoes() {
         suggestions.style.display = "none";
+        queryBox.classList.remove("query-box-with-suggestions");
     }
 
     function exibirSugestoes() {
         suggestions.style.display = "block";
+        queryBox.classList.add("query-box-with-suggestions");
     }
 
     function handleAutocomplete(e) {
