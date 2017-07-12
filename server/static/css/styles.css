@@ -97,6 +97,23 @@
     margin-top: 4px;
 }
 
+#lupa {
+    height: 40px;
+    width: 40px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    border-radius: 3px;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+#lupa svg {
+    fill: rgb(51, 118, 99);
+}
+
 #paginar {
     color: #fff;
     background-color: rgb(51, 118, 99);
