@@ -13,11 +13,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const queryBox = document.querySelector(".query-box");
     const queryField = document.getElementById("query");
     const suggestions = document.querySelector(".suggestions");
+    const buscar = document.getElementById("buscar");
+    const lupa = document.getElementById("lupa");
 
     queryField.addEventListener("keydown", function(e){
         if(e.keyCode == 13){
             aplicarSugestao();
-            esconderSugestoes();
             realizaConsultaComHistorico();
         }else if(e.keyCode == 38){
             //preventDefault evita que o cursor volte para o inicio
@@ -30,9 +31,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    document.getElementById("buscar").addEventListener("click", function() {
-        realizaConsultaComHistorico();
-    });
+    buscar.addEventListener("click", realizaConsultaComHistorico);
+    lupa.addEventListener("click", realizaConsultaComHistorico);
 
     suggestions.addEventListener('mousemove', function(e) {
 
@@ -50,7 +50,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     suggestions.addEventListener('click', function(e) {
         aplicarSugestao();
-        esconderSugestoes();
         realizaConsultaComHistorico();
     });
 
@@ -158,6 +157,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function realizaConsultaComHistorico() {
+
+        esconderSugestoes();
 
         var query = document.getElementById("query").value;
         if(!query) {
