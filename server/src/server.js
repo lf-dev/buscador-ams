@@ -6,7 +6,7 @@ var app = router(3000);
 
 app.get('/autocomplete', function(req, res) {
 
-  var q = url.parse(req.url, true);
+  var q = url.parse(req.url, true).query.q.toLowerCase();
 
   const query = {
     "size": 0,
@@ -17,14 +17,14 @@ app.get('/autocomplete', function(req, res) {
           "order": {
             "_count": "desc"
           },
-          "include":  `${q.query.q}.*`
+          "include":  `${q}.*`
         }
       }
     },
     "query": {
       "prefix": {
         "autocomplete": {
-          "value": q.query.q
+          "value": q
         }
       }
     }
