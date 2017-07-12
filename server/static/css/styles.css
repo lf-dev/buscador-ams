@@ -64,10 +64,8 @@
     top: 100%;
     /*posiciona sugestao exatamente sobre a borda da query-box */
     left: -1px;
-    /*extrapola o tamanho mas limita ao tamanho da query-box para a borda
-    direita ficar exatamente posicionada sobre a borda da query-box*/
-    width: 110%;
-    max-width: 400px;
+    box-sizing: content-box;
+    width: 100%;
     border: 1px solid black;
     border-top: 0px;
     border-bottom-left-radius: 3px;
