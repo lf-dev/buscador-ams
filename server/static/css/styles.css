@@ -89,14 +89,6 @@
     color: white;
 }
 
-#buscar {
-    float: left;
-    color: #333;
-    background-color: #fff;
-    border-color: #ccc;
-    margin-top: 4px;
-}
-
 #lupa {
     height: 40px;
     width: 40px;
@@ -223,9 +215,6 @@ button {
 }
 
 @media (max-width: 767px) {
-    #buscar {
-        width: 100%;
-    }
 }
 
 @media (min-width: 768px) {
@@ -250,9 +239,4 @@ button {
     .query-box {
         max-width: 400px;
     }
-
-    #buscar {
-        margin-left: 20px;
-    }
-
 }

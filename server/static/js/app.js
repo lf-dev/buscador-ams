@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const queryBox = document.querySelector(".query-box");
     const queryField = document.getElementById("query");
     const suggestions = document.querySelector(".suggestions");
-    const buscar = document.getElementById("buscar");
     const lupa = document.getElementById("lupa");
 
     queryField.addEventListener("keydown", function(e){
@@ -31,7 +30,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    buscar.addEventListener("click", realizaConsultaComHistorico);
     lupa.addEventListener("click", realizaConsultaComHistorico);
 
     suggestions.addEventListener('mousemove', function(e) {
