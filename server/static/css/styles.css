@@ -30,7 +30,7 @@
 }
 
 .logo {
-    height: 100px;
+    height: 50px;
 }
 
 .logo > h1 {
@@ -156,12 +156,12 @@ button {
 
 #header.top {
     top: 0;
-    transform: translateY(-100px);
+    transform: translateY(-50px);
     transition: top 1s, transform 1s;
 }
 
 .container {
-    transform: translateY(-100px);
+    transform: translateY(-50px);
     margin: 0 145px;
     padding-top: 10px;
     /* translateY altera o contexto de stack para o z-index fazendo com que o texto
