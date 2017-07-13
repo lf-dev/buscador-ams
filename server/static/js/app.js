@@ -63,6 +63,11 @@ document.addEventListener('DOMContentLoaded', function () {
         slideOut();
     });
 
+    voltar.addEventListener('click', function(e) {
+        e.preventDefault();
+        slideIn();
+    })
+
     var transitionEvent = whichTransitionEvent();
     document.getElementById("header").addEventListener(transitionEvent, function(e) {
         mainContainer.style.display = "block";
@@ -196,6 +201,7 @@ document.addEventListener('DOMContentLoaded', function () {
         mainContainer.classList.add("slide-out");
         info.classList.add("slide-out");
         homeLogo.classList.add("slide-out");
+        voltar.classList.add("slide-in");
     }
 
     function slideIn() {
@@ -203,6 +209,7 @@ document.addEventListener('DOMContentLoaded', function () {
         mainContainer.classList.remove("slide-out");
         info.classList.remove("slide-out");
         homeLogo.classList.remove("slide-out");
+        voltar.classList.remove("slide-in");
     }
 
     function carregarResultados(query, pagina) {
