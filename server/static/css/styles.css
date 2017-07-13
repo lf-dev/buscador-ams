@@ -16,7 +16,6 @@
 
 #info {
     color: rgb(51, 118, 99);
-    float: right;
     font-style: italic;
     text-decoration: none;
     position: absolute;
@@ -225,6 +224,17 @@ button {
 @media (max-width: 425px) {
     .container {
         margin: 0 20px;
+    }
+
+    #info {
+        right: 10px;
+        top: 140px;
+        z-index: 0;
+    }
+
+    #info.top {
+      top: 90px;
+      color: rgb(51, 118, 99);
     }
 }
 
