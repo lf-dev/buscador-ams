@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const suggestions = document.querySelector(".suggestions");
     const lupa = document.getElementById("lupa");
     const info = document.getElementById("info");
+    const mainContainer = document.getElementById("main-container");
 
     queryField.addEventListener("keydown", function(e){
         if(e.keyCode == 13){
@@ -60,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var transitionEvent = whichTransitionEvent();
     document.getElementById("header").addEventListener(transitionEvent, function(e) {
-        document.getElementById("main-container").style.display = "block";
+        mainContainer.style.display = "block";
     });
 
     function whichTransitionEvent(){
@@ -198,13 +199,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function preencherConsulta(json, query, pagina) {
 
-        var container = document.getElementById("main-container");
-
         removerBotaoPaginacao();
 
         var html = "";
         if(pagina == 0) {
-            container.innerHTML = "";
+            mainContainer.innerHTML = "";
             html = htmlTotalResultados(json);
             html += htmlDidYouMean(json);
         }
@@ -212,8 +211,7 @@ document.addEventListener('DOMContentLoaded', function () {
         html += preencherHTMLConsulta(json);
         html += htmlBotaoPaginacao(json, pagina);
 
-
-        container.innerHTML += html;
+        mainContainer.innerHTML += html;
 
         incluirListnerPaginacao(query, pagina + 1);
     }
