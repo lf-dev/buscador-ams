@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     info.addEventListener('click', function(e) {
         e.preventDefault();
-        slideLeft();
+        slideOut();
     });
 
     var transitionEvent = whichTransitionEvent();
@@ -191,18 +191,18 @@ document.addEventListener('DOMContentLoaded', function () {
         info.classList.add("top");
     }
 
-    function slideLeft() {
-        header.classList.add("slide-left");
-        mainContainer.classList.add("slide-left");
-        info.classList.add("slide-left");
-        homeLogo.classList.add("slide-left");
+    function slideOut() {
+        header.classList.add("slide-out");
+        mainContainer.classList.add("slide-out");
+        info.classList.add("slide-out");
+        homeLogo.classList.add("slide-out");
     }
 
-    function slideRight() {
-        header.classList.remove("slide-left");
-        mainContainer.classList.remove("slide-left");
-        info.classList.remove("slide-left");
-        homeLogo.classList.remove("slide-left");
+    function slideIn() {
+        header.classList.remove("slide-out");
+        mainContainer.classList.remove("slide-out");
+        info.classList.remove("slide-out");
+        homeLogo.classList.remove("slide-out");
     }
 
     function carregarResultados(query, pagina) {

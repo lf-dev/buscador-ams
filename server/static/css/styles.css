@@ -167,12 +167,12 @@ button {
     transition: top 1s, transform 1s;
 }
 
-.slidable-left {
+.slidable-out {
     position: relative;
     right: 0;
 }
 
-.slide-left {
+.slide-out {
     right: 100% !important;
     transition: right 1s !important;
 }
