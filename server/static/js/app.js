@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const queryField = document.getElementById("query");
     const suggestions = document.querySelector(".suggestions");
     const lupa = document.getElementById("lupa");
+    const info = document.getElementById("info");
 
     queryField.addEventListener("keydown", function(e){
         if(e.keyCode == 13){
@@ -51,6 +52,10 @@ document.addEventListener('DOMContentLoaded', function () {
     suggestions.addEventListener('click', function(e) {
         aplicarSugestao();
         realizaConsultaComHistorico();
+    });
+
+    info.addEventListener('click', function(e) {
+        e.preventDefault();
     });
 
     var transitionEvent = whichTransitionEvent();
@@ -174,6 +179,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         document.getElementById("header").classList.add("top");
         document.getElementById("home-logo").classList.add("top");
+        info.classList.add("top");
 
         carregarResultados(query, 0);
     }
