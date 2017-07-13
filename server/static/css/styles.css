@@ -19,6 +19,7 @@ a.nav {
     font-style: italic;
     text-decoration: none;
     position: absolute;
+    white-space: nowrap;
 }
 
 #voltar {
