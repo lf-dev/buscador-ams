@@ -25,6 +25,8 @@ document.addEventListener('DOMContentLoaded', function () {
             moverSelecaoSugestao(true);
         }else if(e.keyCode == 40){
             moverSelecaoSugestao(false);
+        }else if(e.keyCode == 27){
+            esconderSugestoes();
         }else {
             handleAutocomplete(e);
         }
