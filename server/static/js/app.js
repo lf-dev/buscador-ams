@@ -177,12 +177,14 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function realizarConsulta(query) {
+        subirFaixa();
+        carregarResultados(query, 0);
+    }
 
+    function subirFaixa() {
         document.getElementById("header").classList.add("top");
         document.getElementById("home-logo").classList.add("top");
         info.classList.add("top");
-
-        carregarResultados(query, 0);
     }
 
     function carregarResultados(query, pagina) {
