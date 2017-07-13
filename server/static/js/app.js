@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const suggestions = document.querySelector(".suggestions");
     const lupa = document.getElementById("lupa");
     const info = document.getElementById("info");
+    const voltar = document.getElementById("voltar");
     const mainContainer = document.getElementById("main-container");
 
     queryField.addEventListener("keydown", function(e){
