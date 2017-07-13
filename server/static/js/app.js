@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', function () {
 (function (global) {
 
     var PAGE_SIZE = 10;
+    const header = document.getElementById("header");
+    const homeLogo = document.getElementById("home-logo");
     const queryBox = document.querySelector(".query-box");
     const queryField = document.getElementById("query");
     const suggestions = document.querySelector(".suggestions");
@@ -57,10 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     info.addEventListener('click', function(e) {
         e.preventDefault();
-        document.getElementById("header").classList.add("slide-left");
-        mainContainer.classList.add("slide-left");
-        info.classList.add("slide-left");
-        document.getElementById("home-logo").classList.add("slide-left");
+        slideLeft();
     });
 
     var transitionEvent = whichTransitionEvent();
@@ -186,9 +185,23 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function subirFaixa() {
-        document.getElementById("header").classList.add("top");
-        document.getElementById("home-logo").classList.add("top");
+        header.classList.add("top");
+        homeLogo.classList.add("top");
         info.classList.add("top");
+    }
+
+    function slideLeft() {
+        header.classList.add("slide-left");
+        mainContainer.classList.add("slide-left");
+        info.classList.add("slide-left");
+        homeLogo.classList.add("slide-left");
+    }
+
+    function slideRight() {
+        header.classList.remove("slide-left");
+        mainContainer.classList.remove("slide-left");
+        info.classList.remove("slide-left");
+        homeLogo.classList.remove("slide-left");
     }
 
     function carregarResultados(query, pagina) {
