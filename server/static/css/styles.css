@@ -26,6 +26,7 @@
 
 #info.top {
     color: white;
+    transition: color 3s;
 }
 
 .logo {
