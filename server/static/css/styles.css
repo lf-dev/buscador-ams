@@ -159,13 +159,23 @@ button {
     transition: top 1s, transform 1s;
 }
 
+.slidable-left {
+    position: relative;
+    right: 0;
+}
+
+.slide-left {
+    right: 100% !important;
+    transition: right 1s !important;
+}
+
 .container {
     transform: translateY(-50px);
     margin: 0 145px;
     padding-top: 10px;
     /* translateY altera o contexto de stack para o z-index fazendo com que o texto
     do container fique na frente da sugestao de autocomplete */
-    position: absolute;
+    position: relative;
     z-index: -1;
 }
 
@@ -250,7 +260,6 @@ button {
     }
 
     #header {
-        position: relative;
         top: 50%;
         transform: translateY(-50%);
     }

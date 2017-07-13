@@ -57,6 +57,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     info.addEventListener('click', function(e) {
         e.preventDefault();
+        document.getElementById("header").classList.add("slide-left");
+        mainContainer.classList.add("slide-left");
+        info.classList.add("slide-left");
+        document.getElementById("home-logo").classList.add("slide-left");
     });
 
     var transitionEvent = whichTransitionEvent();
