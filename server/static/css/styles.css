@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+body {
+    overflow-x: hidden;
+}
+
 .faixa {
     background-color: rgb(51, 118, 99);
 }
