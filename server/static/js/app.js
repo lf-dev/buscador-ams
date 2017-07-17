@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const info = document.getElementById("info");
     const voltar = document.getElementById("voltar");
     const mainContainer = document.getElementById("main-container");
+    const infoContainer = document.getElementById("info-container");
 
     queryField.addEventListener("keydown", function(e){
         if(e.keyCode == 13){
@@ -202,6 +203,7 @@ document.addEventListener('DOMContentLoaded', function () {
         info.classList.add("slide-out");
         homeLogo.classList.add("slide-out");
         voltar.classList.add("slide-in");
+        infoContainer.classList.add("slide-in");
     }
 
     function slideIn() {
@@ -210,6 +212,7 @@ document.addEventListener('DOMContentLoaded', function () {
         info.classList.remove("slide-out");
         homeLogo.classList.remove("slide-out");
         voltar.classList.remove("slide-in");
+        infoContainer.classList.remove("slide-in");
     }
 
     function carregarResultados(query, pagina) {

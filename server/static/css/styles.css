@@ -196,10 +196,22 @@ button {
     do container fique na frente da sugestao de autocomplete */
     position: relative;
     z-index: -1;
+}
 
-    /*slide-out*/
-    transition: all 1s;
-    right: 0;
+#main-container {
+  /*slide-out*/
+  transition: all 1s;
+  right: 0;
+}
+
+#info-container {
+  /*slide-in*/
+  left: 100%;
+  transition: left 1s;
+}
+
+#info-container.slide-in {
+  left: 0;
 }
 
 #sumario-resultados{
