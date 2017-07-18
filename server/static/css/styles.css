@@ -208,6 +208,19 @@ button {
   /*slide-in*/
   left: 100%;
   transition: left 1s;
+
+  color: rgb(51, 118, 99);;
+  font-family: Verdana, Geneva, sans-serif;
+  font-weight: normal;
+}
+
+#info-container h1 {
+  margin-bottom: 30px;
+}
+
+#info-container p {
+  margin: 10px;
+  /*width: 100%;*/
 }
 
 #info-container.slide-in {
