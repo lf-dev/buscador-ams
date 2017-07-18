@@ -189,22 +189,30 @@ button {
 }
 
 .container {
-    transform: translateY(-50px);
-    margin: 0 145px;
-    padding-top: 10px;
-    /* translateY altera o contexto de stack para o z-index fazendo com que o texto
-    do container fique na frente da sugestao de autocomplete */
-    position: relative;
-    z-index: -1;
+
+  margin: 0 145px;
+  padding-top: 10px;
+
 }
 
 #main-container {
+
+  transform: translateY(-50px);
+  /* translateY altera o contexto de stack para o z-index fazendo com que o texto
+  do container fique na frente da sugestao de autocomplete */
+  position: relative;
+  z-index: -1;
+
   /*slide-out*/
   transition: all 1s;
   right: 0;
 }
 
 #info-container {
+  position: absolute;
+  top: 30px;
+  /*width: 100%;*/
+
   /*slide-in*/
   left: 100%;
   transition: left 1s;
@@ -219,7 +227,7 @@ button {
 }
 
 #info-container p {
-  margin: 10px;
+  margin: 10 0;
   /*width: 100%;*/
 }
 
