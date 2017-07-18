@@ -228,7 +228,8 @@ button {
 
 #info-container p {
   margin: 10 0;
-  /*width: 100%;*/
+  text-align: justify;
+  width: 100%;
 }
 
 #info-container.slide-in {
