@@ -189,10 +189,7 @@ button {
 }
 
 .container {
-
-  margin: 0 145px;
-  padding-top: 10px;
-
+  padding: 10px 145px 0 145px;
 }
 
 #main-container {
@@ -211,7 +208,7 @@ button {
 #info-container {
   position: absolute;
   top: 30px;
-  /*width: 100%;*/
+  width: 100%;
 
   /*slide-in*/
   left: 100%;
@@ -229,7 +226,6 @@ button {
 #info-container p {
   margin: 10 0;
   text-align: justify;
-  width: 100%;
 }
 
 #info-container.slide-in {
@@ -291,7 +287,7 @@ button {
 
 @media (max-width: 425px) {
     .container {
-        margin: 0 20px;
+        padding: 0 20px;
     }
 
     #info {
