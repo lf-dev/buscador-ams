@@ -204,6 +204,11 @@ document.addEventListener('DOMContentLoaded', function () {
         homeLogo.classList.add("slide-out");
         voltar.classList.add("slide-in");
         infoContainer.classList.add("slide-in");
+
+        if(ga){
+            ga('set', 'page', '/info');
+            ga('send', 'pageview');
+        }
     }
 
     function slideIn() {
@@ -213,6 +218,11 @@ document.addEventListener('DOMContentLoaded', function () {
         homeLogo.classList.remove("slide-out");
         voltar.classList.remove("slide-in");
         infoContainer.classList.remove("slide-in");
+
+        if(ga){
+            ga('set', 'page', '/');
+            ga('send', 'pageview');
+        }
     }
 
     function carregarResultados(query, pagina) {
