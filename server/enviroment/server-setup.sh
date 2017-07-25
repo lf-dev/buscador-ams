@@ -78,6 +78,6 @@ pm2 save
 sudo cp ./buscador-ams/server/enviroment/logrotate /etc/logrotate.d/pm2-ec2-user
 
 # -configura crontab para monitorar Elastic Search a cada minuto
-echo "* * * * * /home/ec2-user/buscador-ams/server/enviroment/keep_alive_es.sh > /home/ec2-user/keep_alive.log 2>&1" > es_cron
+echo "* * * * * /home/ec2-user/buscador-ams/server/enviroment/keep_alive_es.sh | sudo tee -a /home/ec2-user/keep_alive.log 2>&1" > es_cron
 crontab es_cron
 rm es_cron
