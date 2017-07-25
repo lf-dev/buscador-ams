@@ -3,24 +3,12 @@
 # ---------------
 # INSTALACAO JAVA
 # ---------------
-# adaptado de: https://gist.github.com/rtfpessoa/17752cbf7156bdf32c59
 
-java_base_version="8"
-java_sub_version="73"
-java_base_build="02"
+wget -c --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.rpm
 
-java_version="${java_base_version}u${java_sub_version}"
-java_build="b${java_base_build}"
-java_version_with_build="${java_version}-${java_build}"
-
-# -download
-wget --no-cookies --header "Cookie: gpw_e24=xxx; oraclelicense=accept-securebackup-cookie;" "http://download.oracle.com/otn-pub/java/jdk/${java_version_with_build}/jdk-${java_version}-linux-x64.rpm"
 # -install
-sudo rpm -i jdk-${java_version}-linux-x64.rpm
-# -instalacao alternativa
-sudo /usr/sbin/alternatives --install /usr/bin/java java /usr/java/jdk1.${java_base_version}.0_${java_sub_version}/bin/java 20000
-# -configura como padrao
-sudo /usr/sbin/alternatives --config java
+sudo rpm -i jdk-8u131-linux-x64
+
 # -exporta java home
 export JAVA_HOME=/usr/java/default
 
