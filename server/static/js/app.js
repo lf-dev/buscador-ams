@@ -61,12 +61,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     info.addEventListener('click', function(e) {
         e.preventDefault();
-        slideOut();
+        showInfoContainer();
     });
 
     voltar.addEventListener('click', function(e) {
         e.preventDefault();
-        slideIn();
+        hideInfoContainer();
     })
 
     var transitionEvent = whichTransitionEvent();
@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', function () {
         info.classList.add("top");
     }
 
-    function slideOut() {
+    function showInfoContainer() {
         header.classList.add("slide-out");
         mainContainer.classList.add("slide-out");
         info.classList.add("slide-out");
@@ -211,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    function slideIn() {
+    function hideInfoContainer() {
         header.classList.remove("slide-out");
         mainContainer.classList.remove("slide-out");
         info.classList.remove("slide-out");
