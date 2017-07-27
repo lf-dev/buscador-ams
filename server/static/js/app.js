@@ -69,8 +69,8 @@ document.addEventListener('DOMContentLoaded', function () {
         hideInfoContainer();
     })
 
-    var transitionEvent = whichTransitionEvent();
-    document.getElementById("header").addEventListener(transitionEvent, function(e) {
+    const transitionEvent = whichTransitionEvent();
+    header.addEventListener(transitionEvent, function(e) {
         mainContainer.style.display = "block";
     });
 
