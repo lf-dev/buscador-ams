@@ -198,12 +198,19 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function showInfoContainer() {
-        header.classList.add("slide-out");
-        mainContainer.classList.add("slide-out");
-        info.classList.add("slide-out");
-        homeLogo.classList.add("slide-out");
-        voltar.classList.add("slide-in");
-        infoContainer.classList.add("slide-in");
+
+        voltar.style.display = "block";
+        infoContainer.style.display = "block";
+
+        //TODO: figure out how to set classes only when display=block is visible
+        setTimeout( () => {
+          header.classList.add("slide-out");
+          mainContainer.classList.add("slide-out");
+          info.classList.add("slide-out");
+          homeLogo.classList.add("slide-out");
+          voltar.classList.add("slide-in");
+          infoContainer.classList.add("slide-in");
+        }, 10);
 
         if(ga){
             ga('set', 'page', '/info');
@@ -218,6 +225,11 @@ document.addEventListener('DOMContentLoaded', function () {
         homeLogo.classList.remove("slide-out");
         voltar.classList.remove("slide-in");
         infoContainer.classList.remove("slide-in");
+
+        setTimeout( () => {
+          voltar.style.display = "none";
+          infoContainer.style.display = "none";
+        }, 1000);
 
         if(ga){
             ga('set', 'page', '/');

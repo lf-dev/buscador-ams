@@ -30,6 +30,7 @@ a.nav {
     top: 10px;
     left: 100%;
     transition: left 1s;
+    display: none;
 }
 
 #voltar.slide-in {
@@ -218,6 +219,7 @@ button {
   color: rgb(51, 118, 99);;
   font-family: Verdana, Geneva, sans-serif;
   font-weight: normal;
+  display: none;
 }
 
 #info-container h1 {
